@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 /*
@@ -21,10 +22,15 @@ public class TemaEntity extends BaseEntity {
     private String titulo;
     private String descripcion;
 
+
+
     // @OneToMany(mappedBy = "tema", fetch = FetchType.LAZY)
     // private List<DocumentoEntity> documentos = new ArrayList<>();
 
-    // @OneToOne()
+    // @OneToOne
     // private TutorIAEntity tutorIA = new TutorIA();
+
+    // @ManyToOne
+    // private CursoEntity curso = new CursoEntity();
 
 }
