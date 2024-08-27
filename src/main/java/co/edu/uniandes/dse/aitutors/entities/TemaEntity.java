@@ -22,9 +22,9 @@ public class TemaEntity extends BaseEntity {
     private String descripcion;
 
     // @OneToMany(mappedBy = "tema", fetch = FetchType.LAZY)
-    // private List<Documento> documentos = new ArrayList<>();
+    // private List<DocumentoEntity> documentos = new ArrayList<>();
 
     // @OneToOne()
-    // private TutorIA tutorIA = new TutorIA();
+    // private TutorIAEntity tutorIA = new TutorIA();
 
 }
