@@ -9,5 +9,5 @@ import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
-        List<UsuarioRepository> findById(String id);
+        
 }

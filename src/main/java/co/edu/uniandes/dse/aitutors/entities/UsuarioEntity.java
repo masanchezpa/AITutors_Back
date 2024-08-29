@@ -30,7 +30,7 @@ public class UsuarioEntity extends BaseEntity {
 
     @PodamExclude
     @OneToMany
-    private ArtefactoEntity artefacto;
+    private ArrayList<ArtefactoEntity> artefacto;
 
 
 }
