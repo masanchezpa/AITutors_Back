@@ -23,21 +23,16 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 @Data
 @Entity
-public  class AretefactoEntity extends BaseEntity {
+public  class AccionEntity extends BaseEntity {
 
-	private String tipo;
-	private String contenido;
-	private UsuarioEntity autor; 
-
-	@PodamExclude
-	@OneToOne
-	private UsuarioEntity usuario; 
-
-	@PodamExclude
-	@ManyToOne
-	private AccionEntity Accion; 
+	private String nombre;
+	private String descripcion;
+	private boolean habilitacion;
+	private String objetivo;
 
 	@PodamExclude
 	@OneToMany
-	private List<ComentarioEntity> comentarios = new ArrayList<>(); /*Aqui el tipo no es String sino Comentario */
+	private List<AretefactoEntity> aretefactos = new ArrayList<>(); /*Aqui el tipo no es String sino Aretefacto */
+	
+	
 }
