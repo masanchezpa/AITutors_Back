@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @Getter
 @Setter
@@ -21,13 +22,15 @@ import lombok.Setter;
 public class UsuarioEntity extends BaseEntity {
     private String nombre;
     private String email;
-    private ArrayList<Object> comentarios;
+    
+    
+    @PodamExclude
+    @OneToMany
+    private ArrayList<ComentarioEntity> comentarios;
 
-    //@OneToMany
-    //private Comentario comentarios;
-
-    //@OneToMany
-    //private Artefacto artefacto = new ArtefactoEntity();
+    @PodamExclude
+    @OneToMany
+    private ArtefactoEntity artefacto = new ArtefactoEntity();
 
     
 }
