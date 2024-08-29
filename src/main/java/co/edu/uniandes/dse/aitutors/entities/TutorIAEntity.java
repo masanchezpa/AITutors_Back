@@ -24,7 +24,7 @@ public class TutorIAEntity extends BaseEntity{
 
     @PodamExclude
     @OneToMany(
-         mappedBy = "accion",
+         mappedBy = "nombre",
          fetch=FetchType.LAZY)
     private List<AccionEntity> acciones=new ArrayList<>();
 
