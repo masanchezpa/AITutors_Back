@@ -9,12 +9,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import uk.co.jemos.podam.common.PodamExclude;
+
 public class DocumentoEntity extends BaseEntity {
 
     private String tipo;
     private String contenido;
 
-    // @ManyToOne
-    // private TemaEntity tema= new TemaEntity();
+    @PodamExclude
+    @ManyToOne
+    private TemaEntity tema= new TemaEntity();
 
 }

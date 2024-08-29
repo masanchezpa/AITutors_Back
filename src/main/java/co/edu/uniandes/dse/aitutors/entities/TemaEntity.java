@@ -11,7 +11,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.FetchType;
 import lombok.Data;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /*
  * Clase que representa un Tema
@@ -26,14 +28,19 @@ public class TemaEntity extends BaseEntity {
     private String descripcion;
 
 
+    @PodamExclude
+    @OneToMany(mappedBy = "tema", fetch = FetchType.LAZY)
+    private List<DocumentoEntity> documentos = new ArrayList<>();
 
-    // @OneToMany(mappedBy = "tema", fetch = FetchType.LAZY)
-    // private List<DocumentoEntity> documentos = new ArrayList<>();
+    @PodamExclude
+    @OneToOne
+    private TutorIAEntity tutorIA = new TutorIAEntity();
 
-    // @OneToOne
-    // private TutorIAEntity tutorIA = new TutorIAEntity();
 
-    // @ManyToOne
-    // private CursoEntity curso = new CursoEntity();
+    @PodamExclude
+    @ManyToOne
+    private CursoEntity curso = new CursoEntity();
+
+
 
 }
