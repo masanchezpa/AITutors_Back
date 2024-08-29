@@ -30,5 +30,4 @@ public class UsuarioEntity extends BaseEntity {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ArtefactoEntity> artefactos = new ArrayList<>();
 
-
 }
