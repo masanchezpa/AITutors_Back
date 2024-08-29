@@ -1,17 +1,16 @@
 package co.edu.uniandes.dse.aitutors.entities;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -40,5 +39,5 @@ public  class ArtefactoEntity extends BaseEntity {
 
 	@PodamExclude
 	@OneToMany
-	private List<ComentarioEntity> comentarios = new ArrayList<>(); /*Aqui el tipo no es String sino Comentario */
+	private List<ComentarioEntity> comentarios = new ArrayList<>(); 
 }
