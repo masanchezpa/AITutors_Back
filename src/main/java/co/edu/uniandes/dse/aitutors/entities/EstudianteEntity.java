@@ -2,13 +2,10 @@ package co.edu.uniandes.dse.aitutors.entities;
 
 import java.util.ArrayList;
 
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+
 
 import lombok.Data;
 import lombok.Getter;
