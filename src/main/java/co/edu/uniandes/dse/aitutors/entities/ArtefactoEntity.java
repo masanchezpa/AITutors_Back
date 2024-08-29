@@ -30,7 +30,7 @@ public  class ArtefactoEntity extends BaseEntity {
 	private UsuarioEntity autor; 
 
 	@PodamExclude
-	@OneToOne
+	@ManyToOne
 	private UsuarioEntity usuario; 
 
 	@PodamExclude

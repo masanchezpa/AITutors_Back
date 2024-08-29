@@ -11,12 +11,9 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import uk.co.jemos.podam.common.PodamExclude;
 
-@Getter
-@Setter
+
 @Entity
 @Data
 public class UsuarioEntity extends BaseEntity {
@@ -26,11 +23,11 @@ public class UsuarioEntity extends BaseEntity {
 
     @PodamExclude
     @OneToMany
-    private ArrayList<ComentarioEntity> comentarios;
+    private List<ComentarioEntity> comentarios;
 
     @PodamExclude
     @OneToMany
-    private ArrayList<ArtefactoEntity> artefacto;
+    private List<ArtefactoEntity> artefacto;
 
 
 }
