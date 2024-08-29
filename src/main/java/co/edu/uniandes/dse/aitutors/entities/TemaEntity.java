@@ -28,7 +28,7 @@ public class TemaEntity extends BaseEntity {
     // private List<DocumentoEntity> documentos = new ArrayList<>();
 
     // @OneToOne
-    // private TutorIAEntity tutorIA = new TutorIA();
+    // private TutorIAEntity tutorIA = new TutorIAEntity();
 
     // @ManyToOne
     // private CursoEntity curso = new CursoEntity();
