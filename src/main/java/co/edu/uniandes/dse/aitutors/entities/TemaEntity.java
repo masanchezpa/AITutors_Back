@@ -35,12 +35,12 @@ public class TemaEntity extends BaseEntity {
 
     @PodamExclude
     @OneToOne
-    private TutorIAEntity tutorIA = new TutorIAEntity();
+    private TutorIAEntity tutorIA;
 
 
     @PodamExclude
     @ManyToOne
-    private CursoEntity curso = new CursoEntity();
+    private CursoEntity curso;
 
 
 

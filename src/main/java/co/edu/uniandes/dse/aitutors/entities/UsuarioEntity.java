@@ -22,15 +22,15 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class UsuarioEntity extends BaseEntity {
     private String nombre;
     private String email;
-    
-    
+
+
     @PodamExclude
     @OneToMany
     private ArrayList<ComentarioEntity> comentarios;
 
     @PodamExclude
     @OneToMany
-    private ArtefactoEntity artefacto = new ArtefactoEntity();
+    private ArtefactoEntity artefacto;
 
-    
+
 }

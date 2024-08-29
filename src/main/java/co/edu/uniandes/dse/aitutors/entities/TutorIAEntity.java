@@ -27,8 +27,8 @@ public class TutorIAEntity extends BaseEntity{
          mappedBy = "accion",
          fetch=FetchType.LAZY)
     private List<AccionEntity> acciones=new ArrayList<>();
-    
+
     @PodamExclude
     @OneToOne
-    private TemaEntity tema=new TemaEntity();
+    private TemaEntity tema;
 }

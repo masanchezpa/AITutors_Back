@@ -16,7 +16,7 @@ import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
- * Clase que representa 
+ * Clase que representa
  *
  */
 
@@ -31,7 +31,7 @@ public  class AccionEntity extends BaseEntity {
 
 	@PodamExclude
 	@OneToMany
-	private List<ArtefactoEntity> aretefactos = new ArrayList<>(); 
-	
-	
+	private List<ArtefactoEntity> artefactos = new ArrayList<>();
+
+
 }
