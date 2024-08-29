@@ -4,6 +4,7 @@ import java.util.*;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -22,12 +23,12 @@ public class UsuarioEntity extends BaseEntity {
 
 
     @PodamExclude
-    @OneToMany
-    private List<ComentarioEntity> comentarios;
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ComentarioEntity> comentarios =new ArrayList<>();
 
     @PodamExclude
-    @OneToMany
-    private List<ArtefactoEntity> artefacto;
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ArtefactoEntity> artefactos = new ArrayList<>();
 
 
 }
