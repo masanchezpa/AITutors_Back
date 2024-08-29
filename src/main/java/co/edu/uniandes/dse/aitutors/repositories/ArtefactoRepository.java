@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
 
 @Repository
-public interface AretefactoRepository extends JpaRepository<ArtefactoEntity, Long> {
+public interface ArtefactoRepository extends JpaRepository<ArtefactoEntity, Long> {
         List<ArtefactoEntity> findById(String id);
 }
