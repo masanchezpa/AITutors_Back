@@ -1,7 +1,7 @@
 package co.edu.uniandes.dse.aitutors.entities;
 
 
-import jakarta.persistence.Entity;
+import javax.persistence.Entity;
 
 import lombok.Data;
 

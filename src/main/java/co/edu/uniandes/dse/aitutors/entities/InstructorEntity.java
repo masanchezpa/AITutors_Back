@@ -2,8 +2,8 @@ package co.edu.uniandes.dse.aitutors.entities;
 
 import java.util.ArrayList;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 
 import lombok.Data;

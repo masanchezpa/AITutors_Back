@@ -1,16 +1,15 @@
 package co.edu.uniandes.dse.aitutors.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.FetchType;
-
 import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
 
 import java.util.List;
 import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.FetchType;
 
 @Data
 @Entity
