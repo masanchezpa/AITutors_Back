@@ -2,10 +2,11 @@ package co.edu.uniandes.dse.aitutors.entities;
 
 import java.util.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -14,6 +15,8 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 @Data
 public class UsuarioEntity extends BaseEntity {
+
+
     private String nombre;
     private String email;
 
@@ -24,6 +27,6 @@ public class UsuarioEntity extends BaseEntity {
 
     @PodamExclude
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ArtefactoEntity> artefactos = new ArrayList<>();
+    private List<ArtefactoEntity> artefactos ;
 
 }

@@ -1,8 +1,9 @@
 package co.edu.uniandes.dse.aitutors.entities;
 
-
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -24,7 +25,7 @@ public  class CursoEntity extends BaseEntity {
 
     @PodamExclude
     @OneToMany
-    private TemaEntity temas;
+    private List<TemaEntity> temas;
 	
 	
 }

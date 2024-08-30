@@ -1,11 +1,12 @@
 package co.edu.uniandes.dse.aitutors.entities;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 
 import lombok.Data;
@@ -20,7 +21,6 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public  class ArtefactoEntity extends BaseEntity {
 
-	
 	private String tipo;
 	private String contenido;
 	private UsuarioEntity autor; 
@@ -35,5 +35,5 @@ public  class ArtefactoEntity extends BaseEntity {
 
 	@PodamExclude
 	@OneToMany
-	private List<ComentarioEntity> comentarios = new ArrayList<>(); 
+	private List<ComentarioEntity> comentarios; 
 }

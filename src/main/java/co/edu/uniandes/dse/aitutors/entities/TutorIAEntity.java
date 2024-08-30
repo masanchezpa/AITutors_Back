@@ -6,14 +6,17 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 import java.util.List;
 import java.util.ArrayList;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.FetchType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
 
 @Data
 @Entity
 public class TutorIAEntity extends BaseEntity{
+
+
     private String nombre;
     private String especialidad;
 
