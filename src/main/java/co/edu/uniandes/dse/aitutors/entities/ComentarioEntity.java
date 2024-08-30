@@ -22,9 +22,9 @@ public  class ComentarioEntity extends BaseEntity {
 
     private String contenido;
     private Date fecha;
-    private UsuarioEntity autor;
+    
 
 	@PodamExclude
     @ManyToOne 
-    private UsuarioEntity usuario;
+    private UsuarioEntity autor;
 }
