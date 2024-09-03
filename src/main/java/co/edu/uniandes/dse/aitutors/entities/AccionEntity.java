@@ -2,12 +2,11 @@ package co.edu.uniandes.dse.aitutors.entities;
 
 
 import java.util.List;
-
+import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-
+import jakarta.persistence.CascadeType;
 
 import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -27,8 +26,8 @@ public  class AccionEntity extends BaseEntity {
 	private String objetivo;
 
 	@PodamExclude
-	@OneToMany
-	private List<ArtefactoEntity> artefactos;
+	@OneToMany(mappedBy = "Accion", cascade = CascadeType.PERSIST, orphanRemoval = true)
+	private List<ArtefactoEntity> artefacto = new ArrayList<>();
 
 
 }
