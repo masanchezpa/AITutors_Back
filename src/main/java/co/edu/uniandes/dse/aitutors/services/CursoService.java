@@ -18,7 +18,7 @@ public class CursoService {
     private CursoRepository repository;
 
     @Transactional
-    public CursoEntity creaCursoEntity(CursoEntity entity) throws IllegalOperationException {
+    public CursoEntity creaCurso(CursoEntity entity) throws IllegalOperationException {
 
         Optional<CursoEntity> alreadyExist = repository.findById(entity.getId());
 
