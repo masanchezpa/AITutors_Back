@@ -1,0 +1,73 @@
+package co.edu.uniandes.dse.aitutors.services;
+
+
+import static org.mockito.ArgumentMatchers.anyChar;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
+import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
+import co.edu.uniandes.dse.aitutors.repositories.UsuarioRepository;
+import lombok.extern.slf4j.Slf4j;
+
+
+
+@Slf4j
+@Service
+public class UsuarioService {
+    
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @Transactional
+    public UsuarioEntity createUsuario(UsuarioEntity usuario) {
+        log.info("Creating a new usuario");
+        return usuarioRepository.save(usuario);
+    }
+
+    @Transactional
+    public List<UsuarioEntity> getUsuarios() {
+        log.info("Retrieving all usuarios");
+        return usuarioRepository.findAll();
+    }
+
+    @Transactional
+    public UsuarioEntity getUsuario(Long usuarioId) throws EntityNotFoundException {
+        log.info("Retrieving the usuario with id = {0}", usuarioId);
+        Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(usuarioId);
+        if (usuarioEntity.isEmpty()) {
+            throw new EntityNotFoundException("There is no usuario with id = " + usuarioId);
+        }
+        return usuarioEntity.get();
+    }
+
+
+    @Transactional
+    public UsuarioEntity updateUsuario(Long usuarioId, UsuarioEntity usuario) throws EntityNotFoundException {
+        log.info("Updating the usuario with id = {0}", usuarioId);
+        Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(usuarioId);
+        if (!usuarioEntity.isPresent()) {
+            throw new EntityNotFoundException("There is no usuario with id = " + usuarioId);
+        }
+        return usuarioRepository.save(usuario);
+    }
+
+    @Transactional
+    public void deleteUsuario(Long usuarioId) throws EntityNotFoundException {
+        log.info("Deleting the usuario with id = {0}", usuarioId);
+        Optional<UsuarioEntity> usuario = usuarioRepository.findById(usuarioId);
+        if (!usuario.isPresent()) {
+            throw new EntityNotFoundException("There is no usuario with id = " + usuarioId);
+        }
+        usuarioRepository.deleteById(usuarioId);
+    }
+
+
+
+
+}
