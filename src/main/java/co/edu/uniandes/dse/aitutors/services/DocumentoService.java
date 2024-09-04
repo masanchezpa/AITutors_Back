@@ -7,8 +7,7 @@ import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.repositories.DocumentoRepository;
 
 @Service
-public class DocumentoEntity {
-
+public class DocumentoService {
     @Autowired
     private DocumentoRepository documentoRepository;
 
@@ -19,5 +18,4 @@ public class DocumentoEntity {
             throw new IllegalOperationException("No se pudo mostrar el contenido del documento");
         }
     }
-
 }
