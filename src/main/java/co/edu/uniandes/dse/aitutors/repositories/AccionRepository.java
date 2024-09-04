@@ -10,3 +10,5 @@ import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
 public interface AccionRepository extends JpaRepository<AccionEntity, Long> {
         
 }
+
+
