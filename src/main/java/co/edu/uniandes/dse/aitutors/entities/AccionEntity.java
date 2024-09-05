@@ -22,7 +22,7 @@ public  class AccionEntity extends BaseEntity {
 
 	private String nombre;
 	private String descripcion;
-	private Boolean habilitacion;
+	private boolean habilitacion;
 	private String objetivo;
 
 	@PodamExclude
