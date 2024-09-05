@@ -2,6 +2,7 @@ package co.edu.uniandes.dse.aitutors.services;
 
 import java.util.Optional;
 
+import org.opentest4j.AssertionFailedError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class ArtefactoService {
     UsuarioRepository usuarioRepository;
 
     @Transactional
-    public ArtefactoEntity crearArtefacto(ArtefactoEntity artefactoEntity) throws IllegalOperationException{
+    public ArtefactoEntity crearArtefacto(ArtefactoEntity artefactoEntity) throws IllegalOperationException,AssertionFailedError{
         log.info("Creating a new artefact");
         
         if (artefactoEntity.getTipo().isBlank()){
