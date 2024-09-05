@@ -29,4 +29,7 @@ public class TutorIAEntity extends UsuarioEntity{
     @PodamExclude
     @OneToOne
     private TemaEntity tema;
+
+
+
 }
