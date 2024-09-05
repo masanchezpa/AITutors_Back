@@ -14,7 +14,7 @@ import jakarta.persistence.Id;
 
 @Data
 @Entity
-public class TutorIAEntity extends BaseEntity{
+public class TutorIAEntity extends UsuarioEntity{
 
 
     private String nombre;

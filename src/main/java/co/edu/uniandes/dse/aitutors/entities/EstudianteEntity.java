@@ -1,6 +1,6 @@
 package co.edu.uniandes.dse.aitutors.entities;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 import jakarta.persistence.Entity;
@@ -17,11 +17,11 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Setter
 @Entity
 @Data
-public class EstudianteEntity extends BaseEntity {
+public class EstudianteEntity extends UsuarioEntity {
     
 
     @PodamExclude
     @OneToMany
-    private ArrayList<CursoEntity> cursos;
+    private List<CursoEntity> cursos;
     
 }

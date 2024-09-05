@@ -16,7 +16,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Setter
 @Entity
 @Data
-public class InstructorEntity extends BaseEntity {
+public class InstructorEntity extends UsuarioEntity {
     
 
     @PodamExclude
