@@ -1,5 +1,6 @@
 package co.edu.uniandes.dse.aitutors.services;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.uniandes.dse.aitutors.entities.TemaEntity;
@@ -9,6 +10,7 @@ import co.edu.uniandes.dse.aitutors.repositories.TemaRepository;
 import co.edu.uniandes.dse.aitutors.entities.DocumentoEntity;
 
 
+@Service
 public class TemaDocumentoService {
 
     private TemaRepository temaRepository;
