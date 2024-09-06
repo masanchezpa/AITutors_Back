@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 
@@ -28,6 +29,10 @@ public  class AccionEntity extends BaseEntity {
 	@PodamExclude
 	@OneToMany(mappedBy = "Accion", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private List<ArtefactoEntity> artefacto = new ArrayList<>();
+
+	@PodamExclude
+	@ManyToOne
+	private TutorIAEntity TutorIA;
 
 
 }
