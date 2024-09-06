@@ -1,7 +1,6 @@
 package co.edu.uniandes.dse.aitutors.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 
@@ -18,6 +17,6 @@ public class DocumentoEntity extends BaseEntity {
 
     @PodamExclude
     @ManyToOne
-    private TemaEntity tema;
+    private TemaEntity Tema;
 
 }

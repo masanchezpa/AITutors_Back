@@ -1,8 +1,10 @@
 package co.edu.uniandes.dse.aitutors.entities;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -25,11 +27,15 @@ public  class CursoEntity extends BaseEntity {
 
     @PodamExclude
     @ManyToOne
-    private InstructorEntity instructor;
+    private InstructorEntity Instructor;
 
     @PodamExclude
-    @OneToMany
-    private List<TemaEntity> temas;
+    @ManyToOne
+    private EstudianteEntity Estudiante;
+
+    @PodamExclude
+    @OneToMany(mappedBy = "Curso", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<TemaEntity> temas = new ArrayList<>();
 	
 	
 }

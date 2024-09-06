@@ -6,12 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
-import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
 import co.edu.uniandes.dse.aitutors.entities.TutorIAEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
-import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.aitutors.repositories.AccionRepository;
-import co.edu.uniandes.dse.aitutors.repositories.ArtefactoRepository;
 import co.edu.uniandes.dse.aitutors.repositories.TutorIARepository;
 import jakarta.transaction.Transactional;
 

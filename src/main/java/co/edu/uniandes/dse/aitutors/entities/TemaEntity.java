@@ -11,7 +11,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
 
 /*
  * Clase que representa un Tema
@@ -28,7 +27,7 @@ public class TemaEntity extends BaseEntity {
 
 
     @PodamExclude
-    @OneToMany(mappedBy = "tema", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "Tema", fetch = FetchType.LAZY)
     private List<DocumentoEntity> documentos = new ArrayList<>();
 
     @PodamExclude

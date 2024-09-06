@@ -1,11 +1,10 @@
 package co.edu.uniandes.dse.aitutors.entities;
 
 import java.util.List;
-
+import java.util.ArrayList;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-
+import jakarta.persistence.CascadeType;
 
 import lombok.Data;
 import lombok.Getter;
@@ -20,7 +19,7 @@ public class InstructorEntity extends UsuarioEntity {
     
 
     @PodamExclude
-    @OneToMany
-    private List<CursoEntity> cursos;
+    @OneToMany(mappedBy = "Instructor", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<CursoEntity> cursos = new ArrayList<>();
     
 }
