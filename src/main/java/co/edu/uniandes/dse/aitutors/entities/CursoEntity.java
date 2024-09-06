@@ -23,18 +23,17 @@ public  class CursoEntity extends BaseEntity {
 
 	private String nombre;
 	private String descripcion;
-    private String Tema;
 
     @PodamExclude
     @ManyToOne
-    private InstructorEntity Instructor;
+    private InstructorEntity instructor;
 
     @PodamExclude
     @ManyToOne
-    private EstudianteEntity Estudiante;
+    private EstudianteEntity estudiante;
 
     @PodamExclude
-    @OneToMany(mappedBy = "Curso", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.PERSIST)
     private List<TemaEntity> temas = new ArrayList<>();
 	
 	

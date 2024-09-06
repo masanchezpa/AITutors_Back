@@ -28,13 +28,13 @@ public  class ArtefactoEntity extends BaseEntity {
 
 	@PodamExclude
 	@OneToOne
-	private UsuarioEntity Autor; 
+	private UsuarioEntity autor; 
 
 	@PodamExclude
 	@ManyToOne
-	private AccionEntity Accion; 
+	private AccionEntity accion; 
 
 	@PodamExclude
-	@OneToMany(mappedBy = "Artefacto", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "artefacto", cascade = CascadeType.PERSIST)
 	private List<ComentarioEntity> comentarios = new ArrayList<>(); 
 }

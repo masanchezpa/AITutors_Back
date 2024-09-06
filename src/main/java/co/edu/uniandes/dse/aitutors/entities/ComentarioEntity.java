@@ -24,9 +24,9 @@ public  class ComentarioEntity extends BaseEntity {
     
     @PodamExclude
 	@ManyToOne
-	private ArtefactoEntity Artefacto; 
+	private ArtefactoEntity artefacto; 
 
 	@PodamExclude
     @ManyToOne 
-    private UsuarioEntity Autor;
+    private UsuarioEntity autor;
 }

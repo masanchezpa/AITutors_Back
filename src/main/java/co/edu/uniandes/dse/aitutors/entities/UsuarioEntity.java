@@ -19,11 +19,11 @@ public class UsuarioEntity extends BaseEntity {
     private String email;
 
     @PodamExclude
-    @OneToMany(mappedBy = "Autor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "autor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ComentarioEntity> comentarios =new ArrayList<>();
 
     @PodamExclude
-    @OneToMany(mappedBy = "Autor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "autor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ArtefactoEntity> artefactos =new ArrayList<>();
 
 }

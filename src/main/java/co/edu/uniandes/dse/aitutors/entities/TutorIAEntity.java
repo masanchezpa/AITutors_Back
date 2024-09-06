@@ -20,12 +20,12 @@ public class TutorIAEntity extends UsuarioEntity{
     private String especialidad;
 
     @PodamExclude
-    @OneToMany(mappedBy = "TutorIA",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "tutorIA",fetch=FetchType.LAZY)
     private List<AccionEntity> acciones=new ArrayList<>();
 
     @PodamExclude
     @OneToOne
-    private TemaEntity Tema;
+    private TemaEntity tema;
 
 
 

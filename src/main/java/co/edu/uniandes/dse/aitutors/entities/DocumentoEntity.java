@@ -17,6 +17,6 @@ public class DocumentoEntity extends BaseEntity {
 
     @PodamExclude
     @ManyToOne
-    private TemaEntity Tema;
+    private TemaEntity tema;
 
 }
