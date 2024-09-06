@@ -27,7 +27,7 @@ public class TemaEntity extends BaseEntity {
 
 
     @PodamExclude
-    @OneToMany(mappedBy = "Tema", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tema", fetch = FetchType.LAZY)
     private List<DocumentoEntity> documentos = new ArrayList<>();
 
     @PodamExclude
@@ -37,7 +37,7 @@ public class TemaEntity extends BaseEntity {
 
     @PodamExclude
     @ManyToOne
-    private CursoEntity Curso;
+    private CursoEntity curso;
 
 
 
