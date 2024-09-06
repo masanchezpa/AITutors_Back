@@ -34,7 +34,7 @@ public  class CursoEntity extends BaseEntity {
     private EstudianteEntity Estudiante;
 
     @PodamExclude
-    @OneToMany(mappedBy = "Curso", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "Curso", cascade = CascadeType.PERSIST)
     private List<TemaEntity> temas = new ArrayList<>();
 	
 	

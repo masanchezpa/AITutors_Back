@@ -35,6 +35,6 @@ public  class ArtefactoEntity extends BaseEntity {
 	private AccionEntity Accion; 
 
 	@PodamExclude
-	@OneToMany(mappedBy = "Artefacto", cascade = CascadeType.PERSIST, orphanRemoval = true)
+	@OneToMany(mappedBy = "Artefacto", cascade = CascadeType.PERSIST)
 	private List<ComentarioEntity> comentarios = new ArrayList<>(); 
 }
