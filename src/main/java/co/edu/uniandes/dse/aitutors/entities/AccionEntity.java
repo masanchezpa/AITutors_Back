@@ -27,7 +27,7 @@ public  class AccionEntity extends BaseEntity {
 	private String objetivo;
 
 	@PodamExclude
-	@OneToMany(mappedBy = "Accion", cascade = CascadeType.PERSIST, orphanRemoval = true)
+	@OneToMany(mappedBy = "Accion", cascade = CascadeType.PERSIST)
 	private List<ArtefactoEntity> artefacto = new ArrayList<>();
 
 	@PodamExclude

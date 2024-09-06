@@ -37,7 +37,7 @@ public class TemaEntity extends BaseEntity {
 
     @PodamExclude
     @ManyToOne
-    private CursoEntity curso;
+    private CursoEntity Curso;
 
 
 
