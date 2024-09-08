@@ -1,10 +1,10 @@
 package co.edu.uniandes.dse.aitutors.entities;
 
 import java.util.List;
+import java.util.ArrayList;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 
@@ -21,7 +21,7 @@ public class EstudianteEntity extends UsuarioEntity {
     
 
     @PodamExclude
-    @OneToMany
-    private List<CursoEntity> cursos;
+    @OneToMany(mappedBy = "estudiante", cascade = CascadeType.PERSIST)
+    private List<CursoEntity> cursos =  new ArrayList<>();
     
 }

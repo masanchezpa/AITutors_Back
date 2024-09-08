@@ -5,12 +5,10 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+
 
 import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -34,9 +32,9 @@ public  class ArtefactoEntity extends BaseEntity {
 
 	@PodamExclude
 	@ManyToOne
-	private AccionEntity Accion; 
+	private AccionEntity accion; 
 
 	@PodamExclude
-	@OneToMany
+	@OneToMany(mappedBy = "artefacto", cascade = CascadeType.PERSIST)
 	private List<ComentarioEntity> comentarios = new ArrayList<>(); 
 }
