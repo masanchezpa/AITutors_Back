@@ -12,10 +12,6 @@ import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
 
 
-/**
- * Clase que representa 
- *
- */
 
 @Data
 @Entity
@@ -27,14 +23,12 @@ public  class CursoEntity extends BaseEntity {
     @PodamExclude
     @ManyToOne
     private InstructorEntity instructor;
-
-    @PodamExclude
+    
     @ManyToOne
     private EstudianteEntity estudiante;
-
+ 
     @PodamExclude
-    @OneToMany(mappedBy = "curso", cascade = CascadeType.PERSIST)
-    private List<TemaEntity> temas = new ArrayList<>();
-	
+    @OneToMany(mappedBy = "curso") 
+    private List<TemaEntity> temas = new ArrayList<>(); 
 	
 }
