@@ -3,7 +3,6 @@ package co.edu.uniandes.dse.aitutors.entities;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 
@@ -23,6 +22,9 @@ public  class ComentarioEntity extends BaseEntity {
     private String contenido;
     private Date fecha;
     
+    @PodamExclude
+	@ManyToOne
+	private ArtefactoEntity artefacto; 
 
 	@PodamExclude
     @ManyToOne 
