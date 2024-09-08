@@ -15,6 +15,7 @@ import co.edu.uniandes.dse.aitutors.repositories.EstudianteRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
+
 @Slf4j
 @Service
 public class CursoEstudianteService {
@@ -45,12 +46,12 @@ public class CursoEstudianteService {
 
     @Transactional
     public List<CursoEntity> getCursos(Long estudianteId) throws EntityNotFoundException{
-        log.info("Inicia el proceso de consultar todos los cursos del instructor");
+        log.info("Inicia el proceso de consultar todos los cursos del estudiante");
         Optional<EstudianteEntity> estudianteEntity= estudianteRepository.findById(estudianteId);
         if (estudianteEntity.isEmpty()){
             throw new EntityNotFoundException("ESTUDIANTE NOT FOUND");
         }
-        log.info("Termina el proceso de consultar los todos los cursos de un instructor");
+        log.info("Termina el proceso de consultar los todos los cursos de un estudiante");
         return estudianteEntity.get().getCursos();
     }
 
@@ -67,7 +68,7 @@ public class CursoEstudianteService {
             throw new EntityNotFoundException("CURSO NOT FOUND");
         }
         log.info("Termina el proceso de consultar el curso con id={0} del estudiante con id = "+estudianteId,cursoId);
-        if (!cursoEntity.get().getEstudiante().equals(estudianteEntity.get())){
+        if (!cursoEntity.get().getEstudiantes().contains(estudianteEntity.get())){
             throw new IllegalOperationException("El curso no está asociado con el estudiante");
         }
 
@@ -86,11 +87,11 @@ public class CursoEstudianteService {
             if (cursoEntity.isEmpty()){
                 throw new EntityNotFoundException("CURSO NOT FOUND");
             }
-            if (!cursoEntity.get().getEstudiante().equals(estudianteEntity.get())){
-                cursoEntity.get().setEstudiante(estudianteEntity.get());
+            if (!cursoEntity.get().getEstudiantes().contains(estudianteEntity.get())){
+                cursoEntity.get().getEstudiantes().add(estudianteEntity.get());
             }
         }
-        log.info("Finaliza proceso de reemplazar los cursos asociados al instructor con id = {0}",estudianteId);
+        log.info("Finaliza proceso de reemplazar los cursos asociados al estudiante con id = {0}",estudianteId);
         estudianteEntity.get().setCursos(cursos);
         return estudianteEntity.get().getCursos();
     }
@@ -106,7 +107,7 @@ public class CursoEstudianteService {
         if (cursoEntity.isEmpty()){
             throw new EntityNotFoundException("CURSO NOT FOUND");
         }
-        cursoEntity.get().setInstructor(null);
+        cursoEntity.get().getEstudiantes().remove(estudianteEntity.get());
         estudianteEntity.get().getCursos().remove(cursoEntity.get());
         log.info("Finaliza el proceso de borrar un curso del estudiante con id = {0}",estudianteId);
     }
