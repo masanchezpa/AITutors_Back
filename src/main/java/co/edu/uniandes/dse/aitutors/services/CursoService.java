@@ -68,48 +68,4 @@ public class CursoService {
 
 
 
-    @Transactional
-    public CursoEntity agregarTema(long cursoId, long temaId) throws IllegalOperationException {
-        Optional<CursoEntity> curso = cursoRepository.findById(cursoId);
-        Optional<TemaEntity> temaEntity = temaRepository.findById(temaId);
-
-        if(!curso.isPresent()) {
-            throw new IllegalOperationException("No existe un curso con ese id");
-        } else {
-            if(!temaEntity.isPresent()) {
-                throw new IllegalOperationException("No existe un tema con ese id");
-            } else {
-                curso.get().getTemas().add(temaEntity.get());
-                cursoRepository.save(curso.get());
-                return curso.get();
-            }
-        }
-        
-        curso.getTemas().add(tema);
-        cursoRepository.save(curso);
-    }
-    
-
-  
-
-    @Transactionals
-    public CursoEntity eliminarTema(long cursoId, long temaId) throws IllegalOperationException {
-        Optional<CursoEntity> curso = cursoRepository.findById(cursoId);
-        Optional<TemaEntity> temaEntity = temaRepository.findById(temaId);
-
-        if(!curso.isPresent()) {
-            throw new IllegalOperationException("No existe un curso con ese id");
-        } else {
-            if(!temaEntity.isPresent()) {
-                throw new IllegalOperationException("No existe un tema con ese id");
-            } else {
-                curso.get().getTemas().remove(temaEntity.get());
-                cursoRepository.save(curso.get());
-                return curso.get();
-            }
-        }
-    
-        curso.getTemas().remove(tema);
-        cursoRepository.save(curso);
-    }
 }
