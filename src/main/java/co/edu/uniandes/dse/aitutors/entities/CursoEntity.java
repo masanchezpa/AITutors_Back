@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -25,9 +26,10 @@ public  class CursoEntity extends BaseEntity {
     private InstructorEntity instructor;
     
     @PodamExclude
-    @ManyToOne
-    private EstudianteEntity estudiante;
- 
+    @ManyToMany
+    private List<EstudianteEntity> estudiantes=new ArrayList<>();
+
+
     @PodamExclude
     @OneToMany(mappedBy = "curso") 
     private List<TemaEntity> temas = new ArrayList<>(); 

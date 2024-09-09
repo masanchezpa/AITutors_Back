@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 
 import lombok.Data;
@@ -21,7 +21,7 @@ public class EstudianteEntity extends UsuarioEntity {
     
 
     @PodamExclude
-    @OneToMany(mappedBy = "estudiante", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "estudiantes")
     private List<CursoEntity> cursos =  new ArrayList<>();
     
 }
