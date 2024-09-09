@@ -7,11 +7,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.uniandes.dse.aitutors.entities.CursoEntity;
+import co.edu.uniandes.dse.aitutors.entities.InstructorEntity;
 import co.edu.uniandes.dse.aitutors.entities.TemaEntity;
+import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.repositories.CursoRepository;
+import co.edu.uniandes.dse.aitutors.repositories.InstructorRepository;
 import co.edu.uniandes.dse.aitutors.repositories.TemaRepository;
+import co.edu.uniandes.dse.aitutors.repositories.UsuarioRepository;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class CursoService {
 
@@ -21,21 +27,38 @@ public class CursoService {
     @Autowired
     private TemaRepository temaRepository;
 
+    @Autowired
+    private InstructorRepository instructorRepository;
+
     /*
      * Crea un curso
      * @param entity
      * @return CursoEntity
      */
     @Transactional
-    public CursoEntity creaCurso(CursoEntity entity) throws IllegalOperationException {
+    public CursoEntity creaCurso(CursoEntity curso) throws IllegalOperationException {
+        log.info("Creating a new course");
 
-        Optional<CursoEntity> alreadyExist = cursoRepository.findById(entity.getId());
-
-        if(!alreadyExist.isPresent()) {
-            throw new IllegalOperationException("Ya existe una compañía con ese nombre");
-        } else {
-            return cursoRepository.save(entity);
+        if (curso.getDescripcion().isBlank()){
+            throw new IllegalOperationException("Curso must have a description");
         }
+
+        if (curso.getInstructor()==null){
+            throw new IllegalOperationException("Curso must have an instructor");
+        }
+
+        if (curso.getNombre().isBlank()){
+            throw new IllegalOperationException("Curso must have a name");
+        }
+
+        Optional<InstructorEntity> instructorEntity=instructorRepository.findById(curso.getInstructor().getId());
+
+        if (instructorEntity.isEmpty()){
+            throw new IllegalOperationException("Instructor does not exist");
+        }
+        curso.setInstructor(instructorEntity.get());
+        log.info("End of creation of curso");
+        return cursoRepository.save(curso);
     }
     /*
      * Obtiene la lista de cursos
@@ -44,7 +67,7 @@ public class CursoService {
      * @return List<CursoEntity>
      */
     @Transactional
-    public void agregarTema(long cursoId, long temaId) throws IllegalOperationException {
+    public CursoEntity agregarTema(long cursoId, long temaId) throws IllegalOperationException {
         Optional<CursoEntity> curso = cursoRepository.findById(cursoId);
         Optional<TemaEntity> temaEntity = temaRepository.findById(temaId);
 
@@ -56,6 +79,7 @@ public class CursoService {
             } else {
                 curso.get().getTemas().add(temaEntity.get());
                 cursoRepository.save(curso.get());
+                return curso.get();
             }
         }
     }
@@ -67,7 +91,7 @@ public class CursoService {
      * @return List<CursoEntity>
      */
     @Transactional
-    public void eliminarTema(long cursoId, long temaId) throws IllegalOperationException {
+    public CursoEntity eliminarTema(long cursoId, long temaId) throws IllegalOperationException {
         Optional<CursoEntity> curso = cursoRepository.findById(cursoId);
         Optional<TemaEntity> temaEntity = temaRepository.findById(temaId);
 
@@ -79,6 +103,7 @@ public class CursoService {
             } else {
                 curso.get().getTemas().remove(temaEntity.get());
                 cursoRepository.save(curso.get());
+                return curso.get();
             }
         }
     }
