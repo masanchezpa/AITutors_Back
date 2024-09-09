@@ -1,5 +1,9 @@
 package co.edu.uniandes.dse.aitutors.services;
+import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +39,7 @@ public class CursoService {
      * @param entity
      * @return CursoEntity
      */
+
     @Transactional
     public CursoEntity creaCurso(CursoEntity curso) throws IllegalOperationException {
         log.info("Creating a new course");
@@ -60,12 +65,9 @@ public class CursoService {
         log.info("End of creation of curso");
         return cursoRepository.save(curso);
     }
-    /*
-     * Obtiene la lista de cursos
-     * @param cursoId
-     * @param temaId
-     * @return List<CursoEntity>
-     */
+
+
+
     @Transactional
     public CursoEntity agregarTema(long cursoId, long temaId) throws IllegalOperationException {
         Optional<CursoEntity> curso = cursoRepository.findById(cursoId);
@@ -82,15 +84,15 @@ public class CursoService {
                 return curso.get();
             }
         }
+        
+        curso.getTemas().add(tema);
+        cursoRepository.save(curso);
     }
+    
 
-    /*
-     * Obtiene la lista de cursos
-     * @param cursoId
-     * @param temaId
-     * @return List<CursoEntity>
-     */
-    @Transactional
+  
+
+    @Transactionals
     public CursoEntity eliminarTema(long cursoId, long temaId) throws IllegalOperationException {
         Optional<CursoEntity> curso = cursoRepository.findById(cursoId);
         Optional<TemaEntity> temaEntity = temaRepository.findById(temaId);
@@ -106,5 +108,8 @@ public class CursoService {
                 return curso.get();
             }
         }
+    
+        curso.getTemas().remove(tema);
+        cursoRepository.save(curso);
     }
 }

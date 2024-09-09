@@ -3,7 +3,7 @@ package co.edu.uniandes.dse.aitutors.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
@@ -13,10 +13,6 @@ import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
 
 
-/**
- * Clase que representa 
- *
- */
 
 @Data
 @Entity
@@ -28,14 +24,14 @@ public  class CursoEntity extends BaseEntity {
     @PodamExclude
     @ManyToOne
     private InstructorEntity instructor;
-
+    
     @PodamExclude
     @ManyToMany
     private List<EstudianteEntity> estudiantes=new ArrayList<>();
 
+
     @PodamExclude
-    @OneToMany(mappedBy = "curso", cascade = CascadeType.PERSIST)
-    private List<TemaEntity> temas = new ArrayList<>();
-	
+    @OneToMany(mappedBy = "curso") 
+    private List<TemaEntity> temas = new ArrayList<>(); 
 	
 }
