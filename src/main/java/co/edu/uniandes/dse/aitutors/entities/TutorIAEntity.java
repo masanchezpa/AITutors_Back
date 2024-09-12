@@ -13,7 +13,7 @@ import jakarta.persistence.FetchType;
 
 @Data
 @Entity
-public class TutorIAEntity extends UsuarioEntity{
+public class TutorIAEntity extends BaseEntity{
 
 
     private String nombre;
