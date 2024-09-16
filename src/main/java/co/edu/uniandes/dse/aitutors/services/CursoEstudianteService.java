@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import co.edu.uniandes.dse.aitutors.entities.CursoEntity;
 import co.edu.uniandes.dse.aitutors.entities.EstudianteEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.repositories.CursoRepository;
 import co.edu.uniandes.dse.aitutors.repositories.EstudianteRepository;
@@ -32,11 +33,11 @@ public class CursoEstudianteService {
         Optional<CursoEntity> cursoEntity=cursoRepository.findById(cursoId);
         
         if (estudianteEntity.isEmpty()){
-            throw new EntityNotFoundException("ESTUDIANTE NOT FOUND");
+            throw new EntityNotFoundException(ErrorMessage.ESTUDIANTE_NOT_FOUND);
         }
 
         if (cursoEntity.isEmpty()){
-            throw new EntityNotFoundException("CURSO NOT FOUND");
+            throw new EntityNotFoundException(ErrorMessage.CURSO_NOT_FOUND);
         }
 
         estudianteEntity.get().getCursos().add(cursoEntity.get());
@@ -49,7 +50,7 @@ public class CursoEstudianteService {
         log.info("Inicia el proceso de consultar todos los cursos del estudiante");
         Optional<EstudianteEntity> estudianteEntity= estudianteRepository.findById(estudianteId);
         if (estudianteEntity.isEmpty()){
-            throw new EntityNotFoundException("ESTUDIANTE NOT FOUND");
+            throw new EntityNotFoundException(ErrorMessage.ESTUDIANTE_NOT_FOUND);
         }
         log.info("Termina el proceso de consultar los todos los cursos de un estudiante");
         return estudianteEntity.get().getCursos();
@@ -61,11 +62,11 @@ public class CursoEstudianteService {
         Optional<EstudianteEntity> estudianteEntity= estudianteRepository.findById(estudianteId);
         Optional<CursoEntity> cursoEntity=cursoRepository.findById(cursoId);
         if (estudianteEntity.isEmpty()){
-            throw new EntityNotFoundException("ESTUDIANTE NOT FOUND");
+            throw new EntityNotFoundException(ErrorMessage.ESTUDIANTE_NOT_FOUND);
         }
 
         if (cursoEntity.isEmpty()){
-            throw new EntityNotFoundException("CURSO NOT FOUND");
+            throw new EntityNotFoundException(ErrorMessage.CURSO_NOT_FOUND);
         }
         log.info("Termina el proceso de consultar el curso con id={0} del estudiante con id = "+estudianteId,cursoId);
         if (!cursoEntity.get().getEstudiantes().contains(estudianteEntity.get())){
@@ -80,12 +81,12 @@ public class CursoEstudianteService {
         log.info("Inicia el proceso de reemplazar los cursos asociados al estudiante con id = {0}",estudianteId);
         Optional<EstudianteEntity> estudianteEntity= estudianteRepository.findById(estudianteId);
         if (estudianteEntity.isEmpty()){
-            throw new EntityNotFoundException("ESTUDIANTE NOT FOUND");
+            throw new EntityNotFoundException(ErrorMessage.ESTUDIANTE_NOT_FOUND);
         }
         for (CursoEntity curso:cursos){
             Optional<CursoEntity> cursoEntity=cursoRepository.findById(curso.getId());
             if (cursoEntity.isEmpty()){
-                throw new EntityNotFoundException("CURSO NOT FOUND");
+                throw new EntityNotFoundException(ErrorMessage.CURSO_NOT_FOUND);
             }
             if (!cursoEntity.get().getEstudiantes().contains(estudianteEntity.get())){
                 cursoEntity.get().getEstudiantes().add(estudianteEntity.get());
@@ -101,11 +102,11 @@ public class CursoEstudianteService {
         log.info("Inicia el proceso de borrar un curso del estudiante con id = {0}",estudianteId);
         Optional<EstudianteEntity> estudianteEntity=estudianteRepository.findById(estudianteId);
         if (estudianteEntity.isEmpty()){
-            throw new EntityNotFoundException("ESTUDIANTE NOT FOUND");
+            throw new EntityNotFoundException(ErrorMessage.ESTUDIANTE_NOT_FOUND);
         }
         Optional<CursoEntity> cursoEntity=cursoRepository.findById(cursoId);
         if (cursoEntity.isEmpty()){
-            throw new EntityNotFoundException("CURSO NOT FOUND");
+            throw new EntityNotFoundException(ErrorMessage.CURSO_NOT_FOUND);
         }
         cursoEntity.get().getEstudiantes().remove(estudianteEntity.get());
         estudianteEntity.get().getCursos().remove(cursoEntity.get());
