@@ -59,22 +59,17 @@ public class EstudianteCursoService {
     }
 
     @Transactional
-    public EstudianteEntity getCurso(Long estudianteId,Long cursoId) throws EntityNotFoundException, IllegalOperationException{
-        log.info("Inicia el proceso de consultar el estudiante con id={0} del curso con id = "+cursoId,estudianteId);
-        Optional<EstudianteEntity> estudianteEntity= estudianteRepository.findById(estudianteId);
+    public EstudianteEntity getEstudiante(Long cursoId,Long estudianteId) throws EntityNotFoundException{
+        log.info("Inicia el proceso de consultar un estudiante del curso con id = {0}",cursoId);
         Optional<CursoEntity> cursoEntity=cursoRepository.findById(cursoId);
-        if (estudianteEntity.isEmpty()){
-            throw new EntityNotFoundException(ErrorMessage.ESTUDIANTE_NOT_FOUND);
-        }
-
         if (cursoEntity.isEmpty()){
             throw new EntityNotFoundException(ErrorMessage.CURSO_NOT_FOUND);
         }
-        log.info("Termina el proceso de consultar el estudiante con id={0} del curso con id = "+cursoId,estudianteId);
-        if (!estudianteEntity.get().getCursos().contains(cursoEntity.get())){
-            throw new IllegalOperationException("El curso no está asociado con el estudiante");
+        Optional<EstudianteEntity> estudianteEntity=estudianteRepository.findById(estudianteId);
+        if (estudianteEntity.isEmpty()){
+            throw new EntityNotFoundException(ErrorMessage.ESTUDIANTE_NOT_FOUND);
         }
-
+        log.info("Termina el proceso de consultar un estudiante del curso con id = {0}",cursoId);
         return estudianteEntity.get();
     }
 
