@@ -100,7 +100,7 @@ class ComentarioUsuarioServiceTest {
     }
 	
     @Test
-    void testAddComentarioInvalidComentario() {
+    void testAddUsuarioInvalidComentario() {
         assertThrows(EntityNotFoundException.class, () -> {
             UsuarioEntity entity = usuarioList.get(0);
             comentarioUsuarioService.addUsuario(entity.getId(), 0L);
