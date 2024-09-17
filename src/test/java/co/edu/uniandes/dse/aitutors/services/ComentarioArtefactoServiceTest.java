@@ -44,7 +44,7 @@ public class ComentarioArtefactoServiceTest {
 
     private PodamFactory factory=new PodamFactoryImpl();
 
-    private ComentarioEntity comentario=new ComentarioEntity();
+    private ComentarioEntity comentario;
 
     private UsuarioEntity autor;
 
