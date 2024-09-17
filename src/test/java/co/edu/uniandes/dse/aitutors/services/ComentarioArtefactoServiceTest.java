@@ -2,6 +2,7 @@ package co.edu.uniandes.dse.aitutors.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
@@ -150,36 +151,55 @@ public class ComentarioArtefactoServiceTest {
 
     @Test
     void testGetArtefactoInvalidComentario(){
-
+        assertThrows(EntityNotFoundException.class, () -> {
+			comentarioArtefactoService.getArtefacto(0L);
+		});
     }
 
     @Test
     void testGetArtefactoNull(){
-
+        assertThrows(EntityNotFoundException.class, () -> {
+			comentarioArtefactoService.getArtefacto(comentario.getId());
+		});
     }
 
     @Test 
-    void testReplaceArtefacto(){
-
+    void testReplaceArtefacto() throws EntityNotFoundException{
+        ArtefactoEntity artefactoEntity=artefactoList.getFirst();
+        ArtefactoEntity newEntity=comentarioArtefactoService.replaceArtefacto(comentario.getId(),artefactoEntity.getId());
+        
+        assertNotNull(newEntity);
+        assertEquals(artefactoEntity.getId(), newEntity.getId());
+        assertEquals(artefactoEntity.getTipo(), newEntity.getTipo());
+        assertEquals(artefactoEntity.getContenido(), newEntity.getContenido());
     }
 
     @Test
     void testReplaceArtefactoInvalidComentario(){
+        assertThrows(EntityNotFoundException.class, () -> {
+            ArtefactoEntity artefactoEntity=artefactoList.getFirst();
+            comentarioArtefactoService.replaceArtefacto(0L,artefactoEntity.getId());
+        });
 
     }
 
     @Test
     void testReplaceArtefactoInvalid(){
-
+        assertThrows(EntityNotFoundException.class, () -> {
+            comentarioArtefactoService.replaceArtefacto(comentario.getId(),0L);
+        });
     }
 
     @Test
-    void testRemoveArtefacto(){
-
+    void testRemoveArtefacto() throws EntityNotFoundException{
+        comentarioArtefactoService.removeArtefacto(comentario.getId());
+        assertNull(comentario.getArtefacto());
     }
 
     @Test 
     void testRemoveArtefactoInvalidComentario(){
-        
+        assertThrows(EntityNotFoundException.class, () -> {
+            comentarioArtefactoService.removeArtefacto(0L);
+        });
     }
 }
