@@ -64,21 +64,27 @@ public class UsuarioComentarioService  {
     }
 
 	@Transactional
-    public void getComentario(Long usuarioId, Long comentarioId) throws EntityNotFoundException, IllegalOperationException {
+    public ComentarioEntity getComentario(Long usuarioId, Long comentarioId) throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de consultar el comentario con id = {0} del usuario con id = " + usuarioId, comentarioId);
         
         Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(usuarioId);
         if(usuarioEntity.isEmpty())
             throw new EntityNotFoundException(ErrorMessage.USUARIO_NOT_FOUND);
-        
+              
         Optional<ComentarioEntity> comentarioEntity = comentarioRepository.findById(comentarioId);
         if(comentarioEntity.isEmpty())
             throw new EntityNotFoundException(ErrorMessage.COMENTARIO_NOT_FOUND);
         
-        if(!usuarioEntity.get().getComentarios().contains(comentarioEntity.get()))
-            throw new IllegalOperationException("The comment is not associated to the user");
-        
+            
+        if(comentarioEntity.get().getAutor()==null)
+        throw new IllegalOperationException("NULL AUTHOR IS NOT VALID");
+    
         log.info("Termina proceso de consultar el comentario con id = {0} del usuario con id = " + usuarioId, comentarioId);
+
+        if(!comentarioEntity.get().getAutor().equals(usuarioEntity.get())){
+            throw new IllegalOperationException("The comment is not associated to the user");
+        }
+        return comentarioEntity.get();
     }
 
 
@@ -94,10 +100,12 @@ public class UsuarioComentarioService  {
             Optional<ComentarioEntity> c = comentarioRepository.findById(comentario.getId());
             if(c.isEmpty())
                 throw new EntityNotFoundException(ErrorMessage.COMENTARIO_NOT_FOUND);
-            
+
             c.get().setAutor(usuarioEntity.get());
+            usuarioEntity.get().getComentarios().add(comentario);
         }        
-        return comentarios;
+        usuarioEntity.get().setComentarios(comentarios);
+        return usuarioEntity.get().getComentarios();
     }
 
 }
