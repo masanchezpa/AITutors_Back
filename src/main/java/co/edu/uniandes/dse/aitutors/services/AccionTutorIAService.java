@@ -88,7 +88,7 @@ public class AccionTutorIAService {
 
 
     @Transactional
-    public void removeTutorial(Long accionId) throws EntityNotFoundException {
+    public void removeTutorIA(Long accionId) throws EntityNotFoundException {
         log.info("Inicia proceso de borrar el tutorIA del accion con id = {0}", accionId);
         Optional<AccionEntity> accionEntity = accionRepository.findById(accionId);
         if (accionEntity.isEmpty())
