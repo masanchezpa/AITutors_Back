@@ -1,11 +1,14 @@
 package co.edu.uniandes.dse.aitutors.dto;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
-public class DocumentoDTO {
+public class ComentarioDTO {
     private Long id;
-    private String tipo;
     private String contenido;
+    private Date fecha;
+    private UsuarioDTO usuario;
     private TemaDTO tema;
 }

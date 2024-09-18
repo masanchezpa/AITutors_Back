@@ -3,9 +3,10 @@ package co.edu.uniandes.dse.aitutors.dto;
 import lombok.Data;
 
 @Data
-public class DocumentoDTO {
+public class ArtefactoDTO {
     private Long id;
     private String tipo;
     private String contenido;
-    private TemaDTO tema;
+    private UsuarioDTO autor;
+    private AccionDTO accion;
 }
