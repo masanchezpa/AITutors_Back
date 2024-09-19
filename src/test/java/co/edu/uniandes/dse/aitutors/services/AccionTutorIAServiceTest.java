@@ -73,6 +73,7 @@ public class AccionTutorIAServiceTest {
         TutorIAEntity result = accionTutorIAService.addTutorIA(accion.getId(), tutorIA.getId());
         assertNotNull(result);
         assertEquals(tutorIA.getId(), result.getId());
+        assertEquals(accion, result);
     }
 
     @Test
