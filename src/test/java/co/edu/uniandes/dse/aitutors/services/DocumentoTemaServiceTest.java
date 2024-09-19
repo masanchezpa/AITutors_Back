@@ -60,7 +60,7 @@ class DocumentoTemaServiceTest {
 	 */
 	private void clearData() {
 		entityManager.getEntityManager().createQuery("delete from DocumentoEntity").executeUpdate();
-		entityManager.getEntityManager().createQuery("delete from TutorIAEntity").executeUpdate();
+		entityManager.getEntityManager().createQuery("delete from TemaEntity").executeUpdate();
 	}
 
 	/**
