@@ -21,7 +21,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import co.edu.uniandes.dse.aitutors.entities.ComentarioEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.aitutors.services.ComentarioService;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -69,7 +68,7 @@ class ComentarioServiceTest {
     }
 
     @Test
-    void testCreateComentario() {
+    void testCreateComentario() throws IllegalOperationException{
         ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
         ComentarioEntity result = comentarioService.createComentario(newEntity);
         assertNotNull(result);

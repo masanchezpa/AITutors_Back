@@ -23,8 +23,7 @@ import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import jakarta.transaction.Transactional;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
-import java.util.List;
-import java.util.ArrayList;
+
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest

@@ -21,7 +21,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import co.edu.uniandes.dse.aitutors.entities.EstudianteEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.aitutors.services.EstudianteService;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -70,7 +69,7 @@ class EstudianteServiceTest {
 
 
     @Test
-    void testCreateEstudiante() {
+    void testCreateEstudiante() throws IllegalOperationException{
         EstudianteEntity newEntity = factory.manufacturePojo(EstudianteEntity.class);
         EstudianteEntity result = accionService.createEstudiante(newEntity);
         assertNotNull(result);
