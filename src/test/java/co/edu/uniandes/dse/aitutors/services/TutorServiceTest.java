@@ -86,7 +86,7 @@ public class TutorServiceTest {
     @Test
     void testCreateTutor(){
         TutorIAEntity newTutor = factory.manufacturePojo(TutorIAEntity.class);
-        TutorIAEntity result = tutorIAService.crateTutor(newTutor);
+        TutorIAEntity result = tutorIAService.createTutor(newTutor);
         assertNotNull(result);
         TutorIAEntity entity = entityManager.find(TutorIAEntity.class,result.getId());
         assertEquals(newTutor.getId(), entity.getId());

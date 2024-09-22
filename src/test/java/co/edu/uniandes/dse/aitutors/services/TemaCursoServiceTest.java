@@ -2,9 +2,9 @@
 package co.edu.uniandes.dse.aitutors.services;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
 
 import jakarta.transaction.Transactional;
 
@@ -17,11 +17,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-
 import co.edu.uniandes.dse.aitutors.entities.CursoEntity;
 import co.edu.uniandes.dse.aitutors.entities.TemaEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
+
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -148,6 +148,7 @@ class TemaCursoServiceTest {
     }
 
     @Test
+
     void testReplaceCursoInvalidTema() {
         assertThrows(EntityNotFoundException.class, () -> {
             temaCursoService.replaceCurso(0L, cursoList.get(1).getId());
@@ -178,8 +179,6 @@ class TemaCursoServiceTest {
     }
    
 }
-
-
 
 
 
