@@ -65,7 +65,7 @@ class TutorServiceTest {
     }
 
     @Test
-    void testAgregarAccion()throws IllegalOperationException{
+    void testAgregarAccion(){
         TutorIAEntity tutor = tutorList.get(0);
         AccionEntity accion = accionList.get(0);
         tutorIAService.agregarAccion(accion, tutor);

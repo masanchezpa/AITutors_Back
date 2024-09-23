@@ -4,7 +4,6 @@ package co.edu.uniandes.dse.aitutors.services;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 import org.junit.jupiter.api.BeforeEach;

@@ -69,7 +69,7 @@ class EstudianteServiceTest {
 
 
     @Test
-    void testCreateEstudiante() throws IllegalOperationException{
+    void testCreateEstudiante() {
         EstudianteEntity newEntity = factory.manufacturePojo(EstudianteEntity.class);
         EstudianteEntity result = accionService.createEstudiante(newEntity);
         assertNotNull(result);

@@ -69,7 +69,7 @@ class UsuarioServiceTest {
 
 
     @Test
-    void testCreateUsuario() throws IllegalOperationException{
+    void testCreateUsuario() {
         UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
         UsuarioEntity result = usuarioService.createUsuario(newEntity);
         assertNotNull(result);

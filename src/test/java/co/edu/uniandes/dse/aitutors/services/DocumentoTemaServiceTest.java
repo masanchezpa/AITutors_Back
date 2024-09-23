@@ -158,7 +158,7 @@ class DocumentoTemaServiceTest {
 
 	
 	@Test
-    public void testRemoveDocumento() throws EntityNotFoundException {
+    void testRemoveDocumento() throws EntityNotFoundException {
         documentoTemaService.removeTema(documentoList.get(0).getId());
         DocumentoEntity documento = entityManager.find(DocumentoEntity.class, documentoList.get(0).getId());
         assertNull(documento.getTema());
