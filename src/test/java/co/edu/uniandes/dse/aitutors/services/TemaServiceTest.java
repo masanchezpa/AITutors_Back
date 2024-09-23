@@ -24,7 +24,7 @@ import co.edu.uniandes.dse.aitutors.repositories.TemaRepository;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Import(TemaService.class)
-public class TemaServiceTest {
+class TemaServiceTest {
     @Autowired
     private TemaService temaService;
 

@@ -84,7 +84,7 @@ class AccionTutorIAServiceTest {
     }   
 
     @Test
-    public void testAddTutorIA() throws EntityNotFoundException, IllegalOperationException  {
+    void testAddTutorIA() throws EntityNotFoundException, IllegalOperationException  {
         TutorIAEntity tutorIA = tutorIAList.get(0);
         AccionEntity accion = accionList.get(1);
         TutorIAEntity response = accionTutorIAService.addTutorIA(accion.getId(), tutorIA.getId());
@@ -93,7 +93,7 @@ class AccionTutorIAServiceTest {
     }
     
     @Test
-    public void testAddInvalidTutorIA() {
+    void testAddInvalidTutorIA() {
         assertThrows(EntityNotFoundException.class, () -> {
             AccionEntity accion = accionList.get(1);
             accionTutorIAService.addTutorIA(accion.getId(), 0L);
@@ -101,7 +101,7 @@ class AccionTutorIAServiceTest {
     }
 	
 	@Test
-    public void testAddTutorIAInvalidAccion() {
+    void testAddTutorIAInvalidAccion() {
         assertThrows(EntityNotFoundException.class, () -> {
             TutorIAEntity tutorIA = tutorIAList.get(0);
             accionTutorIAService.addTutorIA(0L, tutorIA.getId());
@@ -109,7 +109,7 @@ class AccionTutorIAServiceTest {
     }
 	
     @Test
-    public void testGetTutorIA() throws EntityNotFoundException {
+    void testGetTutorIA() throws EntityNotFoundException {
         AccionEntity entity = accionList.get(0);
         TutorIAEntity response = accionTutorIAService.getTutorIA(entity.getId());
         assertNotNull(response);
@@ -117,7 +117,7 @@ class AccionTutorIAServiceTest {
     }
 
 	@Test
-    public void testGetTutorIAInvalidAccion() {
+    void testGetTutorIAInvalidAccion() {
         assertThrows(EntityNotFoundException.class, () -> {
             accionTutorIAService.getTutorIA(0L);
         });
@@ -125,7 +125,7 @@ class AccionTutorIAServiceTest {
 
 
     @Test
-    public void testReplaceTutorIA() throws EntityNotFoundException {
+    void testReplaceTutorIA() throws EntityNotFoundException {
         TutorIAEntity tutorIA = tutorIAList.get(0);
         AccionEntity accion = accionList.get(1);
         TutorIAEntity response = accionTutorIAService.replaceTutorIA(accion.getId(), tutorIA.getId());
@@ -134,7 +134,7 @@ class AccionTutorIAServiceTest {
     }
 
 	@Test
-    public void testReplaceInvalidTutorIA() {
+    void testReplaceInvalidTutorIA() {
         assertThrows(EntityNotFoundException.class, () -> {
             accionTutorIAService.replaceTutorIA(0L, accionList.get(1).getId());
         });
@@ -142,21 +142,21 @@ class AccionTutorIAServiceTest {
 
 	
 	@Test
-	public void testReplaceTutorIAInvalidAccion() {
+	void testReplaceTutorIAInvalidAccion() {
         assertThrows(EntityNotFoundException.class, () -> {
             accionTutorIAService.replaceTutorIA(accionList.get(0).getId(), 0L);
         });
     }
     
     @Test
-    public void testRemoveAccion() throws EntityNotFoundException {
+    void testRemoveAccion() throws EntityNotFoundException {
         accionTutorIAService.removeTutorIA(accionList.get(0).getId());
         AccionEntity accion = entityManager.find(AccionEntity.class, accionList.get(0).getId());
         assertNull(accion.getTutorIA());
     }
 
     @Test
-    public void testRemoveInvalidTutorIA() {
+    void testRemoveInvalidTutorIA() {
         assertThrows(EntityNotFoundException.class, () -> {
             accionTutorIAService.removeTutorIA(0L);
         });
