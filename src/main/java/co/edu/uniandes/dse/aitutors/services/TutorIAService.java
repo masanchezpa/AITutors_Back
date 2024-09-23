@@ -44,17 +44,17 @@ public class TutorIAService {
 
     @Transactional
     public TutorIAEntity getTutor(Long tutorid) throws EntityNotFoundException {
-        Optional<TutorIAEntity> TutorEntidad = repositorioTutor.findById(tutorid);
-        if (TutorEntidad.isEmpty()) {
+        Optional<TutorIAEntity> tutorEntidad = repositorioTutor.findById(tutorid);
+        if (tutorEntidad.isEmpty()) {
             throw new EntityNotFoundException(ErrorMessage.TUTORIA_NOT_FOUND);
         }
-        return TutorEntidad.get();
+        return tutorEntidad.get();
     }
 
     @Transactional
     public TutorIAEntity updateTutor(Long tutorid, TutorIAEntity tutor) throws EntityNotFoundException {
-        Optional<TutorIAEntity> TutorEntidad = repositorioTutor.findById(tutorid);
-        if (!TutorEntidad.isPresent()) {
+        Optional<TutorIAEntity> tutorEntidad = repositorioTutor.findById(tutorid);
+        if (!tutorEntidad.isPresent()) {
             throw new EntityNotFoundException(ErrorMessage.TUTORIA_NOT_FOUND);
         }
         return repositorioTutor.save(tutor);
@@ -62,8 +62,8 @@ public class TutorIAService {
 
     @Transactional
     public void deleteTutor(Long tutorid) throws EntityNotFoundException {
-        Optional<TutorIAEntity> TutorEntidad = repositorioTutor.findById(tutorid);
-        if (!TutorEntidad.isPresent()) {
+        Optional<TutorIAEntity> tutorEntidad = repositorioTutor.findById(tutorid);
+        if (!tutorEntidad.isPresent()) {
             throw new EntityNotFoundException(ErrorMessage.TUTORIA_NOT_FOUND);
         }
         repositorioTutor.deleteById(tutorid);
