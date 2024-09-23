@@ -84,4 +84,26 @@ public class ComentarioUsuarioService {
         log.info("Termina proceso de borrar el usuario del comentario con id = {0}", comentarioId);
     }
 
+    @Transactional
+    public void removeComentario(Long usuarioId) throws EntityNotFoundException {
+        log.info("Inicia proceso de borrar el comentario del usuario con id = {0}", usuarioId);
+        Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(usuarioId);
+        if (usuarioEntity.isEmpty())
+            throw new EntityNotFoundException(ErrorMessage.USUARIO_NOT_FOUND);
+
+        usuarioEntity.get().getComentarios().forEach(comentario -> comentario.setAutor(null));
+        log.info("Termina proceso de borrar el comentario del usuario con id = {0}", usuarioId);
+    }
+
+    @Transactional
+    public ComentarioEntity getComentario(Long usuarioId) throws EntityNotFoundException {
+        log.info("Inicia proceso de consultar el comentario del usuario con id = {0}", usuarioId);
+        Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(usuarioId);
+        if (usuarioEntity.isEmpty())
+            throw new EntityNotFoundException(ErrorMessage.USUARIO_NOT_FOUND);
+
+        log.info("Termina proceso de consultar el comentario del usuario con id = {0}", usuarioId);
+        return usuarioEntity.get().getComentarios().get(0);
+    }
+
 }

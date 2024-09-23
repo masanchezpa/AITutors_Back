@@ -151,8 +151,8 @@ class ComentarioUsuarioServiceTest {
 	
     @Test
     void testRemoveComentario() throws EntityNotFoundException {
-        comentarioUsuarioService.removeUsuario(comentarioList.get(0).getId());
-        UsuarioEntity response = comentarioUsuarioService.getUsuario(comentarioList.get(0).getId());
+        comentarioUsuarioService.removeComentario(usuarioList.get(0).getId());
+        ComentarioEntity response = comentarioUsuarioService.getComentario(usuarioList.get(0).getId());
         assertNull(response);
     }
 
