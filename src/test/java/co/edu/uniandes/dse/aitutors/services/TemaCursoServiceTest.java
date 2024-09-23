@@ -1,188 +1,186 @@
+
 package co.edu.uniandes.dse.aitutors.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
-
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
+
+import jakarta.transaction.Transactional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.integration.IntegrationProperties.Error;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
 import co.edu.uniandes.dse.aitutors.entities.CursoEntity;
 import co.edu.uniandes.dse.aitutors.entities.TemaEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
-import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.aitutors.repositories.CursoRepository;
-import co.edu.uniandes.dse.aitutors.repositories.TemaRepository;
-import lombok.ToString;
+
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
-public class TemaCursoServiceTest {
-    
+/**
+ * Pruebas de logica de la relacion Prize - Author
+ *
+ * @author ISIS2603
+ */
+@ExtendWith(SpringExtension.class)
+@DataJpaTest
+@Transactional
+@Import(TemaCursoService.class)
+class TemaCursoServiceTest {
 
-    @Autowired
-	private TemaCursoService servicioTemaCurso;
+	private PodamFactory factory = new PodamFactoryImpl();
 
-	@MockBean
-    private TemaRepository repositorioTema;
+	@Autowired
+	private TemaCursoService temaCursoService;
 
-    @MockBean
-    private CursoRepository repositorioCurso;
+	@Autowired
+	private TestEntityManager entityManager;
 
-    private TemaEntity temaEntity;
-    private CursoEntity cursoEntity;
+	private List<TemaEntity> temaList = new ArrayList<>();
+	private List<CursoEntity> cursoList = new ArrayList<>();
 
 	/**
 	 * Configuración inicial de la prueba.
 	 */
 	@BeforeEach
 	void setUp() {
-        temaEntity = new TemaEntity();
-        temaEntity.setId(1L);
+		clearData();
+		insertData();
+	}
 
-        cursoEntity = new CursoEntity();
-        cursoEntity.setId(1L);
-    }
+	/**
+	 * Limpia las tablas que están implicadas en la prueba.
+	 */
+	private void clearData() {
+		entityManager.getEntityManager().createQuery("delete from CursoEntity").executeUpdate();
+		entityManager.getEntityManager().createQuery("delete from TemaEntity").executeUpdate();
+	}
 
-
-    @Test
-    void testaddCurso() throws EntityNotFoundException, IllegalOperationException {
-
-        when(repositorioTema.findById(1L)).thenReturn(Optional.of(temaEntity));
-        when(repositorioCurso.findById(1L)).thenReturn(Optional.of(cursoEntity));
-
-        CursoEntity result = servicioTemaCurso.addCurso(1L, 1L);
-        assertNotNull(result);
-        assertEquals(result, cursoEntity);
-    }
-
-    @Test
-    void testaddCurso_TemaNotFound() {
-
-        when(repositorioTema.findById(1L)).thenReturn(Optional.empty());
-        when(repositorioCurso.findById(1L)).thenReturn(Optional.of(cursoEntity));
-
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioTemaCurso.addCurso(1L, 1L));
-        assertEquals(ErrorMessage.TEMA_NOT_FOUND, error.getMessage());
-
-    }
-
-    @Test
-    void testaddCurso_CursoNotFound() {
-
-        when(repositorioTema.findById(1L)).thenReturn(Optional.of(temaEntity));
-        when(repositorioCurso.findById(1L)).thenReturn(Optional.empty());
-
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioTemaCurso.addCurso(1L, 1L));
-        assertEquals(ErrorMessage.CURSO_NOT_FOUND, error.getMessage());
-
+	/**
+	 * Inserta los datos iniciales para el correcto funcionamiento de las pruebas.
+	 */
+    private void insertData() {
+        for (int i = 0; i < 2; i++) {
+            TemaEntity tema = factory.manufacturePojo(TemaEntity.class);
+            entityManager.persist(tema);
+            temaList.add(tema);
+        }
+        for (int i = 0; i < 2; i++) {
+            CursoEntity curso = factory.manufacturePojo(CursoEntity.class);
+            entityManager.persist(curso);
+            cursoList.add(curso);
+        }
+        temaList.get(0).setCurso(cursoList.get(0));
+        entityManager.persist(temaList.get(0));
     }
 
     @Test
-    void testAddCurso_CursoAsociado() {
-
-        CursoEntity curso2 = new CursoEntity();
-        curso2.setId(2L);
-
-        temaEntity.setCurso(curso2);
-
-        when(repositorioTema.findById(1L)).thenReturn(Optional.of(temaEntity));
-        when(repositorioCurso.findById(1L)).thenReturn(Optional.of(cursoEntity));
-
-        IllegalOperationException error = assertThrows(IllegalOperationException.class, () -> servicioTemaCurso.addCurso(1L, 1L));
-        assertEquals("El tema ya tiene un curso asociado", error.getMessage());
-
-    }
-
-
-    @Test
-    void testGetCurso() throws EntityNotFoundException, IllegalOperationException {
-        when(repositorioTema.findById(1L)).thenReturn(Optional.of(temaEntity));
-        temaEntity.setCurso(cursoEntity);
-        CursoEntity result = servicioTemaCurso.getCurso(1L);
-        assertNotNull(result);
-        assertEquals(result, cursoEntity);
+    void testAddCurso() throws EntityNotFoundException, IllegalOperationException {
+        TemaEntity tema = temaList.get(1);
+        CursoEntity curso = cursoList.get(1);
+        CursoEntity response = temaCursoService.addCurso(tema.getId(), curso.getId());
+        assertNotNull(response);
+        assertEquals(curso.getId(), response.getId());
     }
 
     @Test
-    void testGetCurso_NoEncontroTema()  {
-        when(repositorioTema.findById(1L)).thenReturn(Optional.empty());
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioTemaCurso.getCurso(1L));
-        assertEquals(ErrorMessage.TEMA_NOT_FOUND, error);
+    void testAddInvalidCurso() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            TemaEntity tema = temaList.get(1);
+            temaCursoService.addCurso(tema.getId(), 0L);
+        });
     }
 
     @Test
-    void testGetCurso_TemaSinCurso() throws EntityNotFoundException, IllegalOperationException {
-
-        when(repositorioTema.findById(1L)).thenReturn(Optional.of(temaEntity));
-        temaEntity.setCurso(null);
-
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioTemaCurso.getCurso(1L));
-        assertEquals("El tema no tiene curso", error.getMessage());
+    void testAddCursoInvalidTema() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            CursoEntity curso = cursoList.get(0);
+            temaCursoService.addCurso(0L, curso.getId());
+        });
     }
-
-
+    
     @Test
-    void testReplaceCurso() throws EntityNotFoundException, IllegalOperationException {
-
-        when(repositorioTema.findById(1L)).thenReturn(Optional.of(temaEntity));
-        when(repositorioCurso.findById(1L)).thenReturn(Optional.of(cursoEntity));
-
-        CursoEntity result = servicioTemaCurso.replaceCurso(1L, 1L);
-        assertNotNull(result);
-        assertEquals(result, cursoEntity);
-
+    void testGetCurso() throws EntityNotFoundException {
+        TemaEntity entity = temaList.get(0);
+        CursoEntity response = temaCursoService.getCurso(entity.getId());
+        assertNotNull(response);
+        assertEquals(entity.getCurso().getId(), response.getId());
     }
-    @Test
-    void testReplaceCurso_CursoNotFound() throws EntityNotFoundException, IllegalOperationException {
-
-        when(repositorioTema.findById(1L)).thenReturn(Optional.empty());
-        when(repositorioCurso.findById(1L)).thenReturn(Optional.of(cursoEntity));
-
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioTemaCurso.addCurso(1L, 1L));
-        assertEquals(ErrorMessage.CURSO_NOT_FOUND, error.getMessage());
-
+	
+	@Test
+    void testGetCursoInvalidTema() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            temaCursoService.getCurso(0L);
+        });
     }
+	
     @Test
-    void testReplaceCurso_TemaNotFound() throws EntityNotFoundException, IllegalOperationException {
-
-        when(repositorioTema.findById(1L)).thenReturn(Optional.of(temaEntity));
-        when(repositorioCurso.findById(1L)).thenReturn(Optional.empty());
-
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioTemaCurso.addCurso(1L, 1L));
-        assertEquals(ErrorMessage.TEMA_NOT_FOUND, error.getMessage());
-
+    void testReplaceInvalidCurso() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            temaCursoService.replaceCurso(0L, cursoList.get(1).getId());
+        });
     }
 
     @Test
-    void removeCurso() throws EntityNotFoundException, IllegalOperationException {
+    void testReplaceCurso() throws EntityNotFoundException {
+        CursoEntity curso = cursoList.get(0);
+        TemaEntity tema = temaList.get(1);
+        CursoEntity response = temaCursoService.replaceCurso(tema.getId(), curso.getId());
+        assertNotNull(response);
+        assertEquals(curso.getId(), response.getId());
+    }
+    
+    
 
-        when(repositorioTema.findById(1L)).thenReturn(Optional.of(temaEntity));
-        temaEntity.setCurso(cursoEntity);
-        servicioTemaCurso.removeCurso(1L);
-        assertNull(temaEntity.getCurso());
+    @Test
+    void testRemoveInvalidCurso() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            temaCursoService.removeCurso(0L);
+        });
     }
 
     @Test
-    void removeCurso_TemaNotFound() throws EntityNotFoundException, IllegalOperationException {
-        when(repositorioTema.findById(1L)).thenReturn(Optional.empty());
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioTemaCurso.removeCurso(1L));
-        assertEquals(ErrorMessage.TEMA_NOT_FOUND, error.getMessage());
+
+    void testReplaceCursoInvalidTema() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            temaCursoService.replaceCurso(0L, cursoList.get(1).getId());
+        });
     }
 
+    @Test
+    void testRemoveTema() throws EntityNotFoundException {
+        temaCursoService.removeCurso(temaList.get(0).getId());
+        TemaEntity tema = entityManager.find(TemaEntity.class, temaList.get(0).getId());
+        assertNull(tema.getCurso());
+
+    }
 
 	
+	@Test
+    void testRemoveInvalidTema() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            temaCursoService.removeCurso(0L);
+        });
+    }
+
+    @Test
+    void testRemoveCurso() throws EntityNotFoundException {
+        temaCursoService.removeCurso(temaList.get(0).getId());
+        TemaEntity tema = entityManager.find(TemaEntity.class, temaList.get(0).getId());
+        assertNull(tema.getCurso());    
+    }
+   
 }
+
+
+
+
+

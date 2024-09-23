@@ -18,12 +18,12 @@ public class TutorIAService {
 
     @Autowired
     private TutorIARepository repositorioTutor;
-    
+
     @Transactional
     public void agregarAccion(AccionEntity accion, TutorIAEntity tutor) {
         tutor.getAcciones().add(accion);
         repositorioTutor.save(tutor);
-    } 
+    }
 
     @Transactional
     public void eliminarAccion(AccionEntity accion, TutorIAEntity tutor) {
@@ -33,7 +33,7 @@ public class TutorIAService {
 
 
     @Transactional
-    public TutorIAEntity crateTutor(TutorIAEntity tutor) {
+    public TutorIAEntity createTutor(TutorIAEntity tutor) {
         return repositorioTutor.save(tutor);
     }
 
@@ -70,4 +70,4 @@ public class TutorIAService {
     }
 
 
-}   
+}

@@ -20,7 +20,6 @@ import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
 import co.edu.uniandes.dse.aitutors.entities.TutorIAEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.aitutors.services.AccionService;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -66,7 +65,7 @@ public class TutorServiceTest {
     }
 
     @Test
-    void testAgregarAccion(){
+    void testAgregarAccion()throws IllegalOperationException{
         TutorIAEntity tutor = tutorList.get(0);
         AccionEntity accion = accionList.get(0);
         tutorIAService.agregarAccion(accion, tutor);
@@ -87,7 +86,7 @@ public class TutorServiceTest {
     @Test
     void testCreateTutor(){
         TutorIAEntity newTutor = factory.manufacturePojo(TutorIAEntity.class);
-        TutorIAEntity result = tutorIAService.crateTutor(newTutor);
+        TutorIAEntity result = tutorIAService.createTutor(newTutor);
         assertNotNull(result);
         TutorIAEntity entity = entityManager.find(TutorIAEntity.class,result.getId());
         assertEquals(newTutor.getId(), entity.getId());

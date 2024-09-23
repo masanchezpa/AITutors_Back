@@ -21,7 +21,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import co.edu.uniandes.dse.aitutors.entities.InstructorEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.aitutors.services.InstructorService;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -69,7 +68,7 @@ class InstructorServiceTest {
     }
 
     @Test
-    void testCreateInstructor() {
+    void testCreateInstructor() throws IllegalOperationException{
         InstructorEntity newEntity = factory.manufacturePojo(InstructorEntity.class);
         InstructorEntity result = instructorService.createInstructor(newEntity);
         assertNotNull(result);

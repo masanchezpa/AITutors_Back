@@ -1,188 +1,174 @@
 package co.edu.uniandes.dse.aitutors.services;
 
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import jakarta.transaction.Transactional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.uniandes.dse.aitutors.entities.*;
+
+import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
+import co.edu.uniandes.dse.aitutors.entities.TutorIAEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
-import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.aitutors.repositories.AccionRepository;
-import co.edu.uniandes.dse.aitutors.repositories.DocumentoRepository;
-import co.edu.uniandes.dse.aitutors.repositories.TemaRepository;
-import co.edu.uniandes.dse.aitutors.repositories.TutorIARepository;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
 
-
+/**
+ * Pruebas de logica de la relacion Prize - Author
+ *
+ * @author ISIS2603
+ */
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-@Import(TemaDocumentoService.class)
-public class AccionTutorIAServiceTest {
+@Transactional
+@Import(AccionTutorIAService.class)
+class AccionTutorIAServiceTest {
+
+	private PodamFactory factory = new PodamFactoryImpl();
+
+	@Autowired
+	private AccionTutorIAService accionTutorIAService;
+
+	@Autowired
+	private TestEntityManager entityManager;
+
+	private List<TutorIAEntity> tutorIAList = new ArrayList<>();
+	private List<AccionEntity> accionList = new ArrayList<>();
+
+	/**
+	 * Configuración inicial de la prueba.
+	 */
+	@BeforeEach
+	void setUp() {
+		clearData();
+		insertData();
+	}
+
+	/**
+	 * Limpia las tablas que están implicadas en la prueba.
+	 */
+	private void clearData() {
+		entityManager.getEntityManager().createQuery("delete from AccionEntity").executeUpdate();
+		entityManager.getEntityManager().createQuery("delete from TutorIAEntity").executeUpdate();
+	}
+
+	/**
+	 * Inserta los datos iniciales para el correcto funcionamiento de las pruebas.
+	 */
+
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
+            TutorIAEntity tutorIA = factory.manufacturePojo(TutorIAEntity.class);
+            entityManager.persist(tutorIA);
+            tutorIAList.add(tutorIA);
+        }
+        for (int i = 0; i < 3; i++) {
+            AccionEntity accion = factory.manufacturePojo(AccionEntity.class);
+            entityManager.persist(accion);
+            accionList.add(accion);
+            if (i == 0) {
+                accion.setTutorIA(tutorIAList.get(0));
+            }
+        }
+    }   
+
+    @Test
+    public void testAddTutorIA() throws EntityNotFoundException, IllegalOperationException  {
+        TutorIAEntity tutorIA = tutorIAList.get(0);
+        AccionEntity accion = accionList.get(1);
+        TutorIAEntity response = accionTutorIAService.addTutorIA(accion.getId(), tutorIA.getId());
+        assertNotNull(response);
+        assertEquals(tutorIA.getId(), response.getId());
+    }
     
-    @Autowired
-    private AccionTutorIAService servicioAccionTutor;
-
-    @MockBean
-    private TutorIARepository repositorioTutor;
-
-    @MockBean
-    private AccionRepository repositorioAccion;
-
-    private AccionEntity accionEntity;
-
-    private TutorIAEntity tutorIAEntity;
-
-    @BeforeEach
-    void setUp() {
-        accionEntity = new AccionEntity();
-        accionEntity.setId(1L);
-        
-        tutorIAEntity = new TutorIAEntity();
-        tutorIAEntity.setId(1L);
+    @Test
+    public void testAddInvalidTutorIA() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            AccionEntity accion = accionList.get(1);
+            accionTutorIAService.addTutorIA(accion.getId(), 0L);
+        });
+    }
+	
+	@Test
+    public void testAddTutorIAInvalidAccion() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            TutorIAEntity tutorIA = tutorIAList.get(0);
+            accionTutorIAService.addTutorIA(0L, tutorIA.getId());
+        });
+    }
+	
+    @Test
+    public void testGetTutorIA() throws EntityNotFoundException {
+        AccionEntity entity = accionList.get(0);
+        TutorIAEntity response = accionTutorIAService.getTutorIA(entity.getId());
+        assertNotNull(response);
+        assertEquals(entity.getTutorIA().getId(), response.getId());
     }
 
-    @Test
-    void testAgregarTutorIA() throws IllegalOperationException {
-        when(repositorioTutor.findById(1L)).thenReturn(Optional.of(tutorIAEntity));
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.of(accionEntity));
-        try{
-        TutorIAEntity result = servicioAccionTutor.addTutorIA(1L, 1L);
-        assertNotNull(result);
-        assertEquals(accionEntity.getTutorIA(), result);
-        }
-        catch (EntityNotFoundException e) {}
-
-    }
-
-    @Test
-    void testAgregarTutorIAAccionNoExistente() {
-
-        when(repositorioTutor.findById(1L)).thenReturn(Optional.of(tutorIAEntity));
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.empty());
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioAccionTutor.addTutorIA(1L, 1L));
-        assertEquals(ErrorMessage.TUTORIA_NOT_FOUND, error.getMessage());
-
-    }
-
-    @Test
-    void testAgregarTutorIAYaTieneTutor() {
-
-        TutorIAEntity tutor2 = new TutorIAEntity();
-        tutor2.setId(2L);
-        when(repositorioTutor.findById(1L)).thenReturn(Optional.of(tutorIAEntity));
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.of(accionEntity));
-        accionEntity.setTutorIA(tutor2);
-
-        IllegalOperationException error = assertThrows(IllegalOperationException.class, () ->servicioAccionTutor.addTutorIA(1L, 1L));
-        assertEquals("El accion ya tiene un tutorIA asociado", error.getMessage());
-    }
-
-    @Test
-    void testAgregarTutorIAATUTORIANoExistente() {
-
-        when(repositorioTutor.findById(1L)).thenReturn(Optional.empty());
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.of(accionEntity));
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioAccionTutor.addTutorIA(1L, 1L));
-        assertEquals(ErrorMessage.ACCION_NOT_FOUND, error.getMessage());
-
-    }
-
-    @Test
-    void testgetTutorIA() {
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.of(accionEntity));
-        try{
-        TutorIAEntity result = servicioAccionTutor.getTutorIA(1L);
-        assertNotNull(result);
-        assertEquals(result, accionEntity);
-        }
-        catch(EntityNotFoundException e ) {} 
+	@Test
+    public void testGetTutorIAInvalidAccion() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            accionTutorIAService.getTutorIA(0L);
+        });
     }
 
 
     @Test
-    void testgetTutorIA_AccionNoFound() {
+    public void testReplaceTutorIA() throws EntityNotFoundException {
+        TutorIAEntity tutorIA = tutorIAList.get(0);
+        AccionEntity accion = accionList.get(1);
+        TutorIAEntity response = accionTutorIAService.replaceTutorIA(accion.getId(), tutorIA.getId());
+        assertNotNull(response);
+        assertEquals(tutorIA.getId(), response.getId());
+    }
 
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.empty());
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioAccionTutor.getTutorIA(1L));
-        assertEquals(ErrorMessage.ACCION_NOT_FOUND, error.getMessage());
+	@Test
+    public void testReplaceInvalidTutorIA() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            accionTutorIAService.replaceTutorIA(0L, accionList.get(1).getId());
+        });
+    }
 
+	
+	@Test
+	public void testReplaceTutorIAInvalidAccion() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            accionTutorIAService.replaceTutorIA(accionList.get(0).getId(), 0L);
+        });
+    }
+    
+    @Test
+    public void testRemoveAccion() throws EntityNotFoundException {
+        accionTutorIAService.removeTutorIA(accionList.get(0).getId());
+        AccionEntity accion = entityManager.find(AccionEntity.class, accionList.get(0).getId());
+        assertNull(accion.getTutorIA());
     }
 
     @Test
-    void testgetTutorIA_NoHayTutor() {
-
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.of(accionEntity));
-        accionEntity.setTutorIA(null);
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioAccionTutor.getTutorIA(1L));
-        assertEquals("El accion no tiene tutorIA", error.getMessage());
-
+    public void testRemoveInvalidTutorIA() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            accionTutorIAService.removeTutorIA(0L);
+        });
     }
 
     @Test
-    void testreplaceTutorIA() throws IllegalOperationException {
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.of(accionEntity));
-        when(repositorioTutor.findById(1L)).thenReturn(Optional.of(tutorIAEntity));
-        try{
-            TutorIAEntity result = servicioAccionTutor.replaceTutorIA(1L, 1L);
-            assertNotNull(result);
-            assertEquals(result, tutorIAEntity);
-        }
-        catch (EntityNotFoundException e) {}
-    }
-
-    @Test
-    void testreplaceTutorIA_TutoriaNotFound() {
-
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.of(accionEntity));
-        when(repositorioTutor.findById(1L)).thenReturn(Optional.empty());
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioAccionTutor.replaceTutorIA(1L, 1L));
-        assertEquals(ErrorMessage.TUTORIA_NOT_FOUND, error.getMessage());
-
-    }
-
-    @Test
-    void testreplaceTutorIA_AccionNotFound() {
-
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.empty());
-        when(repositorioTutor.findById(1L)).thenReturn(Optional.of(tutorIAEntity));
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioAccionTutor.replaceTutorIA(1L, 1L));
-        assertEquals(ErrorMessage.ACCION_NOT_FOUND, error.getMessage());
-
-    }
-    @Test
-    void testremoveTutorIA() {
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.of(accionEntity));
-        try{
-        servicioAccionTutor.removeTutorIA(1L);
-        verify(repositorioAccion, times(1)).findById(1L);
-        assertNull(accionEntity.getTutorIA());
-        }
-        catch(EntityNotFoundException e ) {}
-    }
-
-    @Test
-    void testremoveTutorIA_AccionNotFound() {
-
-        when(repositorioAccion.findById(1L)).thenReturn(Optional.empty());
-        EntityNotFoundException error = assertThrows(EntityNotFoundException.class, () -> servicioAccionTutor.removeTutorIA(1L));
-        assertEquals(ErrorMessage.ACCION_NOT_FOUND, error.getMessage());
-
-
+    void testRemoveTutorIA () {
+        Long nonExistentId = 9999L;
+        assertThrows(EntityNotFoundException.class, () -> {
+            accionTutorIAService.removeTutorIA(nonExistentId);
+        });
     }
 
 }
+
