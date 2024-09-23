@@ -68,7 +68,7 @@ class AccionServiceTest {
     }
 
     @Test
-    void testCreateAccion() throws IllegalOperationException {
+    void testCreateAccion() {
         AccionEntity newEntity = factory.manufacturePojo(AccionEntity.class);
         AccionEntity result = accionService.createAccion(newEntity);
         assertNotNull(result);

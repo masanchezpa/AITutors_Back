@@ -68,7 +68,7 @@ class ComentarioServiceTest {
     }
 
     @Test
-    void testCreateComentario() throws IllegalOperationException{
+    void testCreateComentario() {
         ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
         ComentarioEntity result = comentarioService.createComentario(newEntity);
         assertNotNull(result);
