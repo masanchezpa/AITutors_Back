@@ -18,7 +18,6 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Data
 public class EstudianteEntity extends UsuarioEntity {
     
-    private String nombre;
     
     @PodamExclude
     @ManyToMany(mappedBy = "estudiantes")
