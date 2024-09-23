@@ -27,7 +27,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @DataJpaTest
 @Transactional
 @Import(TutorIAService.class)
-public class TutorServiceTest {
+class TutorServiceTest {
 
     @Autowired
     private TutorIAService tutorIAService;

@@ -20,7 +20,7 @@ import co.edu.uniandes.dse.aitutors.repositories.DocumentoRepository;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Import(DocumentoService.class)
-public class DocumentoServiceTest {
+class DocumentoServiceTest {
     @TestConfiguration
     static class DocumentoServiceTestContextConfiguration {
         @Bean
