@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.aitutors.entities.InstructorEntity;
 import co.edu.uniandes.dse.aitutors.repositories.InstructorRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public class InstructorService {
         log.info("Retrieving the instructor with id = {0}", instructorId);
         Optional<InstructorEntity> instructorEntity = instructorRepository.findById(instructorId);
         if (instructorEntity.isEmpty()) {
-            throw new EntityNotFoundException("There is no instructor with id = " + instructorId);
+            throw new EntityNotFoundException(ErrorMessage.INSTRUCTOR_NOT_FOUND);
         }
         return instructorEntity.get();
     }
@@ -50,7 +51,7 @@ public class InstructorService {
         log.info("Updating the instructor with id = {0}", instructorId);
         Optional<InstructorEntity> instructorEntity = instructorRepository.findById(instructorId);
         if (!instructorEntity.isPresent()) {
-            throw new EntityNotFoundException("There is no instructor with id = " + instructorId);
+            throw new EntityNotFoundException(ErrorMessage.INSTRUCTOR_NOT_FOUND);
         }
         return instructorRepository.save(instructor);
     }
@@ -60,7 +61,7 @@ public class InstructorService {
         log.info("Deleting the instructor with id = {0}", instructorId);
         Optional<InstructorEntity> instructorEntity = instructorRepository.findById(instructorId);
         if (!instructorEntity.isPresent()) {
-            throw new EntityNotFoundException("There is no instructor with id = " + instructorId);
+            throw new EntityNotFoundException(ErrorMessage.INSTRUCTOR_NOT_FOUND);
         }
         instructorRepository.deleteById(instructorId);
     }

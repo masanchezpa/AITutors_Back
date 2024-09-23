@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
 import co.edu.uniandes.dse.aitutors.repositories.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +41,7 @@ public class UsuarioService {
         log.info("Retrieving the usuario with id = {0}", usuarioId);
         Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(usuarioId);
         if (usuarioEntity.isEmpty()) {
-            throw new EntityNotFoundException("There is no usuario with id = " + usuarioId);
+            throw new EntityNotFoundException(ErrorMessage.USUARIO_NOT_FOUND);
         }
         return usuarioEntity.get();
     }
@@ -51,7 +52,7 @@ public class UsuarioService {
         log.info("Updating the usuario with id = {0}", usuarioId);
         Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(usuarioId);
         if (!usuarioEntity.isPresent()) {
-            throw new EntityNotFoundException("There is no usuario with id = " + usuarioId);
+            throw new EntityNotFoundException(ErrorMessage.USUARIO_NOT_FOUND);
         }
         return usuarioRepository.save(usuario);
     }
@@ -61,7 +62,7 @@ public class UsuarioService {
         log.info("Deleting the usuario with id = {0}", usuarioId);
         Optional<UsuarioEntity> usuario = usuarioRepository.findById(usuarioId);
         if (!usuario.isPresent()) {
-            throw new EntityNotFoundException("There is no usuario with id = " + usuarioId);
+            throw new EntityNotFoundException(ErrorMessage.USUARIO_NOT_FOUND);
         }
         usuarioRepository.deleteById(usuarioId);
     }

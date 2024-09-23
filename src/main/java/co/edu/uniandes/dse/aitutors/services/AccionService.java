@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
 import co.edu.uniandes.dse.aitutors.repositories.AccionRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +42,7 @@ public class AccionService {
         log.info("Retrieving the accion with id = {0}", accionId);
         Optional<AccionEntity> accionEntity = accionRepository.findById(accionId);
         if (accionEntity.isEmpty()) {
-            throw new EntityNotFoundException("There is no accion with id = " + accionId);
+            throw new EntityNotFoundException(ErrorMessage.ACCION_NOT_FOUND);
         }
         return accionEntity.get();
     }
@@ -51,7 +52,7 @@ public class AccionService {
         log.info("Updating the accion with id = {0}", accionId);
         Optional<AccionEntity> accionEntity = accionRepository.findById(accionId);
         if (!accionEntity.isPresent()) {
-            throw new EntityNotFoundException("There is no accion with id = " + accionId);
+            throw new EntityNotFoundException(ErrorMessage.ACCION_NOT_FOUND);
         }
         return accionRepository.save(accion);
     }
@@ -61,7 +62,7 @@ public class AccionService {
         log.info("Deleting the accion with id = {0}", accionId);
         Optional<AccionEntity> accion = accionRepository.findById(accionId);
         if (!accion.isPresent()) {
-            throw new EntityNotFoundException("There is no accion with id = " + accionId);
+            throw new EntityNotFoundException(ErrorMessage.ACCION_NOT_FOUND);
         }
         accionRepository.deleteById(accionId);
     }

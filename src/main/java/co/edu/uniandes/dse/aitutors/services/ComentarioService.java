@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.aitutors.entities.ComentarioEntity;
 import co.edu.uniandes.dse.aitutors.repositories.ComentarioRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +42,7 @@ public class ComentarioService {
         log.info("Retrieving the comentario with id = {0}", comentarioId);
         Optional<ComentarioEntity> comentarioEntity = comentarioRepository.findById(comentarioId);
         if (comentarioEntity.isEmpty()) {
-            throw new EntityNotFoundException("There is no comentario with id = " + comentarioId);
+            throw new EntityNotFoundException(ErrorMessage.COMENTARIO_NOT_FOUND);
         }
         return comentarioEntity.get();
     }
@@ -51,7 +52,7 @@ public class ComentarioService {
         log.info("Updating the comentario with id = {0}", comentarioId);
         Optional<ComentarioEntity> comentarioEntity = comentarioRepository.findById(comentarioId);
         if (!comentarioEntity.isPresent()) {
-            throw new EntityNotFoundException("There is no comentario with id = " + comentarioId);
+            throw new EntityNotFoundException(ErrorMessage.COMENTARIO_NOT_FOUND);
         }
         return comentarioRepository.save(comentario);
     }
@@ -61,7 +62,7 @@ public class ComentarioService {
         log.info("Deleting the comentario with id = {0}", comentarioId);
         Optional<ComentarioEntity> comentario = comentarioRepository.findById(comentarioId);
         if (!comentario.isPresent()) {
-            throw new EntityNotFoundException("There is no comentario with id = " + comentarioId);
+            throw new EntityNotFoundException(ErrorMessage.COMENTARIO_NOT_FOUND);
         }
         comentarioRepository.deleteById(comentarioId);
     }

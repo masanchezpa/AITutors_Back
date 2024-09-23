@@ -8,6 +8,7 @@ import java.util.Optional;
 import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
 import co.edu.uniandes.dse.aitutors.entities.TutorIAEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.aitutors.repositories.TutorIARepository;
 import jakarta.transaction.Transactional;
 
@@ -45,7 +46,7 @@ public class TutorIAService {
     public TutorIAEntity getTutor(Long tutorid) throws EntityNotFoundException {
         Optional<TutorIAEntity> TutorEntidad = repositorioTutor.findById(tutorid);
         if (TutorEntidad.isEmpty()) {
-            throw new EntityNotFoundException("No se encontro tutor con el id: " + tutorid);
+            throw new EntityNotFoundException(ErrorMessage.TUTORIA_NOT_FOUND);
         }
         return TutorEntidad.get();
     }
@@ -54,7 +55,7 @@ public class TutorIAService {
     public TutorIAEntity updateTutor(Long tutorid, TutorIAEntity tutor) throws EntityNotFoundException {
         Optional<TutorIAEntity> TutorEntidad = repositorioTutor.findById(tutorid);
         if (!TutorEntidad.isPresent()) {
-            throw new EntityNotFoundException("No se encontro tutor con el id: " + tutorid);
+            throw new EntityNotFoundException(ErrorMessage.TUTORIA_NOT_FOUND);
         }
         return repositorioTutor.save(tutor);
     }
@@ -63,7 +64,7 @@ public class TutorIAService {
     public void deleteTutor(Long tutorid) throws EntityNotFoundException {
         Optional<TutorIAEntity> TutorEntidad = repositorioTutor.findById(tutorid);
         if (!TutorEntidad.isPresent()) {
-            throw new EntityNotFoundException("No se encontro tutor con el id: " + tutorid);
+            throw new EntityNotFoundException(ErrorMessage.TUTORIA_NOT_FOUND);
         }
         repositorioTutor.deleteById(tutorid);
     }

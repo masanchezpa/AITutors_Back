@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.aitutors.entities.EstudianteEntity;
 import co.edu.uniandes.dse.aitutors.repositories.EstudianteRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public class EstudianteService {
         log.info("Retrieving the estudiante with id = {0}", estudianteId);
         Optional<EstudianteEntity> estudianteEntity = estudianteRepository.findById(estudianteId);
         if (estudianteEntity.isEmpty()) {
-            throw new EntityNotFoundException("There is no estudiante with id = " + estudianteId);
+            throw new EntityNotFoundException(ErrorMessage.ESTUDIANTE_NOT_FOUND);
         }
         return estudianteEntity.get();
     }
@@ -50,7 +51,7 @@ public class EstudianteService {
         log.info("Updating the estudiante with id = {0}", estudianteId);
         Optional<EstudianteEntity> estudianteEntity = estudianteRepository.findById(estudianteId);
         if (!estudianteEntity.isPresent()) {
-            throw new EntityNotFoundException("There is no estudiante with id = " + estudianteId);
+            throw new EntityNotFoundException(ErrorMessage.ESTUDIANTE_NOT_FOUND);
         }
         return estudianteRepository.save(estudiante);
     }
@@ -60,7 +61,7 @@ public class EstudianteService {
         log.info("Deleting the estudiante with id = {0}", estudianteId);
         Optional<EstudianteEntity> estudianteEntity = estudianteRepository.findById(estudianteId);
         if (!estudianteEntity.isPresent()) {
-            throw new EntityNotFoundException("There is no estudiante with id = " + estudianteId);
+            throw new EntityNotFoundException(ErrorMessage.ESTUDIANTE_NOT_FOUND);
         }
         estudianteRepository.deleteById(estudianteId);
     }

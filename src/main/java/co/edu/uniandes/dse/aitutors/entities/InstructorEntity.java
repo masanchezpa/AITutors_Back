@@ -17,6 +17,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Data
 public class InstructorEntity extends UsuarioEntity {
     
+    private String nombre;
 
     @PodamExclude
     @OneToMany(mappedBy = "instructor", cascade = CascadeType.PERSIST)
