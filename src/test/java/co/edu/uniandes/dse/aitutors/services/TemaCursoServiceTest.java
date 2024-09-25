@@ -173,9 +173,19 @@ class TemaCursoServiceTest {
 
     @Test
     void testRemoveCurso() throws EntityNotFoundException {
-        temaCursoService.removeCurso(temaList.get(0).getId());
-        TemaEntity tema = entityManager.find(TemaEntity.class, temaList.get(0).getId());
-        assertNull(tema.getCurso());    
+        // Remover el curso del segundo tema
+        temaCursoService.removeCurso(temaList.get(1).getId());
+        
+        // Verificar que el curso del tema sea nulo
+        TemaEntity tema = entityManager.find(TemaEntity.class, temaList.get(1).getId());
+        assertNull(tema.getCurso());
+        
+        // Verificar que el curso no esté asociado a ningún otro tema
+        for (TemaEntity t : temaList) {
+            if (!t.getId().equals(temaList.get(1).getId())) {
+                assertNotEquals(t.getCurso(), tema.getCurso());
+            }
+        }
     }
    
 }
