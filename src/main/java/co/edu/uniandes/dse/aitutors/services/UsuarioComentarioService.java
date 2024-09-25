@@ -76,11 +76,10 @@ public class UsuarioComentarioService  {
             throw new EntityNotFoundException(ErrorMessage.COMENTARIO_NOT_FOUND);
         
             
-        if(comentarioEntity.get().getAutor()==null)
-        throw new IllegalOperationException("NULL AUTHOR IS NOT VALID");
-    
+        if(comentarioEntity.get().getAutor()==null){
+            throw new IllegalOperationException(ErrorMessage.COMENTARIO_NOT_FOUND);        
+        }
         log.info("Termina proceso de consultar el comentario con id = {0} del usuario con id = " + usuarioId, comentarioId);
-
         if(!comentarioEntity.get().getAutor().equals(usuarioEntity.get())){
             throw new IllegalOperationException("The comment is not associated to the user");
         }
