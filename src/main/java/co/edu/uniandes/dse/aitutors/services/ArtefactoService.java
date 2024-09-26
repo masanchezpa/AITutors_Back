@@ -26,6 +26,8 @@ public class ArtefactoService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    private static final String ARTEFACTO_NOT_FOUND = "Artefacto not found";
+
     @Transactional
     public ArtefactoEntity crearArtefacto(ArtefactoEntity artefactoEntity) throws IllegalOperationException,AssertionFailedError{
         log.info("Creating a new artefact");
@@ -76,8 +78,7 @@ public class ArtefactoService {
         Optional<ArtefactoEntity> artefactoEntity = artefactoRepository.findById(id);
 
         if (artefactoEntity.isEmpty()) {
-            System.out.println("Artefacto not found");
-            throw new EntityNotFoundException("Artefacto not found");
+            throw new EntityNotFoundException(ARTEFACTO_NOT_FOUND);
         }
 
         return artefactoEntity.get();
@@ -88,7 +89,7 @@ public class ArtefactoService {
         log.info("Inicia proceso de actualizar el artefacto con id = {0}", artefacto.getId());
         Optional<ArtefactoEntity> artefactoEntity = artefactoRepository.findById(artefacto.getId());
         if (artefactoEntity.isEmpty())
-            throw new EntityNotFoundException("Artefacto not found");
+            throw new EntityNotFoundException(ARTEFACTO_NOT_FOUND);
 
         artefactoEntity.get().setContenido(artefacto.getContenido());
         log.info("Termina proceso de actualizar el artefacto con id = {0}", artefacto.getId());
@@ -100,7 +101,7 @@ public class ArtefactoService {
         log.info("Inicia proceso de borrar el artefacto con id = {0}", id);
         Optional<ArtefactoEntity> artefactoEntity = artefactoRepository.findById(id);
         if (artefactoEntity.isEmpty())
-            throw new EntityNotFoundException("Artefacto not found");
+            throw new EntityNotFoundException(ARTEFACTO_NOT_FOUND);
 
         artefactoRepository.delete(artefactoEntity.get());
         log.info("Termina proceso de borrar el artefacto con id = {0}", id);

@@ -11,9 +11,18 @@ public class DocumentoService {
     @Autowired
     private DocumentoRepository documentoRepository;
 
-    public String mostrarContenido () throws IllegalOperationException {
+    public String mostrarContenido (Long id) throws IllegalOperationException {
         try {
-            return documentoRepository.findById(1L).get().getContenido();
+
+            String contenido = documentoRepository.findById(id).get().getContenido();
+
+            if (!contenido.isEmpty()) {
+                return contenido;
+            }
+            else {
+                return "";
+            }
+
         } catch (Exception e) {
             throw new IllegalOperationException("No se pudo mostrar el contenido del documento");
         }

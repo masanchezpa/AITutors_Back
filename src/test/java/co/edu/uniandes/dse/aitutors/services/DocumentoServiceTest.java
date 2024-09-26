@@ -47,9 +47,9 @@ class DocumentoServiceTest {
     void testMostrarContenido() throws IllegalOperationException {
         // Configurar el comportamiento del mock
         when(documentoRepository.findById(1L)).thenReturn(java.util.Optional.of(documentoEntity));
-        
+
         // Llamar al método y verificar el resultado
-        String contenido = documentoService.mostrarContenido();
+        String contenido = documentoService.mostrarContenido(1L);
         assertEquals("Contenido del documento", contenido);
     }
 
@@ -57,10 +57,10 @@ class DocumentoServiceTest {
     void testMostrarContenidoException() {
         // Configurar el comportamiento del mock para lanzar una excepción
         when(documentoRepository.findById(1L)).thenReturn(java.util.Optional.empty());
-        
+
         // Llamar al método y verificar que se lance la excepción esperada
         assertThrows(IllegalOperationException.class, () -> {
-            documentoService.mostrarContenido();
+            documentoService.mostrarContenido(1L);
         });
     }
 }

@@ -44,7 +44,7 @@ public class ArtefactoController {
 
     @GetMapping("/{accionId}/artefactos")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<ArtefactoDTO> getArtefactos(@PathVariable("accionId") Long accionId) throws EntityNotFoundException, IllegalOperationException {
+    public List<ArtefactoDTO> getArtefactos(@PathVariable("accionId") Long accionId) throws EntityNotFoundException {
 
         List<ArtefactoEntity> entities = artefactoService.getArtefactos(accionId);
 
