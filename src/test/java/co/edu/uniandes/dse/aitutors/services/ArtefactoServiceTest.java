@@ -18,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
 import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
+import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import jakarta.transaction.Transactional;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -28,15 +29,15 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @Transactional
 @Import(ArtefactoService.class)
 class ArtefactoServiceTest {
-    
+
     @Autowired
     private ArtefactoService artefactoService;
-    
+
     @Autowired
     private TestEntityManager entityManager;
 
     private PodamFactory factory=new PodamFactoryImpl();
-    
+
     private List<ArtefactoEntity> artefactoList=new ArrayList<>();
 
     private UsuarioEntity usuarioEntity;
@@ -46,7 +47,7 @@ class ArtefactoServiceTest {
         clearData();
         insertData();
     }
-    
+
     private void clearData() {
         entityManager.getEntityManager().createQuery("delete from UsuarioEntity").executeUpdate();
         entityManager.getEntityManager().createQuery("delete from ArtefactoEntity").executeUpdate();
@@ -54,7 +55,7 @@ class ArtefactoServiceTest {
 
 
     private void insertData() {
-        
+
         usuarioEntity=factory.manufacturePojo(UsuarioEntity.class);
         entityManager.persist(usuarioEntity);
 
@@ -102,7 +103,7 @@ class ArtefactoServiceTest {
             artefactoService.crearArtefacto(newEntity);
         });
     }
-    
+
     @Test
     void testCrearArtefactoAutorNoCreado(){
         assertThrows(IllegalOperationException.class, ()->{
@@ -114,7 +115,7 @@ class ArtefactoServiceTest {
         });
     }
 
-    @Test 
+    @Test
     void testModificarContenidoBlank(){
         assertThrows(IllegalOperationException.class, ()->{
             ArtefactoEntity newEntity=artefactoList.get(0);
@@ -127,9 +128,51 @@ class ArtefactoServiceTest {
         ArtefactoEntity entity=artefactoList.get(0);
         String nuevoContenido="Nuevo Contenido";
         ArtefactoEntity respuesta=artefactoService.modificarContenido(nuevoContenido, entity);
-        
+
         assertEquals(nuevoContenido, respuesta.getContenido());
         assertEquals(entity.getId(), respuesta.getId());
         assertEquals(entity.getTipo(), respuesta.getTipo());
     }
+
+    @Test
+    void testGetArtefacto() throws EntityNotFoundException {
+        ArtefactoEntity entity = artefactoList.get(0);
+        ArtefactoEntity result = artefactoService.getArtefacto(usuarioEntity.getId(), entity.getId());
+        assertNotNull(result);
+        assertEquals(entity.getId(), result.getId());
+        assertEquals(entity.getContenido(), result.getContenido());
+        assertEquals(entity.getTipo(), result.getTipo());
+    }
+
+    @Test
+    void testGetArtefactoNotFound() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            artefactoService.getArtefacto(usuarioEntity.getId(), 0L);
+        });
+    }
+
+    @Test
+    void testUpdateArtefactoNotFound() {
+        ArtefactoEntity newEntity = factory.manufacturePojo(ArtefactoEntity.class);
+        newEntity.setId(0L);
+        assertThrows(EntityNotFoundException.class, () -> {
+            artefactoService.updateArtefacto(usuarioEntity.getId(), newEntity);
+        });
+    }
+
+    @Test
+    void testDeleteArtefacto() throws EntityNotFoundException {
+        ArtefactoEntity entity = artefactoList.get(0);
+        artefactoService.deleteArtefacto(usuarioEntity.getId(), entity.getId());
+        ArtefactoEntity deleted = entityManager.find(ArtefactoEntity.class, entity.getId());
+        assertEquals(null, deleted);
+    }
+
+    @Test
+    void testDeleteArtefactoNotFound() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            artefactoService.deleteArtefacto(usuarioEntity.getId(), 0L);
+        });
+    }
+
 }

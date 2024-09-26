@@ -107,6 +107,8 @@ public class ArtefactoService {
         log.info("Termina proceso de borrar el artefacto con id = {0}", id);
     }
 
+    
+
 
 }
 

@@ -43,7 +43,7 @@ class ArtefactoAccionServiceTest {
 
     private PodamFactory factory=new PodamFactoryImpl();
 
-    private ArtefactoEntity artefacto; 
+    private ArtefactoEntity artefacto;
 
     private List<AccionEntity> accionList=new ArrayList<>();
 
@@ -61,7 +61,7 @@ class ArtefactoAccionServiceTest {
     private void insertData(){
         artefacto=factory.manufacturePojo(ArtefactoEntity.class);
         entityManager.persist(artefacto);
-        
+
         for (int i=0;i<3;i++){
             AccionEntity entity=factory.manufacturePojo(AccionEntity.class);
             entityManager.persist(entity);
@@ -75,7 +75,7 @@ class ArtefactoAccionServiceTest {
     void testAddAccion() throws EntityNotFoundException, IllegalOperationException{
         AccionEntity newAccion=factory.manufacturePojo(AccionEntity.class);
         accionService.createAccion(newAccion);
-        
+
         AccionEntity accionEntity=artefactoAccionService.addAccion(artefacto.getId(), newAccion.getId());
 
         assertNotNull(accionEntity);
@@ -85,7 +85,7 @@ class ArtefactoAccionServiceTest {
         assertEquals(newAccion.getId(), accionEntity.getId());
         assertEquals(newAccion.getNombre(), accionEntity.getNombre());
         assertEquals(newAccion.getObjetivo(), accionEntity.getObjetivo());
-        
+
     }
 
     @Test
@@ -129,7 +129,7 @@ class ArtefactoAccionServiceTest {
         entityManager.persist(artefactoEntity);
 
         AccionEntity answer=artefactoAccionService.getAccion(artefactoEntity.getId());
-        
+
         assertNotNull(answer);
         assertEquals(accionList.getFirst().getDescripcion(), answer.getDescripcion());
         assertEquals(accionList.getFirst().getHabilitacion(), answer.getHabilitacion());
@@ -157,7 +157,7 @@ class ArtefactoAccionServiceTest {
     void testReplaceAccion() throws EntityNotFoundException{
         AccionEntity accionEntity=accionList.getFirst();
         AccionEntity newEntity=artefactoAccionService.replaceAccion(artefacto.getId(),accionEntity.getId());
-        
+
         assertNotNull(newEntity);
 
         assertEquals(accionEntity.getDescripcion(), newEntity.getDescripcion());
@@ -194,5 +194,7 @@ class ArtefactoAccionServiceTest {
             artefactoAccionService.removeAccion(0L);
         });
     }
+
+
 
 }

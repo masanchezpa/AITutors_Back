@@ -78,8 +78,8 @@ class UsuarioServiceTest {
         assertEquals(newEntity.getEmail(), entity.getEmail());
         assertEquals(newEntity.getComentarios(), entity.getComentarios());
         assertEquals(newEntity.getArtefactos(), entity.getArtefactos());
-    
-        
+
+
     }
 
 
@@ -97,8 +97,8 @@ class UsuarioServiceTest {
             assertTrue(found);
         }
     }
-    
-    
+
+
     @Test
     void testGetUsuario() throws EntityNotFoundException {
         UsuarioEntity entity = accionList.get(0);
@@ -110,7 +110,7 @@ class UsuarioServiceTest {
         assertEquals(entity.getComentarios(), entity.getComentarios());
         assertEquals(entity.getArtefactos(), entity.getArtefactos());
     }
-	
+
     @Test
     void testGetInvalidUsuario() {
         assertThrows(EntityNotFoundException.class, () -> {
@@ -135,12 +135,12 @@ class UsuarioServiceTest {
     @Test
     void testUpdateInvalidUsuario() {
         assertThrows(EntityNotFoundException.class, () -> {
-            UsuarioEntity pojoEntity = factory.manufacturePojo(UsuarioEntity.class);  
+            UsuarioEntity pojoEntity = factory.manufacturePojo(UsuarioEntity.class);
             pojoEntity.setId(0L);
             usuarioService.updateUsuario(0L, pojoEntity);
         });
     }
-	
+
    @Test
     void testDeleteUsuario() throws EntityNotFoundException{
         UsuarioEntity entity = accionList.get(1);
@@ -154,6 +154,33 @@ class UsuarioServiceTest {
         assertThrows(EntityNotFoundException.class, () -> {
             usuarioService.deleteUsuario(0L);
         });
+    }
+
+    @Test
+    void testGetUsuarioWithInvalidId() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            usuarioService.getUsuario(-1L);
+        });
+    }
+
+    @Test
+    void testDeleteUsuarioWithInvalidId() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            usuarioService.deleteUsuario(-1L);
+        });
+    }
+
+    @Test
+    void testCreateAndRetrieveUsuario() throws EntityNotFoundException {
+        UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
+        UsuarioEntity createdEntity = usuarioService.createUsuario(newEntity);
+        UsuarioEntity retrievedEntity = usuarioService.getUsuario(createdEntity.getId());
+        assertNotNull(retrievedEntity);
+        assertEquals(createdEntity.getId(), retrievedEntity.getId());
+        assertEquals(createdEntity.getNombre(), retrievedEntity.getNombre());
+        assertEquals(createdEntity.getEmail(), retrievedEntity.getEmail());
+        assertEquals(createdEntity.getComentarios(), retrievedEntity.getComentarios());
+        assertEquals(createdEntity.getArtefactos(), retrievedEntity.getArtefactos());
     }
 
 
