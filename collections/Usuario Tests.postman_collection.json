@@ -74,7 +74,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": 1,\n  \"nombre\": \"Mojarra Alberto de la Santa Rosa\",\n  \"email\": \"masr@gmail.com\"\n}\n",
+					"raw": "{\n  \"id\": {{user}},\n  \"nombre\": \"Mojarra Alberto de la Santa Rosa\",\n  \"email\": \"masr@gmail.com\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
