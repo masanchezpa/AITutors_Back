@@ -45,6 +45,6 @@ public abstract class BaseEntity {
 
 	@PodamExclude
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 }
