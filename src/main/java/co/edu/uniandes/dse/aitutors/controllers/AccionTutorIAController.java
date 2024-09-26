@@ -46,7 +46,7 @@ public class AccionTutorIAController {
 
     }
 
-    @GetMapping("/{idTutor}/acciones")
+    @GetMapping("{idTutor}/acciones")
     @ResponseStatus(code = HttpStatus.OK)
     public List<AccionDTO> getAccionesTutorIA(@PathVariable("idTutor") Long idTutor) throws EntityNotFoundException {
         List<AccionEntity> entities = service.getAcciones(idTutor);
