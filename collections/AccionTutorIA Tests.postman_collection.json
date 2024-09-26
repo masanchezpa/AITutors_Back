@@ -16,6 +16,13 @@
 							"pm.test(\"Status code is 200\", function () {",
 							"   pm.response.to.have.status(200);",
 							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.globals.set(\"tutorId\", jsonData.id);",
+							"    console.log(\"Tutor ID saved:\", jsonData.id);",
+							"}",
 							""
 						],
 						"type": "text/javascript",
@@ -28,7 +35,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\":1,\n  \"nombre\": \"Tutor IA Ejemplo\",\n  \"especialidad\": \"Matemáticas\"\n}\n",
+					"raw": "{\n    \"nombre\": \"Tutor IA Ejemplo\",\n    \"especialidad\": \"Matemáticas\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -56,7 +63,14 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"   pm.response.to.have.status(200);",
-							"});"
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.globals.set(\"accionId\", jsonData.id);",
+							"    console.log(\"Accion ID saved:\", jsonData.id);",
+							"}"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -68,7 +82,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": 1,\n  \"nombre\": \"Acción de ejemplo\",\n  \"descripcion\": \"Descripción de la acción\",\n  \"habilitacion\": true,\n  \"objetivo\": \"Objetivo de la acción\"\n}",
+					"raw": "{\n  \"nombre\": \"Acción de ejemplo\",\n  \"descripcion\": \"Descripción de la acción\",\n  \"habilitacion\": true,\n  \"objetivo\": \"Objetivo de la acción\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -76,20 +90,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id/acciones",
+					"raw": "{{baseUrl}}/tutorias/{{tutorId}}/acciones",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":id",
+						"{{tutorId}}",
 						"acciones"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						}
 					]
 				}
 			},
@@ -109,31 +117,31 @@
 						"type": "text/javascript",
 						"packages": {}
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id/acciones/:idAccion",
+					"raw": "{{baseUrl}}/tutorias/{{tutorId}}/acciones/{{accionId}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":id",
+						"{{tutorId}}",
 						"acciones",
-						":idAccion"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						},
-						{
-							"key": "idAccion",
-							"value": "1"
-						}
+						"{{accionId}}"
 					]
 				}
 			},
@@ -159,20 +167,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id/acciones",
+					"raw": "{{baseUrl}}/tutorias/{{tutorId}}/acciones",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":id",
+						"{{tutorId}}",
 						"acciones"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						}
 					]
 				}
 			},
@@ -207,25 +209,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:idTutor/acciones/:id",
+					"raw": "{{baseUrl}}/tutorias/{{tutorId}}/acciones/{{accionId}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":idTutor",
+						"{{tutorId}}",
 						"acciones",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "idTutor",
-							"value": "1"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"{{accionId}}"
 					]
 				}
 			},
@@ -251,25 +243,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:idTutor/acciones/:id",
+					"raw": "{{baseUrl}}/tutorias/{{tutorId}}/acciones/{{accionId}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":idTutor",
+						"{{tutorId}}",
 						"acciones",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "idTutor",
-							"value": "1"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"{{accionId}}"
 					]
 				}
 			},
@@ -304,19 +286,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id",
+					"raw": "{{baseUrl}}/tutorias/{{tutorId}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"{{tutorId}}"
 					]
 				}
 			},

@@ -15,7 +15,14 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"   pm.response.to.have.status(200);",
-							"});"
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.globals.set(\"usuarioId\", jsonData.id);",
+							"    console.log(\"usuario ID saved:\", jsonData.id);",
+							"}"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -55,7 +62,15 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"   pm.response.to.have.status(200);",
-							"});"
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.globals.set(\"tutorId\", jsonData.id);",
+							"    console.log(\"tutor ID saved:\", jsonData.id);",
+							"}",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -95,7 +110,14 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"   pm.response.to.have.status(200);",
-							"});"
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.globals.set(\"accionId\", jsonData.id);",
+							"    console.log(\"Accion ID saved:\", jsonData.id);",
+							"}"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -107,7 +129,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": 1,\n  \"nombre\": \"Acción de ejemplo\",\n  \"descripcion\": \"Descripción de la acción\",\n  \"habilitacion\": true,\n  \"objetivo\": \"Objetivo de la acción\"\n}",
+					"raw": "{\n  \"nombre\": \"Acción de ejemplo\",\n  \"descripcion\": \"Descripción de la acción\",\n  \"habilitacion\": true,\n  \"objetivo\": \"Objetivo de la acción\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -115,20 +137,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id/acciones",
+					"raw": "{{baseUrl}}/tutorias/{{tutorId}}/acciones",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":id",
+						"{{tutorId}}",
 						"acciones"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						}
 					]
 				}
 			},
@@ -143,7 +159,14 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"   pm.response.to.have.status(200);",
-							"});"
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.globals.set(\"artefacto\", jsonData.id);",
+							"    console.log(\"Artefacto ID saved:\", jsonData.id);",
+							"}"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -155,7 +178,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": 1,\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n     \"id\": 1\n  }\n}\n",
+					"raw": "{\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n     \"id\": {{userId}}\n  }\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -163,20 +186,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/acciones/:idAccion/artefactos",
+					"raw": "{{baseUrl}}/acciones/{{accionId}}/artefactos",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"acciones",
-						":idAccion",
+						"{{accionId}}",
 						"artefactos"
-					],
-					"variable": [
-						{
-							"key": "idAccion",
-							"value": "1"
-						}
 					]
 				}
 			},
@@ -203,7 +220,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": 1,\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n    \"id\": 1\n  }\n}\n",
+					"raw": "{\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n    \"id\": {{userId}}\n  }\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -211,25 +228,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/acciones/:idAccion/artefactos/:id",
+					"raw": "{{baseUrl}}/acciones/{{accionId}}/artefactos/{{artefacto}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"acciones",
-						":idAccion",
+						"{{accionId}}",
 						"artefactos",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "idAccion",
-							"value": "1"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"{{artefacto}}"
 					]
 				}
 			},
@@ -255,25 +262,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/acciones/:idAccion/artefactos/:id",
+					"raw": "{{baseUrl}}/acciones/{{accionId}}/artefactos/{{artefactoId}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"acciones",
-						":idAccion",
+						"{{accionId}}",
 						"artefactos",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "idAccion",
-							"value": "1"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"{{artefactoId}}"
 					]
 				}
 			},
@@ -299,20 +296,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/acciones/:idAccion/artefactos",
+					"raw": "{{baseUrl}}/acciones/{{accionId}}/artefactos",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"acciones",
-						":idAccion",
+						"{{accionId}}",
 						"artefactos"
-					],
-					"variable": [
-						{
-							"key": "idAccion",
-							"value": "1"
-						}
 					]
 				}
 			},
@@ -338,25 +329,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/acciones/:idAccion/artefactos/:id",
+					"raw": "{{baseUrl}}/acciones/{{accionId}}/artefactos/{{artefactoId}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"acciones",
-						":idAccion",
+						"{{accionId}}",
 						"artefactos",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "idAccion",
-							"value": "1"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"{{artefactoId}}"
 					]
 				}
 			},
@@ -382,25 +363,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:idTutor/acciones/:id",
+					"raw": "{{baseUrl}}/tutorias/{{tutorId}}/acciones/{{accionId}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":idTutor",
+						"{{tutorId}}",
 						"acciones",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "idTutor",
-							"value": "1"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"{{accionId}}"
 					]
 				}
 			},
@@ -435,19 +406,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id",
+					"raw": "{{baseUrl}}/tutorias/{{tutorId}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"{{tutorId}}"
 					]
 				}
 			},
@@ -482,19 +447,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/usuarios/:id",
+					"raw": "{{baseUrl}}/usuarios/{{userId}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"usuarios",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"{{userId}}"
 					]
 				}
 			},
