@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class UsuarioService {
-    
+
     @Autowired
     UsuarioRepository usuarioRepository;
 
@@ -54,6 +54,7 @@ public class UsuarioService {
         if (!usuarioEntity.isPresent()) {
             throw new EntityNotFoundException(ErrorMessage.USUARIO_NOT_FOUND);
         }
+        usuario.setId(usuarioId);
         return usuarioRepository.save(usuario);
     }
 

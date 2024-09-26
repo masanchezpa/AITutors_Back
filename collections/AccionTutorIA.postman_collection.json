@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "delete Accion",
+			"name": "new accion",
 			"event": [
 				{
 					"listen": "test",
@@ -23,8 +23,65 @@
 				}
 			],
 			"request": {
-				"method": "DELETE",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"nombre\": \"Acción de ejemplo\",\n  \"descripcion\": \"Descripción de la acción\",\n  \"habilitacion\": true,\n  \"objetivo\": \"Objetivo de la acción\",\n  \"tutorIA\": {\n    \"id\": 1\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tutorias/:id/acciones",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tutorias",
+						":id",
+						"acciones"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Accion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Acción actualizada\",\n  \"descripcion\": \"Descripción actualizada de la acción\",\n  \"habilitacion\": false,\n  \"objetivo\": \"Nuevo objetivo de la acción\",\n  \"tutorIA\": {\n    \"nombre\": \"Tutor IA actualizado\",\n    \"especialidad\": \"Nueva especialidad del tutor\"\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseUrl}}/tutorias/:idTutor/acciones/:id",
 					"host": [
@@ -134,7 +191,7 @@
 			"response": []
 		},
 		{
-			"name": "new accion",
+			"name": "delete Accion",
 			"event": [
 				{
 					"listen": "test",
@@ -150,65 +207,8 @@
 				}
 			],
 			"request": {
-				"method": "POST",
+				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"id\": 1,\n  \"nombre\": \"Acción de ejemplo\",\n  \"descripcion\": \"Descripción de la acción\",\n  \"habilitacion\": true,\n  \"objetivo\": \"Objetivo de la acción\",\n  \"tutorIA\": {\n    \"id\": 1\n    }\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id/acciones",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"tutorias",
-						":id",
-						"acciones"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "update Accion",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Acción actualizada\",\n  \"descripcion\": \"Descripción actualizada de la acción\",\n  \"habilitacion\": false,\n  \"objetivo\": \"Nuevo objetivo de la acción\",\n  \"tutorIA\": {\n    \"nombre\": \"Tutor IA actualizado\",\n    \"especialidad\": \"Nueva especialidad del tutor\"\n  }\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{baseUrl}}/tutorias/:idTutor/acciones/:id",
 					"host": [
