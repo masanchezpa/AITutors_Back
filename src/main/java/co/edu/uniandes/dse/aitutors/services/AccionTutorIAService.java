@@ -81,6 +81,22 @@ public class AccionTutorIAService {
     }
 
     @Transactional
+    public AccionEntity updateAccion(Long accionId, Long tutorIAId) throws EntityNotFoundException {
+        log.info("Inicia proceso de actualizar el accion con id = {0}", accionId);
+        Optional<AccionEntity> accionEntity = accionRepository.findById(accionId);
+        if (accionEntity.isEmpty())
+            throw new EntityNotFoundException(ErrorMessage.ACCION_NOT_FOUND);
+
+        Optional<TutorIAEntity> tutorIAEntity = tutorIARepository.findById(tutorIAId);
+        if (tutorIAEntity.isEmpty())
+            throw new EntityNotFoundException(ErrorMessage.TUTORIA_NOT_FOUND);
+
+        accionEntity.get().setTutorIA(tutorIAEntity.get());
+        log.info("Termina proceso de actualizar el accion con id = {0}", accionId);
+        return accionEntity.get();
+    }
+
+    @Transactional
     public TutorIAEntity getTutorIA(Long accionId) throws EntityNotFoundException {
         log.info("Inicia proceso de consultar el tutorIA del accion con id = {0}", accionId);
         Optional<AccionEntity> accionEntity = accionRepository.findById(accionId);
@@ -124,7 +140,6 @@ public class AccionTutorIAService {
         accionEntity.get().setTutorIA(null);
         log.info("Termina proceso de borrar el tutorIA del accion con id = {0}", accionId);
     }
-
 
 }
 
