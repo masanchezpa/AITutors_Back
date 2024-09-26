@@ -141,5 +141,10 @@ public class AccionTutorIAService {
         log.info("Termina proceso de borrar el tutorIA del accion con id = {0}", accionId);
     }
 
+    @Transactional
+    public boolean tutorIAExists(Long tutorIAId) {
+        return tutorIARepository.existsById(tutorIAId);
+    }
+
 }
 

@@ -1,5 +1,6 @@
 package co.edu.uniandes.dse.aitutors.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.opentest4j.AssertionFailedError;
@@ -7,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.uniandes.dse.aitutors.dto.ArtefactoDTO;
 import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
 import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
+import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.repositories.ArtefactoRepository;
 import co.edu.uniandes.dse.aitutors.repositories.UsuarioRepository;
@@ -27,7 +30,7 @@ public class ArtefactoService {
     @Transactional
     public ArtefactoEntity crearArtefacto(ArtefactoEntity artefactoEntity) throws IllegalOperationException,AssertionFailedError{
         log.info("Creating a new artefact");
-        
+
         if (artefactoEntity.getTipo().isBlank()){
             throw new IllegalOperationException("Artefact must have a type");
         }
@@ -44,7 +47,7 @@ public class ArtefactoService {
         if (usuarioEntity.isEmpty()){
                 throw new IllegalOperationException("Author is not valid");
         }
-        
+
         artefactoEntity.setAutor(usuarioEntity.get());
         log.info("End of creation of artefact");
         return artefactoRepository.save(artefactoEntity);
@@ -62,5 +65,49 @@ public class ArtefactoService {
         log.info("End of modification of artefact");
         return artefactoRepository.save(artefactoEntity);
     }
-}   
+
+    @Transactional
+    public List<ArtefactoEntity> getArtefactos(Long accionId) {
+
+        return artefactoRepository.findByAccionId(accionId);
+    }
+
+    @Transactional
+    public ArtefactoEntity getArtefacto(Long accionId, Long id) throws EntityNotFoundException {
+
+        Optional<ArtefactoEntity> artefactoEntity = artefactoRepository.findById(id);
+
+        if (artefactoEntity.isEmpty()) {
+            System.out.println("Artefacto not found");
+            throw new EntityNotFoundException("Artefacto not found");
+        }
+
+        return artefactoEntity.get();
+    }
+
+    @Transactional
+    public ArtefactoEntity updateArtefacto(Long accionId, ArtefactoEntity artefacto) throws EntityNotFoundException {
+        log.info("Inicia proceso de actualizar el artefacto con id = {0}", artefacto.getId());
+        Optional<ArtefactoEntity> artefactoEntity = artefactoRepository.findById(artefacto.getId());
+        if (artefactoEntity.isEmpty())
+            throw new EntityNotFoundException("Artefacto not found");
+
+        artefactoEntity.get().setContenido(artefacto.getContenido());
+        log.info("Termina proceso de actualizar el artefacto con id = {0}", artefacto.getId());
+        return artefactoEntity.get();
+    }
+
+    @Transactional
+    public void deleteArtefacto(Long accionId, Long id) throws EntityNotFoundException {
+        log.info("Inicia proceso de borrar el artefacto con id = {0}", id);
+        Optional<ArtefactoEntity> artefactoEntity = artefactoRepository.findById(id);
+        if (artefactoEntity.isEmpty())
+            throw new EntityNotFoundException("Artefacto not found");
+
+        artefactoRepository.delete(artefactoEntity.get());
+        log.info("Termina proceso de borrar el artefacto con id = {0}", id);
+    }
+
+
+}
 

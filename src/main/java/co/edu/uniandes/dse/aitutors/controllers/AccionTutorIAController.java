@@ -36,11 +36,20 @@ public class AccionTutorIAController {
     @Autowired
     private ModelMapper modelMapper;
 
+
+    private String getErrorMessage(Long id) {
+        return "No se el tutorIA con id " + id;
+    }
+
     @GetMapping("{idTutor}/acciones/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public AccionDTO getAccionesTutorIA(@PathVariable("idTutor") Long idTutor,@PathVariable("id") Long id) throws EntityNotFoundException {
 
         AccionEntity entity = service.getAccion(id);
+
+        if (entity == null) {
+            throw new EntityNotFoundException("No se encontró la acción con id " + id);
+        }
 
         return modelMapper.map(entity, AccionDTO.class);
 
@@ -51,6 +60,10 @@ public class AccionTutorIAController {
     public List<AccionDTO> getAccionesTutorIA(@PathVariable("idTutor") Long idTutor) throws EntityNotFoundException {
         List<AccionEntity> entities = service.getAcciones(idTutor);
 
+        if (entities.isEmpty()) {
+            throw new EntityNotFoundException(getErrorMessage(idTutor));
+        }
+
         return modelMapper.map(entities, new TypeToken<List<AccionDTO>>() {
 		}.getType());
     }
@@ -58,6 +71,11 @@ public class AccionTutorIAController {
     @PostMapping("{idTutor}/acciones")
     @ResponseStatus(code = HttpStatus.OK)
     public AccionDTO createAccion(@RequestBody AccionDTO accionDTO, @PathVariable("idTutor") Long idTutor) throws EntityNotFoundException, IllegalOperationException {
+
+        if (!service.tutorIAExists(idTutor)) {
+            throw new EntityNotFoundException(getErrorMessage(idTutor));
+        }
+
         AccionEntity accionEntity = modelMapper.map(accionDTO, AccionEntity.class);
         AccionEntity newAccion = service.createAccion(accionEntity);
         service.addTutorIA(newAccion.getId(), idTutor);
@@ -67,6 +85,10 @@ public class AccionTutorIAController {
     @PutMapping("{idTutor}/acciones/{id}")
     public AccionDTO updateAccion(@PathVariable("id") Long id, @PathVariable("idTutor") Long idTutor) throws EntityNotFoundException {
 
+        if (!service.tutorIAExists(idTutor)) {
+            throw new EntityNotFoundException(getErrorMessage(idTutor));
+        }
+
         AccionEntity entity = service.updateAccion(id, idTutor);
 
         return modelMapper.map(entity, AccionDTO.class);
@@ -74,6 +96,11 @@ public class AccionTutorIAController {
 
     @DeleteMapping("{idTutor}/acciones/{id}")
     public ResponseEntity<String> deleteAccion(@PathVariable("id") Long id, @PathVariable("idTutor") Long idTutor) throws EntityNotFoundException {
+
+        if (!service.tutorIAExists(idTutor)) {
+            throw new EntityNotFoundException(getErrorMessage(idTutor));
+        }
+
         service.removeTutorIA(id);
         return new ResponseEntity<>("Accion eliminada", HttpStatus.OK);
     }

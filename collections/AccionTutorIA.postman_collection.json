@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "63af6b0f-2b41-496f-a625-4a8ad410f4dc",
+		"_postman_id": "9978a873-1f93-4463-acd3-1a407edff885",
 		"name": "AccionTutorIA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "16331126"
@@ -83,11 +83,11 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": ""
 						},
 						{
 							"key": "idAccion",
-							"value": "1"
+							"value": ""
 						}
 					]
 				}

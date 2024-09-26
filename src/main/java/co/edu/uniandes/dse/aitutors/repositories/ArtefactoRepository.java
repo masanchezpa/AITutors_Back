@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
 
+import java.util.List;
+
 @Repository
 public interface ArtefactoRepository extends JpaRepository<ArtefactoEntity, Long> {
-        
+        List<ArtefactoEntity> findByAccionId(Long accionId);
 }
