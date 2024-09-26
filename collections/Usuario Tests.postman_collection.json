@@ -20,7 +20,7 @@
 							"var jsonData = pm.response.json();",
 							"",
 							"if (jsonData.id) {",
-							"    pm.globals.set(\"user\", jsonData.id);",
+							"    pm.environment.set(\"user\", jsonData.id);",
 							"    console.log(\"usuario ID saved:\", jsonData.id);",
 							"}"
 						],
