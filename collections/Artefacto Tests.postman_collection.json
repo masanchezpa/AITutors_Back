@@ -1,270 +1,11 @@
 {
 	"info": {
-		"_postman_id": "7427cf19-9013-4b8b-8a94-31f27e6a5711",
+		"_postman_id": "88c536ea-9062-4cfa-bd43-cf6844d01326",
 		"name": "Artefacto Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "16331126"
 	},
 	"item": [
-		{
-			"name": "new TutorIA",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Tutor IA Ejemplo\",\n  \"especialidad\": \"Matemáticas\"\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/tutorias",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"tutorias"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "new Usuario",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/usuarios",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"usuarios"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "new accion",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"id\": 1,\n  \"nombre\": \"Acción de ejemplo\",\n  \"descripcion\": \"Descripción de la acción\",\n  \"habilitacion\": true,\n  \"objetivo\": \"Objetivo de la acción\",\n  \"tutorIA\": {\n    \"id\": 1\n    }\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id/acciones",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"tutorias",
-						":id",
-						"acciones"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "new Artefacto",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"id\": 1,\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n     \"id\": 1\n  }\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/acciones/:idAccion/artefactos",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"acciones",
-						":idAccion",
-						"artefactos"
-					],
-					"variable": [
-						{
-							"key": "idAccion",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get Artefactos",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/acciones/:idAccion/artefactos",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"acciones",
-						":idAccion",
-						"artefactos"
-					],
-					"variable": [
-						{
-							"key": "idAccion",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get Artefactos by id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/acciones/:idAccion/artefactos/:id",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"acciones",
-						":idAccion",
-						"artefactos",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "idAccion",
-							"value": "1"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "Update Artefacto",
 			"event": [
@@ -272,12 +13,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -319,18 +59,28 @@
 			"response": []
 		},
 		{
+			"name": "bruno",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "delete Artefacto",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -357,6 +107,374 @@
 							"key": "id",
 							"value": "1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Artefactos by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/acciones/:idAccion/artefactos/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"acciones",
+						":idAccion",
+						"artefactos",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "idAccion",
+							"value": "1"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Artefactos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/acciones/:idAccion/artefactos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"acciones",
+						":idAccion",
+						"artefactos"
+					],
+					"variable": [
+						{
+							"key": "idAccion",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Artefacto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n     \"id\": 1\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/acciones/:idAccion/artefactos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"acciones",
+						":idAccion",
+						"artefactos"
+					],
+					"variable": [
+						{
+							"key": "idAccion",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new TutorIA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Tutor IA Ejemplo\",\n  \"especialidad\": \"Matemáticas\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tutorias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tutorias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/usuarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new accion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"nombre\": \"Acción de ejemplo\",\n  \"descripcion\": \"Descripción de la acción\",\n  \"habilitacion\": true,\n  \"objetivo\": \"Objetivo de la acción\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tutorias/:id/acciones",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tutorias",
+						":id",
+						"acciones"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Accion",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/tutorias/:idTutor/acciones/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tutorias",
+						":idTutor",
+						"acciones",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "idTutor",
+							"value": "1"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/usuarios/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"usuarios",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete TutorIA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\":1,\n  \"nombre\": \"Tutor IA Ejemplo\",\n  \"especialidad\": \"Matemáticas\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tutorias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tutorias"
 					]
 				}
 			},

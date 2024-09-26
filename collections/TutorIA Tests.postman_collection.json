@@ -1,11 +1,126 @@
 {
 	"info": {
-		"_postman_id": "1347bef5-b855-43fb-a1d0-8a3acb33281c",
+		"_postman_id": "130127e5-5f86-4c80-81ce-8e153ee9814d",
 		"name": "TutorIA Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "16331126"
 	},
 	"item": [
+		{
+			"name": "bruno",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete TutorIA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/tutorias/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tutorias",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get TutorIA by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/tutorias/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tutorias",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get TutorIAs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/tutorias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tutorias"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "new TutorIA",
 			"event": [
@@ -13,12 +128,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -53,12 +167,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
+							"test(\"Status code is 200\", function () {",
+							"   expect(res.getStatus()).to.equal(200);",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -87,113 +200,6 @@
 						{
 							"key": "id",
 							"value": "2"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get TutorIAs",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/tutorias",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"tutorias"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get TutorIA by id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"tutorias",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete TutorIA",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"tutorias",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
 						}
 					]
 				}
