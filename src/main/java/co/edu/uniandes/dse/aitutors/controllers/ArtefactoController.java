@@ -21,6 +21,7 @@ import co.edu.uniandes.dse.aitutors.dto.ArtefactoDTO;
 import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
+import co.edu.uniandes.dse.aitutors.services.ArtefactoAccionService;
 import co.edu.uniandes.dse.aitutors.services.ArtefactoService;
 
 @RestController
@@ -32,6 +33,9 @@ public class ArtefactoController {
     private ArtefactoService artefactoService;
 
     @Autowired
+    private ArtefactoAccionService artefactoAccionService;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     public String getErrorMessage(Long id) {
@@ -40,9 +44,7 @@ public class ArtefactoController {
 
     @GetMapping("/{accionId}/artefactos")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<ArtefactoDTO> getArtefactos(@PathVariable("accionId") Long accionId) throws EntityNotFoundException {
-
-
+    public List<ArtefactoDTO> getArtefactos(@PathVariable("accionId") Long accionId) throws EntityNotFoundException, IllegalOperationException {
 
         List<ArtefactoEntity> entities = artefactoService.getArtefactos(accionId);
 
@@ -59,6 +61,7 @@ public class ArtefactoController {
     public ResponseEntity<ArtefactoDTO> getArtefacto(@PathVariable("accionId") Long accionId,@PathVariable("id")  Long id) throws EntityNotFoundException {
         ArtefactoEntity entity = artefactoService.getArtefacto(accionId, id);
 
+
         return ResponseEntity.ok(modelMapper.map(entity, ArtefactoDTO.class));
     }
 
@@ -68,6 +71,7 @@ public class ArtefactoController {
         ArtefactoEntity entity = modelMapper.map(artefacto, ArtefactoEntity.class);
         entity.setId(id);
         entity = artefactoService.updateArtefacto(accionId, entity);
+        artefactoAccionService.replaceAccion(id, accionId);
 
         return ResponseEntity.ok(modelMapper.map(entity, ArtefactoDTO.class));
     }
@@ -77,6 +81,7 @@ public class ArtefactoController {
     public ResponseEntity<ArtefactoDTO> createArtefacto(@PathVariable("accionId") Long accionId, @RequestBody ArtefactoDTO artefacto) throws EntityNotFoundException, IllegalOperationException {
         ArtefactoEntity entity = modelMapper.map(artefacto, ArtefactoEntity.class);
         entity = artefactoService.crearArtefacto(entity);
+        artefactoAccionService.addAccion(entity.getId(), accionId);
 
         return ResponseEntity.ok(modelMapper.map(entity, ArtefactoDTO.class));
     }
@@ -84,6 +89,7 @@ public class ArtefactoController {
     @DeleteMapping("/{accionId}/artefactos/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public void deleteArtefacto(@PathVariable("accionId") Long accionId,@PathVariable("id")  Long id) throws EntityNotFoundException {
+        artefactoAccionService.removeAccion(id);
         artefactoService.deleteArtefacto(accionId, id);
     }
 
