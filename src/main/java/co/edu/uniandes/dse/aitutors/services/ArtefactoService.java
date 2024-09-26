@@ -47,7 +47,6 @@ public class ArtefactoService {
         if (usuarioEntity.isEmpty()){
                 throw new IllegalOperationException("Author is not valid");
         }
-
         artefactoEntity.setAutor(usuarioEntity.get());
         log.info("End of creation of artefact");
         return artefactoRepository.save(artefactoEntity);

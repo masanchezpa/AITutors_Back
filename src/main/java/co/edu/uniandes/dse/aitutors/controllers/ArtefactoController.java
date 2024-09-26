@@ -81,6 +81,7 @@ public class ArtefactoController {
     public ResponseEntity<ArtefactoDTO> createArtefacto(@PathVariable("accionId") Long accionId, @RequestBody ArtefactoDTO artefacto) throws EntityNotFoundException, IllegalOperationException {
         ArtefactoEntity entity = modelMapper.map(artefacto, ArtefactoEntity.class);
         entity = artefactoService.crearArtefacto(entity);
+        System.out.println("llego aca con id "+entity.getId() + " y tipo "+entity.getTipo());
         artefactoAccionService.addAccion(entity.getId(), accionId);
 
         return ResponseEntity.ok(modelMapper.map(entity, ArtefactoDTO.class));

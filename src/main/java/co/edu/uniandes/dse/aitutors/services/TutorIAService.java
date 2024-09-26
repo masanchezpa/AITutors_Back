@@ -69,6 +69,8 @@ public class TutorIAService {
         if (!tutorEntidad.isPresent()) {
             throw new EntityNotFoundException(ErrorMessage.TUTORIA_NOT_FOUND);
         }
+        tutorEntidad.get().getAcciones().clear();
+        repositorioTutor.save(tutorEntidad.get());
         repositorioTutor.deleteById(tutorid);
     }
 

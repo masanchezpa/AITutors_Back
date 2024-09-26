@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "9978a873-1f93-4463-acd3-1a407edff885",
-		"name": "AccionTutorIA",
+		"_postman_id": "1347bef5-b855-43fb-a1d0-8a3acb33281c",
+		"name": "TutorIA Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "16331126"
 	},
 	"item": [
 		{
-			"name": "new accion",
+			"name": "new TutorIA",
 			"event": [
 				{
 					"listen": "test",
@@ -27,7 +27,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": 1,\n  \"nombre\": \"Acción de ejemplo\",\n  \"descripcion\": \"Descripción de la acción\",\n  \"habilitacion\": true,\n  \"objetivo\": \"Objetivo de la acción\",\n  \"tutorIA\": {\n    \"id\": 1\n    }\n}",
+					"raw": "{\n  \"nombre\": \"Tutor IA Ejemplo\",\n  \"especialidad\": \"Matemáticas\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -35,27 +35,19 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id/acciones",
+					"raw": "{{baseUrl}}/tutorias",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"tutorias",
-						":id",
-						"acciones"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"tutorias"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "update Accion",
+			"name": "update TutorIA",
 			"event": [
 				{
 					"listen": "test",
@@ -75,7 +67,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Acción actualizada\",\n  \"descripcion\": \"Descripción actualizada de la acción\",\n  \"habilitacion\": false,\n  \"objetivo\": \"Nuevo objetivo de la acción\",\n  \"tutorIA\": {\n    \"nombre\": \"Tutor IA actualizado\",\n    \"especialidad\": \"Nueva especialidad del tutor\"\n  }\n}\n",
+					"raw": "{\n  \"nombre\": \"Tutor IA Ejemplo\",\n  \"especialidad\": \"Matemáticas\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -83,24 +75,18 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:idTutor/acciones/:id",
+					"raw": "{{baseUrl}}/tutorias/:id",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":idTutor",
-						"acciones",
 						":id"
 					],
 					"variable": [
 						{
-							"key": "idTutor",
-							"value": "1"
-						},
-						{
 							"key": "id",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}
@@ -108,7 +94,7 @@
 			"response": []
 		},
 		{
-			"name": "get Accion by id",
+			"name": "get TutorIAs",
 			"event": [
 				{
 					"listen": "test",
@@ -127,32 +113,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id/acciones/:idAccion",
+					"raw": "{{baseUrl}}/tutorias",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"tutorias",
-						":id",
-						"acciones",
-						":idAccion"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": ""
-						},
-						{
-							"key": "idAccion",
-							"value": ""
-						}
+						"tutorias"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "get Acciones",
+			"name": "get TutorIA by id",
 			"event": [
 				{
 					"listen": "test",
@@ -171,14 +144,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:id/acciones",
+					"raw": "{{baseUrl}}/tutorias/:id",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":id",
-						"acciones"
+						":id"
 					],
 					"variable": [
 						{
@@ -191,7 +163,7 @@
 			"response": []
 		},
 		{
-			"name": "delete Accion",
+			"name": "delete TutorIA",
 			"event": [
 				{
 					"listen": "test",
@@ -210,21 +182,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/:idTutor/acciones/:id",
+					"raw": "{{baseUrl}}/tutorias/:id",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						":idTutor",
-						"acciones",
 						":id"
 					],
 					"variable": [
-						{
-							"key": "idTutor",
-							"value": "1"
-						},
 						{
 							"key": "id",
 							"value": "1"
