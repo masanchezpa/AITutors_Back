@@ -20,7 +20,7 @@
 							"var jsonData = pm.response.json();",
 							"",
 							"if (jsonData.id) {",
-							"    pm.globals.set(\"usuarioId\", jsonData.id);",
+							"    pm.environment.set(\"user\", jsonData.id);",
 							"    console.log(\"usuario ID saved:\", jsonData.id);",
 							"}"
 						],
@@ -67,7 +67,7 @@
 							"var jsonData = pm.response.json();",
 							"",
 							"if (jsonData.id) {",
-							"    pm.globals.set(\"tutorId\", jsonData.id);",
+							"    pm.environment.set(\"tutor\", jsonData.id);",
 							"    console.log(\"tutor ID saved:\", jsonData.id);",
 							"}",
 							""
@@ -115,7 +115,7 @@
 							"var jsonData = pm.response.json();",
 							"",
 							"if (jsonData.id) {",
-							"    pm.globals.set(\"accionId\", jsonData.id);",
+							"    pm.environment.set(\"accion\", jsonData.id);",
 							"    console.log(\"Accion ID saved:\", jsonData.id);",
 							"}"
 						],
@@ -137,13 +137,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/{{tutorId}}/acciones",
+					"raw": "{{baseUrl}}/tutorias/{{tutor}}/acciones",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						"{{tutorId}}",
+						"{{tutor}}",
 						"acciones"
 					]
 				}
@@ -164,7 +164,7 @@
 							"var jsonData = pm.response.json();",
 							"",
 							"if (jsonData.id) {",
-							"    pm.globals.set(\"artefacto\", jsonData.id);",
+							"    pm.environment.set(\"artefacto\", jsonData.id);",
 							"    console.log(\"Artefacto ID saved:\", jsonData.id);",
 							"}"
 						],
@@ -178,7 +178,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n     \"id\": {{userId}}\n  }\n}\n",
+					"raw": "{\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n     \"id\": {{user}}\n  }\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -186,13 +186,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/acciones/{{accionId}}/artefactos",
+					"raw": "{{baseUrl}}/acciones/{{accion}}/artefactos",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"acciones",
-						"{{accionId}}",
+						"{{accion}}",
 						"artefactos"
 					]
 				}
@@ -220,7 +220,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n    \"id\": {{userId}}\n  }\n}\n",
+					"raw": "{\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n    \"id\": {{user}}\n  }\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -228,13 +228,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/acciones/{{accionId}}/artefactos/{{artefacto}}",
+					"raw": "{{baseUrl}}/acciones/{{accion}}/artefactos/{{artefacto}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"acciones",
-						"{{accionId}}",
+						"{{accion}}",
 						"artefactos",
 						"{{artefacto}}"
 					]
@@ -262,15 +262,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/acciones/{{accionId}}/artefactos/{{artefactoId}}",
+					"raw": "{{baseUrl}}/acciones/{{accion}}/artefactos/{{artefacto}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"acciones",
-						"{{accionId}}",
+						"{{accion}}",
 						"artefactos",
-						"{{artefactoId}}"
+						"{{artefacto}}"
 					]
 				}
 			},
@@ -285,7 +285,9 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"   pm.response.to.have.status(200);",
-							"});"
+							"});",
+							"",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -296,13 +298,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/acciones/{{accionId}}/artefactos",
+					"raw": "{{baseUrl}}/acciones/{{accion}}/artefactos",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"acciones",
-						"{{accionId}}",
+						"{{accion}}",
 						"artefactos"
 					]
 				}
@@ -329,15 +331,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/acciones/{{accionId}}/artefactos/{{artefactoId}}",
+					"raw": "{{baseUrl}}/acciones/{{accion}}/artefactos/{{artefacto}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"acciones",
-						"{{accionId}}",
+						"{{accion}}",
 						"artefactos",
-						"{{artefactoId}}"
+						"{{artefacto}}"
 					]
 				}
 			},
@@ -363,15 +365,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/{{tutorId}}/acciones/{{accionId}}",
+					"raw": "{{baseUrl}}/tutorias/{{tutor}}/acciones/{{accion}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						"{{tutorId}}",
+						"{{tutor}}",
 						"acciones",
-						"{{accionId}}"
+						"{{accion}}"
 					]
 				}
 			},
@@ -406,13 +408,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/{{tutorId}}",
+					"raw": "{{baseUrl}}/tutorias/{{tutor}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						"{{tutorId}}"
+						"{{tutor}}"
 					]
 				}
 			},
@@ -447,13 +449,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/usuarios/{{userId}}",
+					"raw": "{{baseUrl}}/usuarios/{{user}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"usuarios",
-						"{{userId}}"
+						"{{user}}"
 					]
 				}
 			},
