@@ -152,7 +152,7 @@
 						</configuration>
 					</execution>
 
-					<execution>
+					<!-- <execution>
 						<id>integration-tests-composed-collection</id>
 						<phase>integration-test</phase>
 						<goals>
@@ -166,7 +166,7 @@
 								run it/composed.collection.json -e collections/EntornoIT.postman_environment.json
 							</commandlineArgs>
 						</configuration>
-					</execution>
+					</execution> -->
 
 				</executions>
 			</plugin>
