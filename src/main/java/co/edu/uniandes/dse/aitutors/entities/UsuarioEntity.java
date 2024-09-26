@@ -18,9 +18,6 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Data
 public class UsuarioEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String nombre;
     private String email;
 
