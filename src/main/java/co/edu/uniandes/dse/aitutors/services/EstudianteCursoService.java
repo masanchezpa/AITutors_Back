@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import co.edu.uniandes.dse.aitutors.entities.CursoEntity;
 import co.edu.uniandes.dse.aitutors.entities.EstudianteEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
-import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.aitutors.repositories.EstudianteRepository;
 import co.edu.uniandes.dse.aitutors.repositories.CursoRepository;
@@ -34,7 +33,7 @@ public class EstudianteCursoService {
         log.info("Inicia proceso de agregar un estudiante al curso con id={0}",cursoId);
         Optional<EstudianteEntity> estudianteEntity=estudianteRepository.findById(estudianteId);
         Optional<CursoEntity> cursoEntity=cursoRepository.findById(cursoId);
-        
+
         if (estudianteEntity.isEmpty()){
             throw new EntityNotFoundException(ErrorMessage.ESTUDIANTE_NOT_FOUND);
         }

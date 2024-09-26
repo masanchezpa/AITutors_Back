@@ -1,6 +1,5 @@
 package co.edu.uniandes.dse.aitutors.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import co.edu.uniandes.dse.aitutors.entities.CursoEntity;
 import co.edu.uniandes.dse.aitutors.entities.InstructorEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
-import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import co.edu.uniandes.dse.aitutors.repositories.InstructorRepository;
 import co.edu.uniandes.dse.aitutors.repositories.CursoRepository;
@@ -28,13 +26,13 @@ public class InstructorCursoService {
 
     @Autowired
     private InstructorRepository instructorRepository;
-    
+
     @Transactional
     public InstructorEntity addInstructor(Long instructorId,Long cursoId) throws EntityNotFoundException{
         log.info("Inicia proceso de agregar un instructor al curso con id={0}",cursoId);
         Optional<InstructorEntity> instructorEntity=instructorRepository.findById(instructorId);
         Optional<CursoEntity> cursoEntity=cursoRepository.findById(cursoId);
-        
+
         if (instructorEntity.isEmpty()){
             throw new EntityNotFoundException(ErrorMessage.INSTRUCTOR_NOT_FOUND);
         }
@@ -46,7 +44,7 @@ public class InstructorCursoService {
         log.info("Termina el proceso de agregar un instructor a un curso");
         return instructorEntity.get();
     }
-     
+
     @Transactional
     public InstructorEntity getInstructor(Long cursoId) throws EntityNotFoundException{
         log.info("Inicia el proceso de consultar el instructor del curso con id = {0}",cursoId);

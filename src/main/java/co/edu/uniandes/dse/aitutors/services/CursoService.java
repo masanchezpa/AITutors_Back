@@ -1,9 +1,5 @@
 package co.edu.uniandes.dse.aitutors.services;
-import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.uniandes.dse.aitutors.entities.CursoEntity;
 import co.edu.uniandes.dse.aitutors.entities.InstructorEntity;
-import co.edu.uniandes.dse.aitutors.entities.TemaEntity;
-import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.repositories.CursoRepository;
 import co.edu.uniandes.dse.aitutors.repositories.InstructorRepository;
-import co.edu.uniandes.dse.aitutors.repositories.TemaRepository;
-import co.edu.uniandes.dse.aitutors.repositories.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -27,9 +19,6 @@ public class CursoService {
 
     @Autowired
     private CursoRepository cursoRepository;
-
-    @Autowired
-    private TemaRepository temaRepository;
 
     @Autowired
     private InstructorRepository instructorRepository;

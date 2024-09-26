@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.uniandes.dse.aitutors.dto.ArtefactoDTO;
 import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
 import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
@@ -107,7 +106,7 @@ public class ArtefactoService {
         log.info("Termina proceso de borrar el artefacto con id = {0}", id);
     }
 
-    
+
 
 
 }
