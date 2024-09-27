@@ -64,6 +64,6 @@ public class ComentarioArtefactoController {
     @DeleteMapping("/{artefactoId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void removeArtefacto(@PathVariable("comentarioId") Long comentarioId, @PathVariable("artefactoId") Long artefactoId) throws EntityNotFoundException {
-        comentarioArtefactoService.removeArtefacto(comentarioId, artefactoId);
+        comentarioArtefactoService.removeArtefacto(comentarioId);
     }
 }

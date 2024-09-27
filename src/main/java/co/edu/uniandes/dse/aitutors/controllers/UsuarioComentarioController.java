@@ -70,7 +70,7 @@ public class UsuarioComentarioController {
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<List<ComentarioDTO>> replaceComentarios(@PathVariable("usuarioId") Long usuarioId, @RequestBody List<ComentarioDTO> comentarios) throws EntityNotFoundException {
         List<ComentarioEntity> comentarioEntities = modelMapper.map(comentarios, new TypeToken<List<ComentarioEntity>>() {}.getType());
-        List<ComentarioEntity> updatedEntities = usuarioComentarioService.replaceComentarios(usuarioId, comentarioEntities);
+        List<ComentarioEntity> updatedEntities = usuarioComentarioService.replaceComentario(usuarioId, comentarioEntities);
         return ResponseEntity.ok(modelMapper.map(updatedEntities, new TypeToken<List<ComentarioDTO>>() {}.getType()));
     }
 }
