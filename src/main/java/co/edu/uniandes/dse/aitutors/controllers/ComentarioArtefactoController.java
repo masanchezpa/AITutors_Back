@@ -10,11 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-=======
->>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,12 +23,9 @@ import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.ComentarioArtefactoService;
 
 @RestController
-<<<<<<< HEAD
-@RequestMapping("/comentarios/{comentarioId}/artefacto")
-=======
-@RequestMapping("/comentario")
->>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
+@RequestMapping("/comentarios/{comentarioId}/artefactos")
 public class ComentarioArtefactoController {
+
     @Autowired
     private ComentarioArtefactoService comentarioArtefactoService;
 
@@ -42,43 +36,34 @@ public class ComentarioArtefactoController {
         return "No se encontró el comentario con id " + id;
     }
 
-<<<<<<< HEAD
+    // Agregar un artefacto a un comentario
     @PostMapping("/{artefactoId}")
-=======
-    @GetMapping("/{comentarioId}/artefactos")
->>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<ArtefactoDTO> addArtefacto(@PathVariable("comentarioId") Long comentarioId, @PathVariable("id")  Long id) throws EntityNotFoundException, IllegalOperationException {
-        ArtefactoEntity entity = comentarioArtefactoService.addArtefacto(comentarioId,id);
+    public ResponseEntity<ArtefactoDTO> addArtefacto(@PathVariable("comentarioId") Long comentarioId, @PathVariable("artefactoId") Long artefactoId) throws EntityNotFoundException, IllegalOperationException {
+        ArtefactoEntity entity = comentarioArtefactoService.addArtefacto(comentarioId, artefactoId);
         return ResponseEntity.ok(modelMapper.map(entity, ArtefactoDTO.class));
     }
 
-<<<<<<< HEAD
+    // Reemplazar un artefacto en un comentario
     @PutMapping("/{artefactoId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<ArtefactoDTO> replaceArtefacto(@PathVariable Long comentarioId, @PathVariable Long artefactoId) throws EntityNotFoundException{
+    public ResponseEntity<ArtefactoDTO> replaceArtefacto(@PathVariable("comentarioId") Long comentarioId, @PathVariable("artefactoId") Long artefactoId) throws EntityNotFoundException {
         ArtefactoEntity entity = comentarioArtefactoService.replaceArtefacto(comentarioId, artefactoId);
         return ResponseEntity.ok(modelMapper.map(entity, ArtefactoDTO.class));
     }
 
+    // Obtener el artefacto asociado a un comentario
     @GetMapping
-=======
-    @GetMapping("/{usuarioId}/artefactos/{id}")
->>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<ArtefactoDTO> getArtefacto(@PathVariable("usuarioId") Long usuarioId) throws EntityNotFoundException, IllegalOperationException {
-        ArtefactoEntity entity = comentarioArtefactoService.getArtefacto(usuarioId);
+    public ResponseEntity<ArtefactoDTO> getArtefacto(@PathVariable("comentarioId") Long comentarioId) throws EntityNotFoundException, IllegalOperationException {
+        ArtefactoEntity entity = comentarioArtefactoService.getArtefacto(comentarioId);
         return ResponseEntity.ok(modelMapper.map(entity, ArtefactoDTO.class));
     }
 
-<<<<<<< HEAD
-    @DeleteMapping
-=======
-    @DeleteMapping("/{usuarioId}/artefactos")
->>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
-    @ResponseStatus(code = HttpStatus.OK)
-    public void removeArtefacto(@PathVariable("usuarioId") Long usuarioId) throws EntityNotFoundException {
-        comentarioArtefactoService.removeArtefacto(usuarioId);
+    // Eliminar el artefacto asociado a un comentario
+    @DeleteMapping("/{artefactoId}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void removeArtefacto(@PathVariable("comentarioId") Long comentarioId, @PathVariable("artefactoId") Long artefactoId) throws EntityNotFoundException {
+        comentarioArtefactoService.removeArtefacto(comentarioId, artefactoId);
     }
-
 }
