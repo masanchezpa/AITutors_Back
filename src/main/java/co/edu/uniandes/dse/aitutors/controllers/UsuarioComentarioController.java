@@ -10,7 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PostMapping;
+=======
+>>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +29,11 @@ import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.UsuarioComentarioService;
 
 @RestController
+<<<<<<< HEAD
 @RequestMapping("/usuarios/{usuarioId}/comentarios")
+=======
+@RequestMapping("/comentario")
+>>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
 public class UsuarioComentarioController {
     
     @Autowired
@@ -39,14 +46,22 @@ public class UsuarioComentarioController {
         return "No se encontró el comentario con id " + id;
     }
 
+<<<<<<< HEAD
     @PostMapping("/{comentarioId}")
+=======
+    @GetMapping("/{comentarioId}")
+>>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<ComentarioDTO> addComentario(@PathVariable("comentarioId") Long comentarioId, @PathVariable("id")  Long id) throws EntityNotFoundException, IllegalOperationException {
         ComentarioEntity entity = usuarioComentarioService.addComentario(comentarioId,id);
         return ResponseEntity.ok(modelMapper.map(entity, ComentarioDTO.class));
     }
 
+<<<<<<< HEAD
     @GetMapping
+=======
+    @GetMapping("/{comentarioId}")
+>>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
     @ResponseStatus(code = HttpStatus.OK)
     public List<ComentarioEntity> getComentarios(@PathVariable("comentarioId") Long comnetarioId) throws EntityNotFoundException {
 
@@ -67,7 +82,11 @@ public class UsuarioComentarioController {
         return ResponseEntity.ok(modelMapper.map(entity, ComentarioDTO.class));
     }
 
+<<<<<<< HEAD
     @PutMapping
+=======
+    @PutMapping("/{comentarioId}")
+>>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<ComentarioDTO> replaceComentarios(@PathVariable Long usuarioId, @RequestBody List<ComentarioEntity> comentarios) throws EntityNotFoundException{
         List<ComentarioEntity> entity = usuarioComentarioService.replaceComentario(usuarioId, comentarios);

@@ -7,7 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PostMapping;
+=======
+>>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +24,11 @@ import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.TemaDocumentoService;
 
 @RestController
+<<<<<<< HEAD
 @RequestMapping("/temas/{temaId}/documentos")
+=======
+@RequestMapping("/documento")
+>>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
 public class TemaDocumentoController {
     @Autowired
     private TemaDocumentoService temaDocumentoService;
@@ -33,7 +40,11 @@ public class TemaDocumentoController {
         return "No se encontró el documento con id " + id;
     }
 
+<<<<<<< HEAD
     @PostMapping("/{documentoId}")
+=======
+    @GetMapping("/{documentoId}")
+>>>>>>> 074d16c38d5f94dd060660a20d6981c2f2ac198f
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<DocumentoDTO> agregarDocumento(@PathVariable("documentoId") Long documentoId, @PathVariable("id")  Long id) throws EntityNotFoundException, IllegalOperationException {
         DocumentoEntity entity = temaDocumentoService.agregarDocumento(documentoId,id);
