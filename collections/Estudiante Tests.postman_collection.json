@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b8aeba20-e865-47e8-ab76-495a0294ed4b",
+		"_postman_id": "4d6d8dae-3f03-4db8-b381-12167ad222a8",
 		"name": "Estudiante Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "37960025"
@@ -38,9 +38,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/estudiantes",
+					"raw": "{{baseUrl}}/estudiantes",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"estudiantes"
@@ -113,9 +113,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/estudiantes",
+					"raw": "{{baseUrl}}/estudiantes",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"estudiantes"
@@ -174,9 +174,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/estudiantes/{{estudiante_id_1}}",
+					"raw": "{{baseUrl}}/estudiantes/{{estudiante_id_1}}",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"estudiantes",
@@ -242,9 +242,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/estudiantes/0",
+					"raw": "{{baseUrl}}/estudiantes/0",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"estudiantes",
@@ -314,9 +314,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/estudiantes/{{estudiante_id_1}}",
+					"raw": "{{baseUrl}}/estudiantes/{{estudiante_id_1}}",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"estudiantes",
@@ -400,9 +400,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/estudiantes/0",
+					"raw": "{{baseUrl}}/estudiantes/0",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"estudiantes",
@@ -427,10 +427,10 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -454,9 +454,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/estudiantes/{{estudiante_id_1}}",
+					"raw": "{{baseUrl}}/estudiantes/{{estudiante_id_1}}",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"estudiantes",
@@ -522,9 +522,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/estudiantes/0",
+					"raw": "{{baseUrl}}/estudiantes/0",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"estudiantes",

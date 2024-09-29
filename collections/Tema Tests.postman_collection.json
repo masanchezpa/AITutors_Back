@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cfd3f34b-be7e-42cb-8f81-10e361fca997",
+		"_postman_id": "179ef45f-afbf-4af2-9e9c-5c59b3b5ea22",
 		"name": "Tema Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "37960025"
@@ -38,9 +38,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/instructores",
+					"raw": "{{baseUrl}}/instructores",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"instructores"
@@ -81,9 +81,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/cursos",
+					"raw": "{{baseUrl}}/cursos",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"cursos"
@@ -162,9 +162,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/temas",
+					"raw": "{{baseUrl}}/temas",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"temas"
@@ -237,9 +237,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/temas",
+					"raw": "{{baseUrl}}/temas",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"temas"
@@ -298,9 +298,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/temas/{{tema_id_1}}",
+					"raw": "{{baseUrl}}/temas/{{tema_id_1}}",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"temas",
@@ -313,7 +313,10 @@
 					"name": "Obtener un tema",
 					"originalRequest": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -356,9 +359,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/temas/0",
+					"raw": "{{baseUrl}}/temas/0",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"temas",
@@ -414,9 +417,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/temas/{{tema_id_1}}",
+					"raw": "{{baseUrl}}/temas/{{tema_id_1}}",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"temas",
@@ -489,9 +492,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/temas/0",
+					"raw": "{{baseUrl}}/temas/0",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"temas",
@@ -552,9 +555,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/temas/{{tema_id_1}}",
+					"raw": "{{baseUrl}}/temas/{{tema_id_1}}",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"temas",
@@ -581,10 +584,10 @@
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -613,9 +616,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/temas/0",
+					"raw": "{{baseUrl}}/temas/0",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"temas",

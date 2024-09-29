@@ -38,9 +38,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/instructores",
+					"raw": "{{baseUrl}}/instructores",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"instructores"
@@ -57,7 +57,7 @@
 					"script": {
 						"exec": [
 							"var data = pm.response.json()\r",
-							"pm.globals.set(\"curso_id\", data.id);\r",
+							"pm.globals.set(\"curso_id_1\", data.id);\r",
 							"\r",
 							"pm.test(\"Status code is 201\", function () {\r",
 							"   pm.response.to.have.status(201);\r",
@@ -81,9 +81,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/cursos",
+					"raw": "{{baseUrl}}/cursos",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"cursos"
@@ -155,9 +155,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/cursos",
+					"raw": "{{baseUrl}}/cursos",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"cursos"
