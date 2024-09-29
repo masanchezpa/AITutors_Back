@@ -1,19 +1,79 @@
 {
 	"info": {
-		"_postman_id": "592d6669-0218-4169-8680-c432d2c1a8a4",
+		"_postman_id": "45076e69-7f47-4912-80d1-86d592fe4ce2",
 		"name": "Curso Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "37960025"
 	},
 	"item": [
 		{
-			"name": "Crear un curso",
+			"name": "Crear un instructor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"instructor_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso\"\r\n}",
+					"raw": "{\r\n    \"nombre\": \"el mejor profe disc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/instructores",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"instructores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un curso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"curso_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso\",\r\n    \"instructor\": {\r\n        \"id\":{{instructor_id}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -72,16 +132,47 @@
 		},
 		{
 			"name": "Obtener todos los cursos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of cursos > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/cursos",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"cursos"
+					]
+				}
 			},
 			"response": [
 				{
 					"name": "Obtener todos los cursos",
 					"originalRequest": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"code": 200,
 					"_postman_previewlanguage": "json",
@@ -100,16 +191,31 @@
 		},
 		{
 			"name": "Obtener un curso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/cursos",
+					"raw": "{{baseUrl}}/cursos/{{curso_id_1}}",
 					"host": [
-						"{{baseURL}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"cursos"
+						"cursos",
+						"{{curso_id_1}}"
 					]
 				}
 			},
@@ -118,7 +224,10 @@
 					"name": "Obtener un curso",
 					"originalRequest": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"code": 200,
 					"_postman_previewlanguage": "json",
@@ -137,6 +246,25 @@
 		},
 		{
 			"name": "Obtener un curso que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El curso con ese id no se encontro\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -186,12 +314,26 @@
 		},
 		{
 			"name": "Editar un curso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso modificada\"\r\n}",
+					"raw": "{\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso modificada\",\r\n    \"instructor\": {\r\n        \"id\":{{instructor_id}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -253,9 +395,37 @@
 		},
 		{
 			"name": "Editar un curso que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El curso con ese id no se encontro\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso modificada\",\r\n    \"instructor\": {\r\n        \"id\":{{instructor_id}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseUrl}}/cursos/0",
 					"host": [
@@ -302,6 +472,20 @@
 		},
 		{
 			"name": "Borrar un curso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -335,15 +519,34 @@
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
 		{
 			"name": "Borrar un curso que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El curso con ese id no se encontro\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
