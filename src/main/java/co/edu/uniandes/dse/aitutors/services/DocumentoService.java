@@ -35,18 +35,6 @@ public class DocumentoService {
             throw new IllegalOperationException("El contenido del documento no puede ser vacío");
         }
 
-        if (documentoEntity.getTema()==null){
-            throw new IllegalOperationException("El tema del documento no puede ser nulo");
-        }
-        
-        Optional<TemaEntity> temaEntity = temaRepository.findById(documentoEntity.getTema().getId());
-
-        if (temaEntity.isEmpty()){
-            throw new IllegalOperationException("El tema del documento no existe");
-        }
-
-        documentoEntity.setTema(temaEntity.get());
-
         log.info("Termina proceso de creación del documento");
         return documentoRepository.save(documentoEntity);
     }

@@ -1,5 +1,4 @@
 package co.edu.uniandes.dse.aitutors.services;
-import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -7,9 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -17,7 +13,6 @@ import co.edu.uniandes.dse.aitutors.entities.DocumentoEntity;
 import co.edu.uniandes.dse.aitutors.entities.TemaEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.aitutors.repositories.DocumentoRepository;
 import jakarta.transaction.Transactional;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -76,7 +71,6 @@ class DocumentoServiceTest {
         assertEquals(documentoEntity.getTipo(), result.getTipo());
         assertEquals(documentoEntity.getContenido(), result.getContenido());
         assertEquals(documentoEntity.getId(), result.getId());
-        assertEquals(documentoEntity.getTema().getId(), result.getTema().getId());
     }
 
     @Test
@@ -90,22 +84,6 @@ class DocumentoServiceTest {
     void testCrearDocumentoContenidoVacio() {
         DocumentoEntity documentoEntity = factory.manufacturePojo(DocumentoEntity.class);
         documentoEntity.setContenido("");
-        assertThrows(IllegalOperationException.class, () -> documentoService.createDocumento(documentoEntity));
-    }
-
-    @Test
-    void testCrearDocumentoTemaNulo() {
-        DocumentoEntity documentoEntity = factory.manufacturePojo(DocumentoEntity.class);
-        documentoEntity.setTema(null);
-        assertThrows(IllegalOperationException.class, () -> documentoService.createDocumento(documentoEntity));
-    }
-
-    @Test
-    void testCrearDocumentoTemaNoExiste() {
-        DocumentoEntity documentoEntity = factory.manufacturePojo(DocumentoEntity.class);
-        TemaEntity temaEntity = factory.manufacturePojo(TemaEntity.class);
-        temaEntity.setId(0L);
-        documentoEntity.setTema(temaEntity);
         assertThrows(IllegalOperationException.class, () -> documentoService.createDocumento(documentoEntity));
     }
 
