@@ -6,6 +6,6 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class EstudianteDTODetail extends EstudianteDTO {
+public class EstudianteDetailDTO extends EstudianteDTO {
     private List<CursoDTO> cursos = new ArrayList<>();
 }
