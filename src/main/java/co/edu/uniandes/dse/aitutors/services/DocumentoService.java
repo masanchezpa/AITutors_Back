@@ -35,17 +35,17 @@ public class DocumentoService {
             throw new IllegalOperationException("El contenido del documento no puede ser vacío");
         }
 
-        if (documentoEntity.getTema()==null){
-            throw new IllegalOperationException("El tema del documento no puede ser nulo");
-        }
+        // if (documentoEntity.getTema()==null){
+        //     throw new IllegalOperationException("El tema del documento no puede ser nulo");
+        // }
         
-        Optional<TemaEntity> temaEntity = temaRepository.findById(documentoEntity.getTema().getId());
+        // Optional<TemaEntity> temaEntity = temaRepository.findById(documentoEntity.getTema().getId());
 
-        if (temaEntity.isEmpty()){
-            throw new IllegalOperationException("El tema del documento no existe");
-        }
+        // if (temaEntity.isEmpty()){
+        //     throw new IllegalOperationException("El tema del documento no existe");
+        // }
 
-        documentoEntity.setTema(temaEntity.get());
+        // documentoEntity.setTema(temaEntity.get());
 
         log.info("Termina proceso de creación del documento");
         return documentoRepository.save(documentoEntity);
@@ -64,7 +64,7 @@ public class DocumentoService {
 
         Optional<DocumentoEntity> documentoEntity = documentoRepository.findById(documentoId);
         if(documentoEntity.isEmpty()){
-            throw new EntityNotFoundException("El documento con id = {0} no existe");
+            throw new EntityNotFoundException("El documento con el id dado no existe");
         }
         return documentoEntity.get();
     }
@@ -74,7 +74,7 @@ public class DocumentoService {
         log.info("Inicia proceso de actualizar un documento con id = {0}", documentoId);
         Optional<DocumentoEntity> documentoEntity = documentoRepository.findById(documentoId);
         if(documentoEntity.isEmpty()){
-            throw new IllegalOperationException("El documento con id = {0} no existe");
+            throw new IllegalOperationException("El documento con el id dado no existe");
         }
 
         documento.setId(documentoId);
@@ -87,7 +87,7 @@ public class DocumentoService {
         log.info("Inicia proceso de eliminación del documento con id = {0}", documentoId);
         Optional<DocumentoEntity> documentoEntity = documentoRepository.findById(documentoId);
         if(documentoEntity.isEmpty()){
-            throw new IllegalOperationException("El documento con id = {0} no existe");
+            throw new IllegalOperationException("El documento con el id dado no existe");
         }
 
         documentoRepository.deleteById(documentoId);

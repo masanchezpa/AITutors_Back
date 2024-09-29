@@ -1,0 +1,605 @@
+{
+	"info": {
+		"_postman_id": "2154a286-f7ff-4ec6-a991-1fc5e8cef826",
+		"name": "Documento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37463788"
+	},
+	"item": [
+		{
+			"name": "Crear un documento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"documento_id_1\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tipo\":\"documento\",\r\n    \"contenido\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel lectus nec justo feugiat sollicitudin.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/documentos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"documentos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un documento",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"tipo\":\"documento\",\r\n    \"contenido\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel lectus nec justo feugiat sollicitudin. Maecenas fermentum, urna ut vehicula interdum, felis velit gravida tortor, sed accumsan leo lorem at elit. Donec vehicula orci sit amet ligula volutpat, nec dictum lacus porttitor. Quisque aliquam lorem a metus fermentum, nec commodo magna faucibus. Nulla facilisi. Phasellus eget metus ut nisi fermentum feugiat in sit amet arcu. Pellentesque quis purus sit amet ligula laoreet faucibus.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/documentos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"documentos"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "201"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los documentos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of documentos > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/documentos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"documentos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todos los documentos",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n    \"id\": 1,\r\n    \"tipo\":\"documento\",\r\n    \"contenido\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel lectus nec justo feugiat sollicitudin. Maecenas fermentum, urna ut vehicula interdum, felis velit gravida tortor, sed accumsan leo lorem at elit. Donec vehicula orci sit amet ligula volutpat, nec dictum lacus porttitor. Quisque aliquam lorem a metus fermentum, nec commodo magna faucibus. Nulla facilisi. Phasellus eget metus ut nisi fermentum feugiat in sit amet arcu. Pellentesque quis purus sit amet ligula laoreet faucibus.\",\r\n    \"tema\":{}\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/documentos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"documentos"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "200"
+				}
+			]
+		},
+		{
+			"name": "Obtener un documento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/documentos/{{documento_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"documentos",
+						"{{documento_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un documento",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{author_id_1}},\r\n    \"tipo\":\"documento\",\r\n    \"contenido\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel lectus nec justo feugiat sollicitudin. Maecenas fermentum, urna ut vehicula interdum, felis velit gravida tortor, sed accumsan leo lorem at elit. Donec vehicula orci sit amet ligula volutpat, nec dictum lacus porttitor. Quisque aliquam lorem a metus fermentum, nec commodo magna faucibus. Nulla facilisi. Phasellus eget metus ut nisi fermentum feugiat in sit amet arcu. Pellentesque quis purus sit amet ligula laoreet faucibus.\",\r\n    \"tema\":{}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/documentos/{{documento_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"documentos",
+								"{{documento_id_1}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "200"
+				}
+			]
+		},
+		{
+			"name": "Obtener un autor que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El documento con el id dado no existe\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/documentos/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"documentos",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un autor que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"apierror\": {\r\n        \"status\": \"NOT_FOUND\",\r\n        \"timestamp\": \"21-02-2023 10:01:09\",\r\n        \"message\": \"The author with the given id was not found\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "404"
+				}
+			]
+		},
+		{
+			"name": "Editar un documento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tipo\":\"documento\",\r\n    \"contenido\":\"El cielo estaba cubierto de nubes grises que se movían lentamente, arrastradas por una brisa suave.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/documentos/{{documento_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"documentos",
+						"{{documento_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Editar un documento",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"tipo\":\"documento\",\r\n    \"contenido\":\"El cielo estaba cubierto de nubes grises que se movían lentamente, arrastradas por una brisa suave. A lo lejos, el sonido de las olas rompiendo contra las rocas añadía una melodía constante al ambiente tranquilo. Los árboles se mecían con un ritmo lento, sus hojas susurrando secretos antiguos al viento. Era un día como cualquier otro, pero había algo en el aire, una sensación de quietud que prometía un cambio inminente. Las aves sobrevolaban el horizonte, como si también fueran parte de ese susurro del universo, esperando algo que estaba por venir.\",\r\n    \"tema\":{}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/documentos/:documento_id_1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"documentos",
+								":documento_id_1"
+							],
+							"variable": [
+								{
+									"key": "documento_id_1",
+									"value": ""
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "200"
+				}
+			]
+		},
+		{
+			"name": "Editar un documento que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El documento con el id dado no existe\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tipo\":\"documento\",\r\n    \"contenido\":\"El cielo estaba cubierto de nubes grises que se movían lentamente, arrastradas por una brisa suave.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/documentos/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"documentos",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Editar un documento que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"apierror\": {\r\n        \"status\": \"NOT_FOUND\",\r\n        \"timestamp\": \"21-02-2023 10:04:10\",\r\n        \"message\": \"El documento con el id dado no existe\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/documentos/0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"documentos",
+								"0"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "404"
+				}
+			]
+		},
+		{
+			"name": "Borrar documento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/documentos/{{documento_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"documentos",
+						"{{documento_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar documento",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": []
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "204"
+				}
+			]
+		},
+		{
+			"name": "Borrar documento inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El documento con el id dado no existe\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/documentos/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"documentos",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar documento inexistente",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"apierror\": {\r\n        \"status\": \"NOT_FOUND\",\r\n        \"timestamp\": \"21-02-2023 10:05:19\",\r\n        \"message\": \"El documento con el id dado no existe\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
