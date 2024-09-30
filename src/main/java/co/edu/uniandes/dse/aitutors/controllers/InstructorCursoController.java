@@ -48,9 +48,9 @@ public class InstructorCursoController {
     }
 
     @DeleteMapping(value="/{cursoId}/instructor/{instructorId}")
-    @ResponseStatus(code = HttpStatus.OK)
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteInstructor(@PathVariable("cursoId") Long cursoId,@PathVariable("instructorId") Long instructorId) throws Exception {
-        instructorCursoService.removeInstructor(cursoId,instructorId);
+        instructorCursoService.removeInstructor(instructorId,cursoId);
     }
 
 }
