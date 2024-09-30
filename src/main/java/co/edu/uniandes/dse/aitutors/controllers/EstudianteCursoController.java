@@ -66,6 +66,6 @@ public class EstudianteCursoController {
     @DeleteMapping(value="/{cursoId}/estudiantes/{estudianteId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void removeEstudiante(@PathVariable("cursoId") Long cursoId,@PathVariable("estudianteId") Long estudianteId) throws EntityNotFoundException {
-        estudianteCursoService.removeStudent(cursoId,estudianteId);
+        estudianteCursoService.removeStudent(estudianteId,cursoId);
     }
 }
