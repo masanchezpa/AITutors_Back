@@ -1,0 +1,649 @@
+{
+	"info": {
+		"_postman_id": "11d298b2-1c54-4b50-b16d-b8a2adf69f47",
+		"name": "TemaCurso Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37463788"
+	},
+	"item": [
+		{
+			"name": "Crear un instructor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"instructor_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"el mejor profe disc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/instructores",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"instructores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un curso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"curso_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso\",\r\n    \"instructor\": {\r\n        \"id\":{{instructor_id}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cursos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cursos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un curso",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cursos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cursos"
+							]
+						}
+					},
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{   \r\n    \"id\":1,\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear un curso 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"curso_id2\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"mi_curso2\",\r\n    \"descripcion\": \"La descripcion de mi curso2\",\r\n    \"instructor\": {\r\n        \"id\":{{instructor_id}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cursos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cursos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un curso",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cursos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cursos"
+							]
+						}
+					},
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{   \r\n    \"id\":1,\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear un tema",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"tema_id_1\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"mi primer tema\",\r\n    \"descripcion\": \"el tema mas educativo que existe!\",\r\n    \"curso\": {\r\n        \"id\": {{curso_id}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/temas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"temas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un tema",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"mi primer tema\",\r\n    \"descripcion\": \"el tema mas educativo que existe!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/temas",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"temas"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\":1,\n    \"titulo\": \"mi primer tema\",\n    \"descripcion\": \"el tema mas educativo que existe!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add Curso",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/temas/{{tema_id_1}}/curso/{{curso_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"temas",
+						"{{tema_id_1}}",
+						"curso",
+						"{{curso_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add curso inexistente Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El curso con ese id no se encontro\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/temas/{{tema_id_1}}/curso/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"temas",
+						"{{tema_id_1}}",
+						"curso",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add curso tema inexistente Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El tema con ese id no se encontro\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/temas/0/curso/{{curso_id2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"temas",
+						"0",
+						"curso",
+						"{{curso_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Curso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/temas/{{tema_id_1}}/curso",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"temas",
+						"{{tema_id_1}}",
+						"curso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Curso tema Inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El tema con ese id no se encontro\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/temas/0/curso",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"temas",
+						"0",
+						"curso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Curso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/temas/{{tema_id_1}}/curso/{{curso_id2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"temas",
+						"{{tema_id_1}}",
+						"curso",
+						"{{curso_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put curso inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El curso con ese id no se encontro\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/temas/{{tema_id_1}}/curso/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"temas",
+						"{{tema_id_1}}",
+						"curso",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put curso tema inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El tema con ese id no se encontro\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/temas/0/curso/{{curso_id2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"temas",
+						"0",
+						"curso",
+						"{{curso_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Curso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/temas/{{tema_id_1}}/curso",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"temas",
+						"{{tema_id_1}}",
+						"curso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete curso tema inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"El tema con ese id no se encontro\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/temas/0/curso",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"temas",
+						"0",
+						"curso"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
