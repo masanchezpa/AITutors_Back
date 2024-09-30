@@ -22,9 +22,21 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseUrl}}/usuarios/1",
 					"host": [
@@ -63,7 +75,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"usuarioId\": 1,\r\n  \"artefactoId\": {{artefactoUsuario}}\r\n}\r\n",
+					"raw": "{\r\n  \"nombre\": \"julian\",\r\n  \"email\": \"j.padsds@asad\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
