@@ -54,7 +54,7 @@ public class ComentarioUsuarioController {
         comentarioUsuarioService.removeComentario(usuarioId);
     }
 
-    @GetMapping("/{usuarioId}")
+    @GetMapping("/{usuarioId}/comentario")
     public ComentarioDTO getComentario(@PathVariable("usuarioId") Long usuarioId) throws EntityNotFoundException {
         ComentarioEntity comentario = comentarioUsuarioService.getComentario(usuarioId);
         return modelMapper.map(comentario, ComentarioDTO.class);

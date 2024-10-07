@@ -5,10 +5,12 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uniandes.dse.aitutors.dto.CursoDTO;
@@ -19,7 +21,8 @@ import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.CursoEstudianteService;
 import co.edu.uniandes.dse.aitutors.services.CursoInstructorService;
 
-@RestController("instructores/{instructorId}/cursos")
+@RestController
+@RequestMapping("instructores/{instructorId}/cursos")
 public class CursoInstructorController {
     
 
@@ -57,7 +60,7 @@ public class CursoInstructorController {
 
     }
 
-    @PutMapping("{cursoId}")
+    @DeleteMapping("{cursoId}")
     public void removeCourse(@PathVariable("instructorId") Long instructorId, @PathVariable("cursoId") Long cursoId) throws EntityNotFoundException {
         cursoInstructorService.removeCourse(instructorId, cursoId);
     }
