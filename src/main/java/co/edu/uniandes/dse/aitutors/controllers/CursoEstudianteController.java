@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.modelmapper.TypeToken;
 import co.edu.uniandes.dse.aitutors.dto.CursoDTO;
@@ -22,7 +23,8 @@ import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.ComentarioService;
 import co.edu.uniandes.dse.aitutors.services.CursoEstudianteService;
 
-@RestController("/estudiantes/{estudianteId}/cursos")
+@RestController
+@RequestMapping("/estudiantes/{estudianteId}/cursos")
 public class CursoEstudianteController {
 
     @Autowired
