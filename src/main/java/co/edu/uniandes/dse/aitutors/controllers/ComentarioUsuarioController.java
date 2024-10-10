@@ -37,7 +37,7 @@ public class ComentarioUsuarioController {
         return modelMapper.map(usuario, UsuarioDTO.class);
     }
 
-    @GetMapping("/{usuarioId}")
+    @PutMapping("/{usuarioId}")
     public UsuarioDTO replaceUsuario(@PathVariable("comentarioId") Long comentarioId, @PathVariable("usuarioId") Long usuarioId) throws EntityNotFoundException {
         UsuarioEntity usuario = comentarioUsuarioService.replaceUsuario(comentarioId, usuarioId);
         return modelMapper.map(usuario, UsuarioDTO.class);
