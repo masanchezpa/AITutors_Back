@@ -7,49 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "Crear El Comentario a Modificar",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"var data = pm.response.json()",
-							"pm.globals.set(\"comentario_id_1\", data.id);",
-							"",
-							"pm.test(\"Status code is 201\", function () {",
-							"   pm.response.to.have.status(201);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"contenido\": \"Este comentario es una chimba\",\n    \"fecha\": \"2024-05-24\",\n    \"usuario\": {\n        \"id\": 54,\n        \"nombre\": \"juan pablo\",\n        \"email\" : \"jpriv64@hotmail.com\"\n\n    },\n    \"tema\": {\n        \"id\" : 69,\n        \"titulo\" : \"temabacan\",\n        \"descripcion\": \"mitema\",\n        \"tutorIA\" : null,\n        \"curso\": null\n\n    } \n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/comentarios",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"comentarios"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Crear El Usuario a Modificar",
 			"event": [
 				{
@@ -97,6 +54,49 @@
 			"response": []
 		},
 		{
+			"name": "Crear El Comentario a Modificar",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"comentario_id_1\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"contenido\": \"Este comentario es una chimba\",\n    \"fecha\": \"2024-05-24\",\n    \"usuario\": {\n        \"id\": 54,\n        \"nombre\": \"juan pablo\",\n        \"email\" : \"jpriv64@hotmail.com\"\n\n    },\n    \"tema\": {\n        \"id\" : 69,\n        \"titulo\" : \"temabacan\",\n        \"descripcion\": \"mitema\",\n        \"tutorIA\" : null,\n        \"curso\": null\n\n    } \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/comentarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Añade usuario a comentario",
 			"event": [
 				{
@@ -132,9 +132,46 @@
 		},
 		{
 			"name": "Consigue el usuario del comentario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/comentarios/{{comentario_id_1}}/usuarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios",
+						"{{comentario_id_1}}",
+						"usuarios"
+					]
+				}
 			},
 			"response": []
 		},
@@ -200,6 +237,130 @@
 						"comentarios",
 						"{{comentario_id_1}}",
 						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear El Usuario a Modificar Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.environment.set(\"user\", jsonData.id);",
+							"    console.log(\"usuario ID saved:\", jsonData.id);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/usuarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear El Comentario a Modificar Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"comentario_id_1\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"contenido\": \"Este comentario es una chimba\",\n    \"fecha\": \"2024-05-24\",\n    \"usuario\": {\n        \"id\": 54,\n        \"nombre\": \"juan pablo\",\n        \"email\" : \"jpriv64@hotmail.com\"\n\n    },\n    \"tema\": {\n        \"id\" : 69,\n        \"titulo\" : \"temabacan\",\n        \"descripcion\": \"mitema\",\n        \"tutorIA\" : null,\n        \"curso\": null\n\n    } \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/comentarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añade usuario a comentario Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/comentarios/{{comentario_id_1}}/usuarios/{{user}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios",
+						"{{comentario_id_1}}",
+						"usuarios",
+						"{{user}}"
 					]
 				}
 			},
