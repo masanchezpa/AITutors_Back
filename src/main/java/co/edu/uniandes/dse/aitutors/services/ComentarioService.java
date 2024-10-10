@@ -54,6 +54,7 @@ public class ComentarioService {
         if (!comentarioEntity.isPresent()) {
             throw new EntityNotFoundException(ErrorMessage.COMENTARIO_NOT_FOUND);
         }
+        comentario.setId(comentarioId);
         return comentarioRepository.save(comentario);
     }
 
