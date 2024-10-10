@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "ec1de56b-06b0-41ea-ab72-b2e464efe416",
+		"name": "Comentario Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38884305"
+	},
+	"item": [
+		{
+			"name": "Crear comentario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"comentario_id_1\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 23,\n    \"contenido\": \"Este comentario es una chimba\",\n    \"fecha\": \"2024-05-24\",\n    \"usuario\": {\n        \"id\": 54,\n        \"nombre\": \"juan pablo\",\n        \"email\" : \"jpriv64@hotmail.com\"\n\n    },\n    \"tema\": {\n        \"id\" : 69,\n        \"titulo\" : \"temabacan\",\n        \"descripcion\": \"mitema\",\n        \"tutorIA\" : null,\n        \"curso\": null\n\n    } \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/comentarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Encontrar por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/comentarios/{{comentario_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios",
+						"{{comentario_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Encontrar todos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Numero de comentarios > ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/comentarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar comentario por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 23,\n    \"contenido\": \"Version 2 comentario chimba\",\n    \"fecha\": \"2024-05-24\",\n    \"usuario\": {\n        \"id\": 54,\n        \"nombre\": \"juan pablo\",\n        \"email\" : \"jpriv64@hotmail.com\"\n\n    },\n    \"tema\": {\n        \"id\" : 69,\n        \"titulo\" : \"temabacan\",\n        \"descripcion\": \"mitema\",\n        \"tutorIA\" : null,\n        \"curso\": null\n\n    } \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/comentarios/{{comentario_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios",
+						"{{comentario_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar comentario por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/comentarios/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
