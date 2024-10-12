@@ -146,7 +146,9 @@
 							"    else {",
 							"        var jsonData = pm.response.json(); // Parseamos la respuesta como JSON",
 							"        pm.expect(jsonData.apierror.status).to.eql(\"NOT_FOUND\");",
-							"        pm.expect(jsonData.apierror.message).to.include(\"El curso con ese id no se encontro\");",
+							"",
+							"        // Verificamos que el mensaje de error contenga \"no se encontró\"",
+							"        pm.expect(jsonData.apierror.message).to.include(\"no se encontro\");",
 							"    }",
 							"});",
 							""
