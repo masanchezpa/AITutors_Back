@@ -14,7 +14,7 @@
 					"script": {
 						"exec": [
 							"var data = pm.response.json()\r",
-							"pm.globals.set(\"instructor_id\", data.id);\r",
+							"pm.globals.set(\"instructor1\", data.id);\r",
 							"\r",
 							"pm.test(\"Status code is 201\", function () {\r",
 							"   pm.response.to.have.status(201);\r",
@@ -73,7 +73,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso\",\r\n    \"instructor\": {\r\n        \"id\":{{instructor_id}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"nombre\": \"mi_curso\",\r\n    \"descripcion\": \"La descripcion de mi curso\",\r\n    \"instructor\": {\r\n        \"id\": {{instructor1}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -150,14 +150,15 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/instructores/{{instructor_id}}/cursos",
+					"raw": "{{baseUrl}}/instructores/{{instructor1}}/cursos/{{curso_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"instructores",
-						"{{instructor_id}}",
-						"cursos"
+						"{{instructor1}}",
+						"cursos",
+						"{{curso_id_1}}"
 					]
 				}
 			},
@@ -221,57 +222,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/instructores/{{instructor_id}}/cursos/{{curso_id_1}}",
+					"raw": "{{baseUrl}}/instructores/{{instructor1}}/cursos/{{curso_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"instructores",
-						"{{instructor_id}}",
+						"{{instructor1}}",
 						"cursos",
 						"{{curso_id_1}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Acualizar lista de cursos",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "[\n\n    {\n    \"nombre\": \"IP\",\n    \"descripcion\": \"La descripcion de mi curso\",\n    \"instructor\": {\n        \"id\":{{instructor_id}}\n    }\n},\n\n    {\n    \"nombre\": \"EDA\",\n    \"descripcion\": \"La descripcion de mi curso\",\n    \"instructor\": {\n        \"id\":{{instructor_id}}\n    }\n}\n\n]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/instructores/{{instructor_id}}/cursos",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"instructores",
-						"{{instructor_id}}",
-						"cursos"
 					]
 				}
 			},
