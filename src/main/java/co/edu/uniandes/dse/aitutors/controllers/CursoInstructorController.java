@@ -63,7 +63,6 @@ public class CursoInstructorController {
     @DeleteMapping("{cursoId}")
     public void removeCourse(@PathVariable("instructorId") Long instructorId, @PathVariable("cursoId") Long cursoId) throws EntityNotFoundException {
         cursoInstructorService.removeCourse(instructorId, cursoId);
-    }
-
+    } 
 
 }
