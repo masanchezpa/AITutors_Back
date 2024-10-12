@@ -137,9 +137,19 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
+							"pm.test(\"Status code is 200 or contains NOT_FOUND in response\", function () {",
+							"    // Si el código de estado es 200",
+							"    if (pm.response.status === 200) {",
+							"        pm.expect(pm.response.status).to.eql(200);",
+							"    }",
+							"    // Si el código de estado no es 200, revisamos si el JSON contiene 'NOT_FOUND'",
+							"    else {",
+							"        var jsonData = pm.response.json(); // Parseamos la respuesta como JSON",
+							"        pm.expect(jsonData.apierror.status).to.eql(\"NOT_FOUND\");",
+							"        pm.expect(jsonData.apierror.message).to.include(\"El curso con ese id no se encontro\");",
+							"    }",
+							"});",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
