@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "88c536ea-9062-4cfa-bd43-cf6844d01326",
+		"_postman_id": "90de45e7-f817-43b1-8106-d7beeb61a068",
 		"name": "Artefacto Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "16331126"
+		"_exporter_id": "37535393"
 	},
 	"item": [
 		{
@@ -178,7 +178,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n     \"id\": {{user}}\n  }\n}\n",
+					"raw": "{\n  \"titulo\": \"documento prueba\",\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n     \"id\": {{user}}\n  },\n  \"isVisible\": false\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -220,7 +220,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n    \"id\": {{user}}\n  }\n}\n",
+					"raw": "{\n  \"titulo\": \"cambio artefacto\",\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n    \"id\": {{user}}\n  },\n  \"isVisible\": true\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
