@@ -1,11 +1,204 @@
 {
 	"info": {
-		"_postman_id": "ec1de56b-06b0-41ea-ab72-b2e464efe416",
+		"_postman_id": "f5516342-775e-47f7-a99d-0a88def970f4",
 		"name": "Comentario Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "38884305"
+		"_exporter_id": "37535393"
 	},
 	"item": [
+		{
+			"name": "new Usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.environment.set(\"commentUser\", jsonData.id);",
+							"    console.log(\"usuario ID saved:\", jsonData.id);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"comentario usuario 2\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/usuarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new TutorIA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.environment.set(\"commentTutor\", jsonData.id);",
+							"    console.log(\"tutor ID saved:\", jsonData.id);",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Tutor IA Ejemplo 2\",\n  \"especialidad\": \"Ciencias\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tutorias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tutorias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new accion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.environment.set(\"comentAccion\", jsonData.id);",
+							"    console.log(\"Accion ID saved:\", jsonData.id);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Acción de ejemplo\",\n  \"descripcion\": \"Descripción de la acción\",\n  \"habilitacion\": true,\n  \"objetivo\": \"Objetivo de la acción\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tutorias/{{commentTutor}}/acciones",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tutorias",
+						"{{commentTutor}}",
+						"acciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Artefacto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.environment.set(\"commentArtefacto\", jsonData.id);",
+							"    console.log(\"Artefacto ID saved:\", jsonData.id);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"titulo\": \"artefacto documento\",\n  \"tipo\": \"tarea\",\n  \"contenido\": \"Este es el contenido del artefacto comentario\",\n  \"autor\": {\n     \"id\": {{commentUser}}\n  },\n  \"isVisible\": false\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/acciones/{{comentAccion}}/artefactos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"acciones",
+						"{{comentAccion}}",
+						"artefactos"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Crear comentario",
 			"event": [
@@ -23,6 +216,13 @@
 						"type": "text/javascript",
 						"packages": {}
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -30,7 +230,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 23,\n    \"contenido\": \"Este comentario es una chimba\",\n    \"fecha\": \"2024-05-24\",\n    \"usuario\": {\n        \"id\": 54,\n        \"nombre\": \"juan pablo\",\n        \"email\" : \"jpriv64@hotmail.com\"\n\n    },\n    \"tema\": {\n        \"id\" : 69,\n        \"titulo\" : \"temabacan\",\n        \"descripcion\": \"mitema\",\n        \"tutorIA\" : null,\n        \"curso\": null\n\n    } \n}",
+					"raw": "{\n    \"contenido\": \"Este comentario es una prueba\",\n    \"fecha\": \"2024-05-24\",\n    \"autor\": {\n        \"id\": {{commentUser}}\n    },\n\n    \"artefacto\": {\n        \"id\": {{commentArtefacto}}\n    }\n\n\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -21,9 +21,11 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public  class ArtefactoEntity extends BaseEntity {
 
+	private String titulo;
 	private String tipo;
 	private String contenido;
-
+	private Boolean isVisible;
+	
 	@PodamExclude
 	@ManyToOne
 	private UsuarioEntity autor;
