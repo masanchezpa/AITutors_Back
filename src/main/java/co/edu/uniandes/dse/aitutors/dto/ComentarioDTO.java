@@ -9,6 +9,6 @@ public class ComentarioDTO {
     private Long id;
     private String contenido;
     private Date fecha;
-    private UsuarioDTO usuario;
-    private TemaDTO tema;
+    private UsuarioDTO autor;
+    private ArtefactoDTO artefacto;
 }

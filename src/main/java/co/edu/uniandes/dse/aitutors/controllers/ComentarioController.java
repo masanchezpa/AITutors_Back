@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uniandes.dse.aitutors.dto.ComentarioDTO;
+import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
 import co.edu.uniandes.dse.aitutors.entities.ComentarioEntity;
+import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.ComentarioService;
+import co.edu.uniandes.dse.aitutors.services.UsuarioService;
+import co.edu.uniandes.dse.aitutors.services.ArtefactoService;
 
 @RestController
 @RequestMapping("/comentarios")
@@ -28,6 +32,14 @@ public class ComentarioController {
 
     @Autowired
     private ComentarioService comentarioService;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private ArtefactoService artefactoService;
+
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -49,10 +61,13 @@ public class ComentarioController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ComentarioDTO create(@RequestBody ComentarioDTO comentarioDTO) throws IllegalOperationException, EntityNotFoundException {
-        ComentarioEntity comentarioEntity = comentarioService.createComentario(modelMapper.map(comentarioDTO, ComentarioEntity.class));
-        return modelMapper.map(comentarioEntity, ComentarioDTO.class);
+    public ComentarioDTO createComentario(@RequestBody ComentarioDTO comentarioDTO) throws EntityNotFoundException, IllegalOperationException {
+        ComentarioEntity comentarioEntity = modelMapper.map(comentarioDTO, ComentarioEntity.class);
+        ComentarioEntity savedEntity = comentarioService.createComentario(comentarioEntity);
+        return modelMapper.map(savedEntity, ComentarioDTO.class);
     }
+    
+
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
