@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class AccionService {
-    
+
     @Autowired
      AccionRepository accionRepository;
 
@@ -54,6 +54,7 @@ public class AccionService {
         if (!accionEntity.isPresent()) {
             throw new EntityNotFoundException(ErrorMessage.ACCION_NOT_FOUND);
         }
+        accion.setId(accionId);
         return accionRepository.save(accion);
     }
 
