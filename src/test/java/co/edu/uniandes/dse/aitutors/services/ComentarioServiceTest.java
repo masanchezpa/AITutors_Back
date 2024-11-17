@@ -1,5 +1,3 @@
-
-
 package co.edu.uniandes.dse.aitutors.services;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +17,11 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.aitutors.entities.ComentarioEntity;
+import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
+import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
+import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -29,118 +31,137 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @Import(ComentarioService.class)
 class ComentarioServiceTest {
 
-	@Autowired
-	private ComentarioService comentarioService;
+    @Autowired
+    private ComentarioService comentarioService;
 
-	@Autowired
-	private TestEntityManager entityManager;
+    @Autowired
+    private TestEntityManager entityManager;
 
-	private PodamFactory factory = new PodamFactoryImpl();
+    private PodamFactory factory = new PodamFactoryImpl();
 
-	private List<ComentarioEntity> accionList = new ArrayList<>();
+    private List<ComentarioEntity> comentarioList = new ArrayList<>();
+    private UsuarioEntity testUsuario;
+    private ArtefactoEntity testArtefacto;
 
-	/**
-	 * Configuración inicial de la prueba.
-	 */
-	@BeforeEach
-	void setUp() {
-		clearData();
-		insertData();
-	}
+    @BeforeEach
+    void setUp() {
+        clearData();
+        insertData();
+    }
 
-	/**
-	 * Limpia las tablas que están implicadas en la prueba.
-	 */
-	private void clearData() {
-		entityManager.getEntityManager().createQuery("delete from AccionEntity");
-	}
+    private void clearData() {
+        entityManager.getEntityManager().createQuery("DELETE FROM ComentarioEntity").executeUpdate();
+        entityManager.getEntityManager().createQuery("DELETE FROM ArtefactoEntity").executeUpdate();
+        entityManager.getEntityManager().createQuery("DELETE FROM UsuarioEntity").executeUpdate();
+        entityManager.getEntityManager().createQuery("DELETE FROM AccionEntity").executeUpdate();
+    }
 
-	/**
-	 * Inserta los datos iniciales para el correcto funcionamiento de las pruebas.
-	 */
     private void insertData() {
+        testUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        entityManager.persist(testUsuario);
+
+        AccionEntity accion = factory.manufacturePojo(AccionEntity.class);
+        entityManager.persist(accion);
+
+        testArtefacto = factory.manufacturePojo(ArtefactoEntity.class);
+        testArtefacto.setAccion(accion);
+        entityManager.persist(testArtefacto);
+
         for (int i = 0; i < 3; i++) {
-            ComentarioEntity comentarioEntity = factory.manufacturePojo(ComentarioEntity.class);
-            entityManager.persist(comentarioEntity);
-            accionList.add(comentarioEntity);
+            ComentarioEntity comentario = factory.manufacturePojo(ComentarioEntity.class);
+            comentario.setAutor(testUsuario);
+            comentario.setArtefacto(testArtefacto);
+            entityManager.persist(comentario);
+            comentarioList.add(comentario);
         }
     }
 
     @Test
-    void testCreateComentario() {
+    void testCreateComentario() throws EntityNotFoundException, IllegalOperationException {
         ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
+        newEntity.setAutor(testUsuario);
+        newEntity.setArtefacto(testArtefacto);
+
         ComentarioEntity result = comentarioService.createComentario(newEntity);
         assertNotNull(result);
+
         ComentarioEntity entity = entityManager.find(ComentarioEntity.class, result.getId());
-        assertEquals(newEntity.getId(), entity.getId());
         assertEquals(newEntity.getContenido(), entity.getContenido());
         assertEquals(newEntity.getFecha(), entity.getFecha());
-        assertEquals(newEntity.getAutor(), entity.getAutor());
+        assertEquals(testUsuario.getId(), entity.getAutor().getId());
+        assertEquals(testArtefacto.getId(), entity.getArtefacto().getId());
     }
 
-	
+    @Test
+    void testCreateComentarioWithoutAccion() {
+        ArtefactoEntity artefactoWithoutAccion = factory.manufacturePojo(ArtefactoEntity.class);
+        entityManager.persist(artefactoWithoutAccion);
+
+        ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
+        newEntity.setAutor(testUsuario);
+        newEntity.setArtefacto(artefactoWithoutAccion);
+
+        assertThrows(IllegalOperationException.class, () -> comentarioService.createComentario(newEntity));
+    }
+
+    @Test
+    void testCreateComentarioWithInvalidUser() {
+        ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
+        newEntity.setArtefacto(testArtefacto);
+
+        UsuarioEntity invalidUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        invalidUsuario.setId(999L);
+        newEntity.setAutor(invalidUsuario);
+
+        assertThrows(EntityNotFoundException.class, () -> comentarioService.createComentario(newEntity));
+    }
+
     @Test
     void testGetComentarios() {
         List<ComentarioEntity> list = comentarioService.getComentarios();
-        assertEquals(accionList.size(), list.size());
+        assertEquals(comentarioList.size(), list.size());
         for (ComentarioEntity entity : list) {
-            boolean found = false;
-            for (ComentarioEntity storedEntity : accionList) {
-                if (entity.getId().equals(storedEntity.getId())) {
-                    found = true;
-                }
-            }
-            assertTrue(found);
+            assertTrue(comentarioList.stream().anyMatch(c -> c.getId().equals(entity.getId())));
         }
     }
-    
+
     @Test
     void testGetComentario() throws EntityNotFoundException {
-        ComentarioEntity entity = accionList.get(0);
-        ComentarioEntity resultEntity = comentarioService.getComentario(entity.getId());
-        assertNotNull(resultEntity);
-        assertEquals(entity.getId(), resultEntity.getId());
-        assertEquals(entity.getContenido(), resultEntity.getContenido());
-        assertEquals(entity.getFecha(), resultEntity.getFecha());
-        assertEquals(entity.getAutor(), resultEntity.getAutor());
-    }
+        ComentarioEntity entity = comentarioList.get(0);
+        ComentarioEntity result = comentarioService.getComentario(entity.getId());
 
-
-	@Test
-    void testGetInvalidComentario() {
-        assertThrows(EntityNotFoundException.class, () -> {
-            comentarioService.getComentario(0L);
-        });
+        assertNotNull(result);
+        assertEquals(entity.getId(), result.getId());
+        assertEquals(entity.getContenido(), result.getContenido());
+        assertEquals(entity.getFecha(), result.getFecha());
     }
 
     @Test
-    void testUpdateComentario() throws EntityNotFoundException{
-        ComentarioEntity entity = accionList.get(0);
-        ComentarioEntity pojoEntity = factory.manufacturePojo(ComentarioEntity.class);
-        pojoEntity.setId(entity.getId());
-        comentarioService.updateComentario(entity.getId(), pojoEntity);
-        ComentarioEntity resp = entityManager.find(ComentarioEntity.class, entity.getId());
-        assertEquals(pojoEntity.getId(), resp.getId());
-        assertEquals(pojoEntity.getContenido(), resp.getContenido());
-        assertEquals(pojoEntity.getFecha(), resp.getFecha());
-        assertEquals(pojoEntity.getAutor(), resp.getAutor());
+    void testGetInvalidComentario() {
+        assertThrows(EntityNotFoundException.class, () -> comentarioService.getComentario(0L));
     }
 
+    @Test
+    void testUpdateComentario() throws EntityNotFoundException {
+        ComentarioEntity entity = comentarioList.get(0);
+        ComentarioEntity updatedEntity = factory.manufacturePojo(ComentarioEntity.class);
+        updatedEntity.setId(entity.getId());
 
+        ComentarioEntity result = comentarioService.updateComentario(entity.getId(), updatedEntity);
+        assertEquals(updatedEntity.getContenido(), result.getContenido());
+        assertEquals(updatedEntity.getFecha(), result.getFecha());
+    }
 
-	@Test
+    @Test
     void testUpdateInvalidComentario() {
-        assertThrows(EntityNotFoundException.class, () -> {
-            ComentarioEntity pojoEntity = factory.manufacturePojo(ComentarioEntity.class);
-            pojoEntity.setId(0L);
-            comentarioService.updateComentario(0L, pojoEntity);
-        });
+        ComentarioEntity updatedEntity = factory.manufacturePojo(ComentarioEntity.class);
+        updatedEntity.setId(0L);
+        assertThrows(EntityNotFoundException.class, () -> comentarioService.updateComentario(0L, updatedEntity));
     }
 
-
-	@Test
-    void testDeleteComentario() throws EntityNotFoundException{
-        ComentarioEntity entity = accionList.get(1);
+    @Test
+    void testDeleteComentario() throws EntityNotFoundException {
+        ComentarioEntity entity = comentarioList.get(1);
         comentarioService.deleteComentario(entity.getId());
         ComentarioEntity deleted = entityManager.find(ComentarioEntity.class, entity.getId());
         assertNull(deleted);
@@ -148,10 +169,6 @@ class ComentarioServiceTest {
 
     @Test
     void testDeleteInvalidComentario() {
-        assertThrows(EntityNotFoundException.class, () -> {
-            comentarioService.deleteComentario(0L);
-        });
+        assertThrows(EntityNotFoundException.class, () -> comentarioService.deleteComentario(0L));
     }
-
 }
-

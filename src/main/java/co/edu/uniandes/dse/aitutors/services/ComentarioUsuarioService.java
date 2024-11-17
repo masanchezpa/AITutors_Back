@@ -50,6 +50,9 @@ public class ComentarioUsuarioService {
         if (comentarioEntity.isEmpty())
             throw new EntityNotFoundException(ErrorMessage.COMENTARIO_NOT_FOUND);
 
+        if (comentarioEntity.get().getAutor() == null) {
+            throw new EntityNotFoundException(ErrorMessage.USUARIO_NOT_FOUND);
+        }
         log.info("Termina proceso de consultar el usuario del comentario con id = {0}", comentarioId);
         return comentarioEntity.get().getAutor();
     }

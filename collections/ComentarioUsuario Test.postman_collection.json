@@ -1,13 +1,60 @@
 {
 	"info": {
-		"_postman_id": "90de45e7-f817-43b1-8106-d7beeb61a068",
-		"name": "Artefacto Tests",
+		"_postman_id": "40aaf4f6-b91f-4390-a6f5-3e752ec89854",
+		"name": "ComentarioUsuario Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "37535393"
 	},
 	"item": [
 		{
-			"name": "new Usuario",
+			"name": "new Usuario Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"if (jsonData.id) {",
+							"    pm.environment.set(\"commentUser\", jsonData.id);",
+							"    console.log(\"usuario ID saved:\", jsonData.id);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"comentario usuario 2 NO MODIFICADO\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/usuarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear El Usuario a Modificar",
 			"event": [
 				{
 					"listen": "test",
@@ -34,7 +81,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"raw": "{\n  \"nombre\": \"COMENTARIO USUARIO MODIFICACION\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -54,7 +101,7 @@
 			"response": []
 		},
 		{
-			"name": "new Instructor",
+			"name": "new TutorIA Copy",
 			"event": [
 				{
 					"listen": "test",
@@ -67,101 +114,7 @@
 							"var jsonData = pm.response.json();",
 							"",
 							"if (jsonData.id) {",
-							"    pm.environment.set(\"user\", jsonData.id);",
-							"    console.log(\"usuario ID saved:\", jsonData.id);",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/usuarios",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"usuarios"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "new Estudiante",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});",
-							"",
-							"var jsonData = pm.response.json();",
-							"",
-							"if (jsonData.id) {",
-							"    pm.environment.set(\"user\", jsonData.id);",
-							"    console.log(\"usuario ID saved:\", jsonData.id);",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/usuarios",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"usuarios"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "new TutorIA",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});",
-							"",
-							"var jsonData = pm.response.json();",
-							"",
-							"if (jsonData.id) {",
-							"    pm.environment.set(\"tutor\", jsonData.id);",
+							"    pm.environment.set(\"commentTutor\", jsonData.id);",
 							"    console.log(\"tutor ID saved:\", jsonData.id);",
 							"}",
 							""
@@ -176,7 +129,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Tutor IA Ejemplo\",\n  \"especialidad\": \"Matemáticas\"\n}\n",
+					"raw": "{\n  \"nombre\": \"Tutor IA Ejemplo 2\",\n  \"especialidad\": \"Ciencias\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -196,7 +149,7 @@
 			"response": []
 		},
 		{
-			"name": "new accion",
+			"name": "new accion Copy",
 			"event": [
 				{
 					"listen": "test",
@@ -209,7 +162,7 @@
 							"var jsonData = pm.response.json();",
 							"",
 							"if (jsonData.id) {",
-							"    pm.environment.set(\"accion\", jsonData.id);",
+							"    pm.environment.set(\"comentAccion\", jsonData.id);",
 							"    console.log(\"Accion ID saved:\", jsonData.id);",
 							"}"
 						],
@@ -231,13 +184,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/tutorias/{{tutor}}/acciones",
+					"raw": "{{baseUrl}}/tutorias/{{commentTutor}}/acciones",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"tutorias",
-						"{{tutor}}",
+						"{{commentTutor}}",
 						"acciones"
 					]
 				}
@@ -245,7 +198,7 @@
 			"response": []
 		},
 		{
-			"name": "new Artefacto",
+			"name": "new Artefacto Copy",
 			"event": [
 				{
 					"listen": "test",
@@ -258,7 +211,7 @@
 							"var jsonData = pm.response.json();",
 							"",
 							"if (jsonData.id) {",
-							"    pm.environment.set(\"artefacto\", jsonData.id);",
+							"    pm.environment.set(\"commentArtefacto\", jsonData.id);",
 							"    console.log(\"Artefacto ID saved:\", jsonData.id);",
 							"}"
 						],
@@ -272,7 +225,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"titulo\": \"documento prueba\",\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n     \"id\": {{user}}\n  },\n  \"isVisible\": false\n}\n",
+					"raw": "{\n  \"titulo\": \"PARCIAL 2\",\n  \"tipo\": \"CUESTIONARIO\",\n  \"contenido\": \"El presente artefacto es un cuestionario correspondiente al parcial 2 de la materia ciencias naturales\",\n  \"autor\": {\n     \"id\": {{commentUser}}\n  },\n  \"isVisible\": false\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -280,13 +233,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/acciones/{{accion}}/artefactos",
+					"raw": "{{baseUrl}}/acciones/{{comentAccion}}/artefactos",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"acciones",
-						"{{accion}}",
+						"{{comentAccion}}",
 						"artefactos"
 					]
 				}
@@ -294,7 +247,139 @@
 			"response": []
 		},
 		{
-			"name": "Update Artefacto",
+			"name": "Crear comentario Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"comentario_id_1\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"contenido\": \"Este comentario es una prueba\",\n    \"fecha\": \"2024-05-24\",\n    \"autor\": {\n         \"id\": {{commentUser}}\n         \n    },\n\n    \"artefacto\": {\n        \"id\": {{commentArtefacto}}\n    }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/comentarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añade usuario a comentario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/comentarios/{{comentario_id_1}}/usuarios/{{user}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios",
+						"{{comentario_id_1}}",
+						"usuarios",
+						"{{user}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consigue el usuario del comentario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/comentarios/{{comentario_id_1}}/usuarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios",
+						"{{comentario_id_1}}",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar el usuario del comentario",
 			"event": [
 				{
 					"listen": "test",
@@ -312,255 +397,87 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"titulo\": \"cambio artefacto\",\n  \"tipo\": \"documento\",\n  \"contenido\": \"Este es el contenido del artefacto\",\n  \"autor\": {\n    \"id\": {{user}}\n  },\n  \"isVisible\": true\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "{{baseUrl}}/acciones/{{accion}}/artefactos/{{artefacto}}",
+					"raw": "{{baseUrl}}/comentarios/{{comentario_id_1}}/usuarios/{{user}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"acciones",
-						"{{accion}}",
-						"artefactos",
-						"{{artefacto}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get Artefactos by id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/acciones/{{accion}}/artefactos/{{artefacto}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"acciones",
-						"{{accion}}",
-						"artefactos",
-						"{{artefacto}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get Artefactos",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});",
-							"",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/acciones/{{accion}}/artefactos",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"acciones",
-						"{{accion}}",
-						"artefactos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete Artefacto",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/acciones/{{accion}}/artefactos/{{artefacto}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"acciones",
-						"{{accion}}",
-						"artefactos",
-						"{{artefacto}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete Accion",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/tutorias/{{tutor}}/acciones/{{accion}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"tutorias",
-						"{{tutor}}",
-						"acciones",
-						"{{accion}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete TutorIA",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"id\":1,\n  \"nombre\": \"Tutor IA Ejemplo\",\n  \"especialidad\": \"Matemáticas\"\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/tutorias/{{tutor}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"tutorias",
-						"{{tutor}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete Usuario",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/usuarios/{{user}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
+						"comentarios",
+						"{{comentario_id_1}}",
 						"usuarios",
 						"{{user}}"
 					]
 				}
 			},
 			"response": []
-		}
-	],
-	"variable": [
+		},
 		{
-			"key": "baseUrl",
-			"value": "",
-			"type": "default"
+			"name": "Eliminar el autor del comentario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/comentarios/{{comentario_id_1}}/usuarios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios",
+						"{{comentario_id_1}}",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar el comentario del autor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/comentarios/{{comentario_id_1}}/usuarios/{{user}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comentarios",
+						"{{comentario_id_1}}",
+						"usuarios",
+						"{{user}}"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

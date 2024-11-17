@@ -11,8 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
+import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
+import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
 import co.edu.uniandes.dse.aitutors.entities.ComentarioEntity;
+import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
 import co.edu.uniandes.dse.aitutors.repositories.ComentarioRepository;
+import co.edu.uniandes.dse.aitutors.repositories.UsuarioRepository;
+import co.edu.uniandes.dse.aitutors.repositories.ArtefactoRepository;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -24,11 +29,45 @@ public class ComentarioService {
     @Autowired
     ComentarioRepository comentarioRepository;
 
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @Autowired
+    ArtefactoRepository artefactoRepository;
+
     @Transactional
-    public ComentarioEntity createComentario(ComentarioEntity comentario) {
+    public ComentarioEntity createComentario(ComentarioEntity comentarioEntity) throws EntityNotFoundException, IllegalOperationException {
         log.info("Creating a new comentario");
-        return comentarioRepository.save(comentario);
+
+
+        if (comentarioEntity.getAutor() == null || comentarioEntity.getAutor().getId() == null) {
+            throw new IllegalOperationException("Author is not valid");
+        }
+        Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(comentarioEntity.getAutor().getId());
+        if (usuarioEntity.isEmpty()) {
+            throw new EntityNotFoundException("Author not found");
+        }
+        comentarioEntity.setAutor(usuarioEntity.get());
+
+
+        if (comentarioEntity.getArtefacto() == null || comentarioEntity.getArtefacto().getId() == null) {
+            throw new IllegalOperationException("Artefacto is not valid");
+        }
+        Optional<ArtefactoEntity> artefactoEntity = artefactoRepository.findById(comentarioEntity.getArtefacto().getId());
+        if (artefactoEntity.isEmpty()) {
+            throw new EntityNotFoundException("Artefacto not found");
+        }
+
+        ArtefactoEntity existingArtefacto = artefactoEntity.get();
+        if (existingArtefacto.getAccion() == null) {
+            throw new IllegalOperationException("Artefacto is not associated with any Accion");
+        }
+        comentarioEntity.setArtefacto(existingArtefacto);
+
+        log.info("Comentario creation complete");
+        return comentarioRepository.save(comentarioEntity);
     }
+
 
 
     @Transactional
@@ -54,6 +93,7 @@ public class ComentarioService {
         if (!comentarioEntity.isPresent()) {
             throw new EntityNotFoundException(ErrorMessage.COMENTARIO_NOT_FOUND);
         }
+        comentario.setId(comentarioId);
         return comentarioRepository.save(comentario);
     }
 

@@ -46,7 +46,7 @@ public class CursoController {
         CursoEntity cursoEntity = cursoService.getCurso(id);
         return modelMapper.map(cursoEntity, CursoDetailDTO.class);
     }
-
+ 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public CursoDTO create(@RequestBody CursoDTO cursoDTO) throws IllegalOperationException, EntityNotFoundException {

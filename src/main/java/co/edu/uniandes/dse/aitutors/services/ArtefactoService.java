@@ -91,9 +91,9 @@ public class ArtefactoService {
         if (artefactoEntity.isEmpty())
             throw new EntityNotFoundException(ARTEFACTO_NOT_FOUND);
 
-        artefactoEntity.get().setContenido(artefacto.getContenido());
+        artefacto.setId(artefacto.getId());
         log.info("Termina proceso de actualizar el artefacto con id = {0}", artefacto.getId());
-        return artefactoEntity.get();
+        return artefactoRepository.save(artefacto);
     }
 
     @Transactional

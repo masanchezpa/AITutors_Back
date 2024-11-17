@@ -33,6 +33,8 @@ public class InstructorCursoService {
         Optional<InstructorEntity> instructorEntity=instructorRepository.findById(instructorId);
         Optional<CursoEntity> cursoEntity=cursoRepository.findById(cursoId);
 
+
+
         if (instructorEntity.isEmpty()){
             throw new EntityNotFoundException(ErrorMessage.INSTRUCTOR_NOT_FOUND);
         }
