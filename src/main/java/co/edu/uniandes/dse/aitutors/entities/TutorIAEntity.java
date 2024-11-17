@@ -6,6 +6,8 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -24,7 +26,7 @@ public class TutorIAEntity extends BaseEntity{
     private List<AccionEntity> acciones=new ArrayList<>();
 
     @PodamExclude
-    @OneToOne
+    @OneToOne(mappedBy = "tutorIA", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private TemaEntity tema;
 
 

@@ -13,6 +13,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class DocumentoEntity extends BaseEntity {
 
     private String tipo;
+    private String nombre;
     private String contenido;
 
     @PodamExclude
