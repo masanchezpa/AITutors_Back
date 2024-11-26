@@ -18,7 +18,6 @@ import co.edu.uniandes.dse.aitutors.dto.InstructorDTO;
 import co.edu.uniandes.dse.aitutors.entities.CursoEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.aitutors.services.CursoEstudianteService;
 import co.edu.uniandes.dse.aitutors.services.CursoInstructorService;
 
 @RestController

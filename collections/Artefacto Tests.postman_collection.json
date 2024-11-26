@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "90de45e7-f817-43b1-8106-d7beeb61a068",
+		"_postman_id": "d8c84af7-2d70-4ef2-b6dc-f908227de43c",
 		"name": "Artefacto Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "37535393"
@@ -34,7 +34,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"usuario@gmail.com\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,14 +60,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
 							"});",
 							"",
 							"var jsonData = pm.response.json();",
 							"",
 							"if (jsonData.id) {",
-							"    pm.environment.set(\"user\", jsonData.id);",
+							"    pm.environment.set(\"instructor\", jsonData.id);",
 							"    console.log(\"usuario ID saved:\", jsonData.id);",
 							"}"
 						],
@@ -81,7 +81,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"raw": "{\n  \"nombre\": \"Maria Camila Sanchez\",\n  \"email\": \"mc.instructor@gmail.com\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -89,12 +89,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/usuarios",
+					"raw": "{{baseUrl}}/instructores",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"usuarios"
+						"instructores"
 					]
 				}
 			},
@@ -107,14 +107,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"   pm.response.to.have.status(200);",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
 							"});",
 							"",
 							"var jsonData = pm.response.json();",
 							"",
 							"if (jsonData.id) {",
-							"    pm.environment.set(\"user\", jsonData.id);",
+							"    pm.environment.set(\"estudiante\", jsonData.id);",
 							"    console.log(\"usuario ID saved:\", jsonData.id);",
 							"}"
 						],
@@ -128,7 +128,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"raw": "{\n  \"nombre\": \"Daniel Bolivar\",\n  \"email\": \"dbolivar-estudiante@gmail.com\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -136,12 +136,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/usuarios",
+					"raw": "{{baseUrl}}/estudiantes",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"usuarios"
+						"estudiantes"
 					]
 				}
 			},
@@ -550,6 +550,88 @@
 					"path": [
 						"usuarios",
 						"{{user}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Instructor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/usuarios/{{instructor}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"usuarios",
+						"{{instructor}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/usuarios/{{estudiante}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"usuarios",
+						"{{estudiante}}"
 					]
 				}
 			},

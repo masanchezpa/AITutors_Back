@@ -5,6 +5,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uniandes.dse.aitutors.dto.UsuarioDTO;
+import co.edu.uniandes.dse.aitutors.dto.UsuarioResponseDTO;
 import co.edu.uniandes.dse.aitutors.entities.UsuarioEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.UsuarioService;
 
 @RestController
@@ -30,7 +33,7 @@ public class UsuarioController {
     private ModelMapper modelMapper;
 
     @PostMapping("")
-    public UsuarioDTO createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+    public UsuarioDTO create(@RequestBody UsuarioDTO usuarioDTO) throws IllegalOperationException {
         UsuarioEntity usuario = modelMapper.map(usuarioDTO, UsuarioEntity.class);
         UsuarioEntity newUsuario = usuarioService.createUsuario(usuario);
         return modelMapper.map(newUsuario, UsuarioDTO.class);
@@ -49,6 +52,17 @@ public class UsuarioController {
         UsuarioEntity usuario = usuarioService.getUsuario(id);
         return modelMapper.map(usuario, UsuarioDTO.class);
     }
+
+    @GetMapping("/login/{email}")
+    public UsuarioResponseDTO getUserByEmail(@PathVariable("email") String email) throws EntityNotFoundException {
+        try {
+            UsuarioResponseDTO userResponse = usuarioService.getUserWithDtypeByEmail(email);
+            return modelMapper.map(userResponse, UsuarioResponseDTO.class);
+        } catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException("Usuario no encontrado o email incorrecto.");
+        }
+    }
+    
 
     @GetMapping("")
     public List<UsuarioDTO> getUsuarios() {
