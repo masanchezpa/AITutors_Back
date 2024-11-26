@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "fe53df73-0fbf-4422-82de-bba95ed06cf8",
+		"_postman_id": "902a844d-92b8-4f81-b4a4-fb74fd0e8f13",
 		"name": "Usuario Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "16331126"
+		"_exporter_id": "37535393"
 	},
 	"item": [
 		{
@@ -34,7 +34,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Diomedes Diaz Maestre\",\n  \"email\": \"eldiome@gmail.com\"\n}\n",
+					"raw": "{\n  \"nombre\": \"Fernando Dominguez\",\n  \"email\": \"fer@gmail.com\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
