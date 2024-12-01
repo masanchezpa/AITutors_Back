@@ -1,7 +1,7 @@
 package co.edu.uniandes.dse.aitutors.services;
 
+import java.util.List;
 import java.util.Optional;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +68,19 @@ public class TemaCursoService {
 
         log.info("Termina proceso de consultar el curso del tema con id = {0}", temaId);
         return cursoEntity;
+    }
+
+    @Transactional
+    public List<TemaEntity> getTemas(Long cursoId) throws EntityNotFoundException {
+        log.info("Inicia proceso de consultar el curso del tema con id = {0}", cursoId);
+        Optional<CursoEntity> cursoEntity = cursoRepository.findById(cursoId);
+        if (cursoEntity.isEmpty())
+            throw new EntityNotFoundException(ErrorMessage.CURSO_NOT_FOUND);
+        
+        
+        log.info("Termina el proceso de consultar todos los temas de un curso");
+        
+        return cursoEntity.get().getTemas();
     }
 
 

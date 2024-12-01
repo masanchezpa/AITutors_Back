@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.modelmapper.TypeToken;
 import co.edu.uniandes.dse.aitutors.dto.CursoDTO;
+import co.edu.uniandes.dse.aitutors.dto.CursoDetailDTO;
 import co.edu.uniandes.dse.aitutors.entities.CursoEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
@@ -36,16 +37,16 @@ public class CursoEstudianteController {
     }
 
     @GetMapping
-    public List<CursoDTO> allCursos(@PathVariable("estudianteId") Long estudianteId) throws EntityNotFoundException {
+    public List<CursoDetailDTO> allCursos(@PathVariable("estudianteId") Long estudianteId) throws EntityNotFoundException {
         List<CursoEntity> cursos = cursoEstudianteService.getCursos(estudianteId);
-        return modelMapper.map(cursos, new TypeToken<List<CursoDTO>>() {
+        return modelMapper.map(cursos, new TypeToken<List<CursoDetailDTO>>() {
         }.getType());
     }
 
     @GetMapping("/{cursoId}")
-    public CursoDTO getCurso(@PathVariable("cursoId") Long cursoId, @PathVariable("estudianteId") Long estudianteId) throws EntityNotFoundException, IllegalOperationException {
+    public CursoDetailDTO getCurso(@PathVariable("cursoId") Long cursoId, @PathVariable("estudianteId") Long estudianteId) throws EntityNotFoundException, IllegalOperationException {
         CursoEntity curso = cursoEstudianteService.getCurso(estudianteId, cursoId);
-        return modelMapper.map(curso, CursoDTO.class);
+        return modelMapper.map(curso, CursoDetailDTO.class);
     }
 
     @PutMapping
