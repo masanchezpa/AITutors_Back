@@ -7,5 +7,5 @@ public class TutorIADTO {
     private Long id;
     private String nombre;
     private String especialidad;
-    private TemaDTO tema;
+    //private TemaDTO tema;
 }
