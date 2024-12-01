@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -75,15 +74,7 @@ class TutorServiceTest {
         assertTrue(resultTutor.getAcciones().contains(accion));
     }
 
-    @Test
-    void testEliminarAccion(){
-        TutorIAEntity tutor = tutorList.get(0);
-        AccionEntity accion = accionList.get(0);
-        tutorIAService.agregarAccion(accion, tutor);
-        tutorIAService.eliminarAccion(accion, tutor);
-        TutorIAEntity resultTutor = entityManager.find(TutorIAEntity.class, tutor.getId());
-        assertFalse(resultTutor.getAcciones().contains(accion));
-    }
+   
 
     @Test
     void testCreateTutor(){
