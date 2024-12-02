@@ -50,17 +50,18 @@ class DocumentoServiceTest {
 
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            DocumentoEntity documento = factory.manufacturePojo(DocumentoEntity.class);
-            entityManager.persist(documento);
-            documentoList.add(documento);
+            DocumentoEntity tempDocumento = factory.manufacturePojo(DocumentoEntity.class);
+            entityManager.persist(tempDocumento);
+            documentoList.add(tempDocumento);
         }
         tema = factory.manufacturePojo(TemaEntity.class);
         entityManager.persist(tema);
 
-        documento = documentoList.get(0);
+        documento = documentoList.get(0); // Aquí sigue siendo el campo de la clase
         documento.setTema(tema);
         entityManager.persist(documento);
     }
+
 
     @Test
     void testCrearDocumento() throws IllegalOperationException {
@@ -103,7 +104,7 @@ class DocumentoServiceTest {
     }
 
     @Test
-    void testGetDocumento() throws IllegalOperationException,EntityNotFoundException {
+    void testGetDocumento() throws EntityNotFoundException {
         DocumentoEntity result = documentoService.getDocumento(documento.getId());
         assertNotNull(result);
         assertEquals(documento.getId(), result.getId());
@@ -120,7 +121,7 @@ class DocumentoServiceTest {
     }
 
     @Test
-    void testUpdateDocumento() throws IllegalOperationException,EntityNotFoundException {
+    void testUpdateDocumento() throws IllegalOperationException {
         DocumentoEntity documentoEntity = factory.manufacturePojo(DocumentoEntity.class);
         documentoEntity.setTema(tema);
         documentoEntity.setId(documento.getId());

@@ -58,7 +58,7 @@ public class UsuarioService {
 
     
     @Transactional
-    public UsuarioResponseDTO getUserWithDtypeByEmail(String email) throws EntityNotFoundException  {
+    public UsuarioResponseDTO getUserWithDtypeByEmail(String email) {
         Map<String, Object> userWithDtype = usuarioRepository.findUserWithDtypeByEmail(email);
 
         Long id = ((Number) userWithDtype.get("id")).longValue();
