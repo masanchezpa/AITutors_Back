@@ -1,5 +1,7 @@
 package co.edu.uniandes.dse.aitutors.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,5 +48,20 @@ public class TemaDocumentoService {
         } catch (Exception e) {
             throw new IllegalOperationException("No se pudo eliminar el documento del tema");
         }
+    }
+
+    @Transactional
+    public List<DocumentoEntity> getDocumentosByTema(Long temaId) throws IllegalOperationException {
+        try{
+            return documentoRepository.findTemaByDocumento(temaId);
+        }
+        catch (Exception e) {
+            throw new IllegalOperationException("No se pudo obtener los documentos del tema");
+        }
+    }
+
+    @Transactional
+    public List<DocumentoEntity> getDocumentosByCategoria(String tipo) {
+        return documentoRepository.findDocumentoByTipo(tipo);
     }
 }

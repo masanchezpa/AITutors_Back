@@ -1,10 +1,13 @@
 package co.edu.uniandes.dse.aitutors.controllers;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,5 +47,22 @@ public class TemaDocumentoController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void eliminarDocumento(@PathVariable("temaId") Long temaId, @PathVariable("documentoId") Long documentoId) throws EntityNotFoundException, IllegalOperationException {
         temaDocumentoService.eliminarDocumento(temaId, documentoId);
+    }
+
+    //Obtener elementos de un tema
+    @GetMapping
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<DocumentoDTO> getDocumentos(@PathVariable("temaId") Long temaId) throws IllegalOperationException {
+        List<DocumentoEntity> entities = temaDocumentoService.getDocumentosByTema(temaId);
+        return modelMapper.map(entities, new org.modelmapper.TypeToken<List<DocumentoDTO>>() {
+        }.getType());
+    }
+
+    @GetMapping(value = "/categoria/{tipo}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<DocumentoDTO> getDocumentosByCategoria(@PathVariable("tipo") String tipo) {
+        List<DocumentoEntity> entities = temaDocumentoService.getDocumentosByCategoria(tipo);
+        return modelMapper.map(entities, new org.modelmapper.TypeToken<List<DocumentoDTO>>() {
+        }.getType());
     }
 }
