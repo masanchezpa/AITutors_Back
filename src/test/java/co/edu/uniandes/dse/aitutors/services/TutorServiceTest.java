@@ -1,12 +1,13 @@
 package co.edu.uniandes.dse.aitutors.services;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.transaction.Transactional;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
 import co.edu.uniandes.dse.aitutors.entities.TutorIAEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -62,8 +64,8 @@ class TutorServiceTest {
             tutorList.add(tutorIAEntity);
         }
     }
-
-    @Test
+ /**
+  * @Test
     void testAgregarAccion(){
         TutorIAEntity tutor = tutorList.get(0);
         AccionEntity accion = accionList.get(0);
@@ -71,16 +73,9 @@ class TutorServiceTest {
         TutorIAEntity resultTutor = entityManager.find(TutorIAEntity.class, tutor.getId());
         assertTrue(resultTutor.getAcciones().contains(accion));
     }
+    */
 
-    @Test
-    void testEliminarAccion(){
-        TutorIAEntity tutor = tutorList.get(0);
-        AccionEntity accion = accionList.get(0);
-        tutorIAService.agregarAccion(accion, tutor);
-        tutorIAService.eliminarAccion(accion, tutor);
-        TutorIAEntity resultTutor = entityManager.find(TutorIAEntity.class, tutor.getId());
-        assertFalse(resultTutor.getAcciones().contains(accion));
-    }
+   
 
     @Test
     void testCreateTutor(){

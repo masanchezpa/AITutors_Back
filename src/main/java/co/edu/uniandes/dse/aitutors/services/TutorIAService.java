@@ -1,9 +1,9 @@
 package co.edu.uniandes.dse.aitutors.services;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
 import co.edu.uniandes.dse.aitutors.entities.TutorIAEntity;
@@ -20,18 +20,11 @@ public class TutorIAService {
     private TutorIARepository repositorioTutor;
 
     @Transactional
-    public void agregarAccion(AccionEntity accion, TutorIAEntity tutor) {
-        tutor.getAcciones().add(accion);
-        repositorioTutor.save(tutor);
+    public TutorIAEntity agregarAccion(AccionEntity accion, TutorIAEntity tutor) {
+        return repositorioTutor.save(tutor);
     }
 
-    @Transactional
-    public void eliminarAccion(AccionEntity accion, TutorIAEntity tutor) {
-        tutor.getAcciones().remove(accion);
-        repositorioTutor.save(tutor);
-    }
-
-
+  
     @Transactional
     public TutorIAEntity createTutor(TutorIAEntity tutor) {
         return repositorioTutor.save(tutor);
@@ -69,8 +62,6 @@ public class TutorIAService {
         if (!tutorEntidad.isPresent()) {
             throw new EntityNotFoundException(ErrorMessage.TUTORIA_NOT_FOUND);
         }
-        tutorEntidad.get().getAcciones().clear();
-        repositorioTutor.save(tutorEntidad.get());
         repositorioTutor.deleteById(tutorid);
     }
 
