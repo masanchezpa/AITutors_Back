@@ -18,6 +18,7 @@ import java.util.Optional;
 public class DocumentoService {
     @Autowired
     private DocumentoRepository documentoRepository;
+    private static final String DOCUMENTO_NO_ENCONTRADO = "El documento con el id dado no existe";
 
     @Transactional
     public DocumentoEntity createDocumento(DocumentoEntity documentoEntity) throws IllegalOperationException {
@@ -47,7 +48,7 @@ public class DocumentoService {
 
         Optional<DocumentoEntity> documentoEntity = documentoRepository.findById(documentoId);
         if(documentoEntity.isEmpty()){
-            throw new EntityNotFoundException("El documento con el id dado no existe");
+            throw new EntityNotFoundException(DOCUMENTO_NO_ENCONTRADO);
         }
         return documentoEntity.get();
     }
@@ -57,7 +58,7 @@ public class DocumentoService {
         log.info("Inicia proceso de actualizar un documento con id = {0}", documentoId);
         Optional<DocumentoEntity> documentoEntity = documentoRepository.findById(documentoId);
         if(documentoEntity.isEmpty()){
-            throw new IllegalOperationException("El documento con el id dado no existe");
+            throw new IllegalOperationException(DOCUMENTO_NO_ENCONTRADO);
         }
 
         documento.setId(documentoId);
@@ -70,7 +71,7 @@ public class DocumentoService {
         log.info("Inicia proceso de eliminación del documento con id = {0}", documentoId);
         Optional<DocumentoEntity> documentoEntity = documentoRepository.findById(documentoId);
         if(documentoEntity.isEmpty()){
-            throw new IllegalOperationException("El documento con el id dado no existe");
+            throw new IllegalOperationException(DOCUMENTO_NO_ENCONTRADO);
         }
 
         documentoRepository.deleteById(documentoId);

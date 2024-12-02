@@ -54,7 +54,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/login/{email}")
-    public UsuarioResponseDTO getUserByEmail(@PathVariable("email") String email) throws EntityNotFoundException {
+    public UsuarioResponseDTO getUserByEmail(@PathVariable("email") String email) {
         UsuarioResponseDTO userResponse = usuarioService.getUserWithDtypeByEmail(email);
         return modelMapper.map(userResponse, UsuarioResponseDTO.class);
     }

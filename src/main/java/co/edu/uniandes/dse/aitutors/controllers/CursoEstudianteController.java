@@ -50,10 +50,10 @@ public class CursoEstudianteController {
     }
 
     @PutMapping
-    public List<CursoDTO> addCursos(@PathVariable("estudianteId") Long estudianteId,@RequestBody List<CursoDTO> ListascursosDTO) throws EntityNotFoundException {
-        List<CursoEntity> cursosEntities = modelMapper.map(ListascursosDTO, new TypeToken<List<CursoEntity>>() {}.getType());
-        List<CursoEntity> CursosNuevos = cursoEstudianteService.addCursos(estudianteId, cursosEntities);
-        return modelMapper.map(CursosNuevos, new TypeToken<List<CursoDTO>>() {}.getType());
+    public List<CursoDTO> addCursos(@PathVariable("estudianteId") Long estudianteId,@RequestBody List<CursoDTO> listascursosDTO) throws EntityNotFoundException {
+        List<CursoEntity> cursosEntities = modelMapper.map(listascursosDTO, new TypeToken<List<CursoEntity>>() {}.getType());
+        List<CursoEntity> cursosNuevos = cursoEstudianteService.addCursos(estudianteId, cursosEntities);
+        return modelMapper.map(cursosNuevos, new TypeToken<List<CursoDTO>>() {}.getType());
     }
 
     @DeleteMapping("/{cursoId}")
