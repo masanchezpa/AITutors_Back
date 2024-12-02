@@ -21,8 +21,6 @@ import co.edu.uniandes.dse.aitutors.exceptions.ErrorMessage;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Clase que implementa la conexion con la persistencia para la relación entre
- * la entidad Prize y Author
  *
  */
 @Slf4j
