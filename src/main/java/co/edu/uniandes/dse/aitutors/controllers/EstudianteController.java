@@ -20,7 +20,6 @@ import co.edu.uniandes.dse.aitutors.dto.EstudianteDTO;
 import co.edu.uniandes.dse.aitutors.dto.EstudianteDetailDTO;
 import co.edu.uniandes.dse.aitutors.entities.EstudianteEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
-import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.EstudianteService;
 
 @RestController
@@ -49,7 +48,7 @@ public class EstudianteController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public EstudianteDTO create(@RequestBody EstudianteDTO estudianteDTO) throws IllegalOperationException, EntityNotFoundException {
+    public EstudianteDTO create(@RequestBody EstudianteDTO estudianteDTO) {
         EstudianteEntity estudianteEntity = estudianteService.createEstudiante(modelMapper.map(estudianteDTO, EstudianteEntity.class));
         return modelMapper.map(estudianteEntity, EstudianteDTO.class);
     }
@@ -57,14 +56,14 @@ public class EstudianteController {
     @PutMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public EstudianteDTO update(@PathVariable("id") Long id, @RequestBody EstudianteDTO estudianteDTO)
-            throws EntityNotFoundException, IllegalOperationException {
+            throws EntityNotFoundException {
         EstudianteEntity estudianteEntity = estudianteService.updateEstudiante(id, modelMapper.map(estudianteDTO, EstudianteEntity.class));
         return modelMapper.map(estudianteEntity, EstudianteDTO.class);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
+    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException {
         estudianteService.deleteEstudiante(id);
     }
 }

@@ -62,7 +62,7 @@ public class ArtefactoUsuarioController {
     // Agregar un artefacto a un usuario
     @PostMapping("/{artefactoId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<ArtefactoDTO> addArtefacto(@PathVariable("usuarioId") Long usuarioId, @PathVariable("artefactoId") Long artefactoId) throws EntityNotFoundException, IllegalOperationException {
+    public ResponseEntity<ArtefactoDTO> addArtefacto(@PathVariable("usuarioId") Long usuarioId, @PathVariable("artefactoId") Long artefactoId) throws EntityNotFoundException  {
         ArtefactoEntity entity = artefactoUsuarioService.addArtefacto(usuarioId, artefactoId);
         return ResponseEntity.ok(modelMapper.map(entity, ArtefactoDTO.class));
     }
@@ -70,7 +70,7 @@ public class ArtefactoUsuarioController {
     // Reemplazar la lista completa de artefactos de un usuario
     @PutMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<List<ArtefactoDTO>> addArtefactos(@PathVariable("usuarioId") Long usuarioId, @RequestBody List<ArtefactoEntity> artefactos) throws EntityNotFoundException, IllegalOperationException {
+    public ResponseEntity<List<ArtefactoDTO>> addArtefactos(@PathVariable("usuarioId") Long usuarioId, @RequestBody List<ArtefactoEntity> artefactos) throws EntityNotFoundException {
         List<ArtefactoEntity> entities = artefactoUsuarioService.addArtefactos(usuarioId, artefactos);
         return ResponseEntity.ok(modelMapper.map(entities, new TypeToken<List<ArtefactoDTO>>() {
         }.getType()));

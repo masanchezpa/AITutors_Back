@@ -44,14 +44,14 @@ public class DocumentoTemaController {
 
     @PutMapping(value="/{documentoId}/tema/{temaId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public TemaDTO updateTema(@PathVariable("documentoId") Long documentoId, @PathVariable("temaId") Long temaId) throws EntityNotFoundException, IllegalOperationException {
+    public TemaDTO updateTema(@PathVariable("documentoId") Long documentoId, @PathVariable("temaId") Long temaId) throws EntityNotFoundException {
         TemaEntity entity = documentoTemaService.replaceTema(documentoId, temaId);
         return modelMapper.map(entity, TemaDTO.class);
     }
 
     @DeleteMapping(value="/{documentoId}/tema")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void removeTema(@PathVariable("documentoId") Long documentoId) throws EntityNotFoundException, IllegalOperationException {
+    public void removeTema(@PathVariable("documentoId") Long documentoId) throws EntityNotFoundException {
         documentoTemaService.removeTema(documentoId);
     }   
 }

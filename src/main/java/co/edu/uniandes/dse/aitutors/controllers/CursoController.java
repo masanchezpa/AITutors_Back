@@ -64,7 +64,7 @@ public class CursoController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public CursoDTO create(@RequestBody CursoDTO cursoDTO) throws IllegalOperationException, EntityNotFoundException {
+    public CursoDTO create(@RequestBody CursoDTO cursoDTO) throws IllegalOperationException {
         CursoEntity cursoEntity = cursoService.createCurso(modelMapper.map(cursoDTO, CursoEntity.class));
         return modelMapper.map(cursoEntity, CursoDTO.class);
     }
@@ -79,7 +79,7 @@ public class CursoController {
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
+    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException {
         cursoService.deleteCurso(id);
     }
 }

@@ -20,7 +20,6 @@ import co.edu.uniandes.dse.aitutors.dto.AccionDTO;
 import co.edu.uniandes.dse.aitutors.dto.AccionDetailDTO;
 import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
-import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.AccionService;
 
 @RestController
