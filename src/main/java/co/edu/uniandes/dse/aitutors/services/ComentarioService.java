@@ -69,15 +69,18 @@ public class ComentarioService {
     @Transactional
     public List<ComentarioEntity> getComentarios(Boolean ordenamiento, Boolean tipoOrd) {
         log.info("Retrieving all comentarios");
-        if (ordenamiento) {
-            if (tipoOrd) {
+        if (Boolean.TRUE.equals(ordenamiento)) {
+            
+            if (Boolean.TRUE.equals(tipoOrd)) {
                 return comentarioRepository.findAllByOrderByFechaAsc();
             } else {
                 return comentarioRepository.findAllByOrderByFechaDesc();
             }
         }
+        
         return comentarioRepository.findAll();
     }
+    
     
 
     @Transactional
