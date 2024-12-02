@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,7 @@ import co.edu.uniandes.dse.aitutors.entities.ComentarioEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.ComentarioService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 @RequestMapping("/comentarios")
@@ -35,8 +37,9 @@ public class ComentarioController {
 
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public List<ComentarioDTO> findAll() {
-        List<ComentarioEntity> comentarios = comentarioService.getComentarios();
+    @ResponseBody
+    public List<ComentarioDTO> findAll(@RequestParam Boolean ord, @RequestParam  Boolean tipo) {
+        List<ComentarioEntity> comentarios = comentarioService.getComentarios(ord, tipo);
         return modelMapper.map(comentarios, new TypeToken<List<ComentarioDTO>>() {}.getType());
     }
 
@@ -54,8 +57,6 @@ public class ComentarioController {
         ComentarioEntity savedEntity = comentarioService.createComentario(comentarioEntity);
         return modelMapper.map(savedEntity, ComentarioDTO.class);
     }
-    
-
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)

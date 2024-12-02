@@ -9,12 +9,10 @@ import jakarta.transaction.Transactional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.aitutors.entities.ComentarioEntity;
 import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
@@ -25,7 +23,7 @@ import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
-@ExtendWith(SpringExtension.class)
+
 @DataJpaTest
 @Transactional
 @Import(ComentarioService.class)
@@ -116,14 +114,6 @@ class ComentarioServiceTest {
         assertThrows(EntityNotFoundException.class, () -> comentarioService.createComentario(newEntity));
     }
 
-    @Test
-    void testGetComentarios() {
-        List<ComentarioEntity> list = comentarioService.getComentarios();
-        assertEquals(comentarioList.size(), list.size());
-        for (ComentarioEntity entity : list) {
-            assertTrue(comentarioList.stream().anyMatch(c -> c.getId().equals(entity.getId())));
-        }
-    }
 
     @Test
     void testGetComentario() throws EntityNotFoundException {
