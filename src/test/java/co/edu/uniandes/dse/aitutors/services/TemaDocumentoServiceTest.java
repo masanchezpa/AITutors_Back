@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 
 import co.edu.uniandes.dse.aitutors.entities.DocumentoEntity;
 import co.edu.uniandes.dse.aitutors.entities.TemaEntity;
@@ -23,7 +23,7 @@ import co.edu.uniandes.dse.aitutors.repositories.DocumentoRepository;
 import co.edu.uniandes.dse.aitutors.repositories.TemaRepository;
 
 
-@ExtendWith(SpringExtension.class)
+
 @DataJpaTest
 @Import(TemaDocumentoService.class)
 class TemaDocumentoServiceTest {

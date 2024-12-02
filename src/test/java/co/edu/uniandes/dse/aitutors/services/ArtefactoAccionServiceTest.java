@@ -10,12 +10,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 
 import co.edu.uniandes.dse.aitutors.entities.AccionEntity;
 import co.edu.uniandes.dse.aitutors.entities.ArtefactoEntity;
@@ -25,7 +25,7 @@ import jakarta.transaction.Transactional;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
-@ExtendWith(SpringExtension.class)
+
 @DataJpaTest
 @Transactional
 @Import({ArtefactoAccionService.class, AccionService.class})
