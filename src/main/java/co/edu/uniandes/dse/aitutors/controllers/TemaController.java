@@ -20,7 +20,6 @@ import co.edu.uniandes.dse.aitutors.dto.TemaDTO;
 import co.edu.uniandes.dse.aitutors.dto.TemaDetailDTO;
 import co.edu.uniandes.dse.aitutors.entities.TemaEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
-import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.TemaService;
 
 @RestController
@@ -49,7 +48,7 @@ public class TemaController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public TemaDTO create(@RequestBody TemaDTO temaDTO) throws IllegalOperationException, EntityNotFoundException {
+    public TemaDTO create(@RequestBody TemaDTO temaDTO) {
         TemaEntity temaEntity = temaService.createTema(modelMapper.map(temaDTO, TemaEntity.class));
         return modelMapper.map(temaEntity, TemaDTO.class);
     }
@@ -57,14 +56,14 @@ public class TemaController {
     @PutMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public TemaDTO update(@PathVariable("id") Long id, @RequestBody TemaDTO temaDTO)
-            throws EntityNotFoundException, IllegalOperationException {
+            throws EntityNotFoundException {
         TemaEntity temaEntity = temaService.updateTema(id, modelMapper.map(temaDTO, TemaEntity.class));
         return modelMapper.map(temaEntity, TemaDTO.class);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
+    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException {
         temaService.deleteTema(id);
     }
 }

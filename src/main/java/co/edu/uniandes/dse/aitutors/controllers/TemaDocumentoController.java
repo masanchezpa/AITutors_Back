@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uniandes.dse.aitutors.dto.DocumentoDTO;
 import co.edu.uniandes.dse.aitutors.entities.DocumentoEntity;
-import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.TemaDocumentoService;
 
@@ -37,7 +36,7 @@ public class TemaDocumentoController {
     // Agregar un documento a un tema
     @PostMapping("/{documentoId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<DocumentoDTO> agregarDocumento(@PathVariable("temaId") Long temaId, @PathVariable("documentoId") Long documentoId) throws EntityNotFoundException, IllegalOperationException {
+    public ResponseEntity<DocumentoDTO> agregarDocumento(@PathVariable("temaId") Long temaId, @PathVariable("documentoId") Long documentoId) throws IllegalOperationException {
         DocumentoEntity entity = temaDocumentoService.agregarDocumento(temaId, documentoId);
         return ResponseEntity.ok(modelMapper.map(entity, DocumentoDTO.class));
     }
@@ -45,7 +44,7 @@ public class TemaDocumentoController {
     // Eliminar un documento de un tema
     @DeleteMapping("/{documentoId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void eliminarDocumento(@PathVariable("temaId") Long temaId, @PathVariable("documentoId") Long documentoId) throws EntityNotFoundException, IllegalOperationException {
+    public void eliminarDocumento(@PathVariable("temaId") Long temaId, @PathVariable("documentoId") Long documentoId) throws IllegalOperationException {
         temaDocumentoService.eliminarDocumento(temaId, documentoId);
     }
 

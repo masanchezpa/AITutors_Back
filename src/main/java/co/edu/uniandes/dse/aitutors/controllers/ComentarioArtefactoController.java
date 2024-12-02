@@ -52,7 +52,7 @@ public class ComentarioArtefactoController {
     // Obtener el artefacto asociado a un comentario
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<ArtefactoDTO> getArtefacto(@PathVariable("comentarioId") Long comentarioId) throws EntityNotFoundException, IllegalOperationException {
+    public ResponseEntity<ArtefactoDTO> getArtefacto(@PathVariable("comentarioId") Long comentarioId) throws EntityNotFoundException {
         ArtefactoEntity entity = comentarioArtefactoService.getArtefacto(comentarioId);
         return ResponseEntity.ok(modelMapper.map(entity, ArtefactoDTO.class));
     }

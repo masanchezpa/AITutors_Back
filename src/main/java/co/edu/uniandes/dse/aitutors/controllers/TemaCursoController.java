@@ -44,14 +44,14 @@ public class TemaCursoController {
 
     @PutMapping(value="/{temaId}/curso/{cursoId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public CursoDTO replaceCurso(@PathVariable("temaId") Long temaId, @PathVariable("cursoId") Long cursoId) throws EntityNotFoundException, IllegalOperationException {
+    public CursoDTO replaceCurso(@PathVariable("temaId") Long temaId, @PathVariable("cursoId") Long cursoId) throws EntityNotFoundException {
         CursoEntity entity = temaCursoService.replaceCurso(temaId, cursoId);
         return modelMapper.map(entity, CursoDTO.class);
     }
 
     @DeleteMapping(value="/{temaId}/curso")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteCurso(@PathVariable("temaId") Long temaId) throws EntityNotFoundException, IllegalOperationException {
+    public void deleteCurso(@PathVariable("temaId") Long temaId) throws EntityNotFoundException {
         temaCursoService.removeCurso(temaId);
     }
 }

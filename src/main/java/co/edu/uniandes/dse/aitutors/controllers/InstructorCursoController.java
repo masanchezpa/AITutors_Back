@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uniandes.dse.aitutors.dto.InstructorDTO;
 import co.edu.uniandes.dse.aitutors.entities.InstructorEntity;
+import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.services.InstructorCursoService;
 
 @RestController
@@ -28,28 +29,28 @@ public class InstructorCursoController {
 
     @PostMapping(value="/{cursoId}/instructor/{instructorId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public InstructorDTO addInstructor(@PathVariable("cursoId") Long cursoId, @PathVariable("instructorId") Long instructorId) throws Exception {
+    public InstructorDTO addInstructor(@PathVariable("cursoId") Long cursoId, @PathVariable("instructorId") Long instructorId) throws EntityNotFoundException {
         InstructorEntity entity=instructorCursoService.addInstructor(instructorId, cursoId);
         return modelMapper.map(entity, InstructorDTO.class);
     }
 
     @GetMapping(value="/{cursoId}/instructor")
     @ResponseStatus(code = HttpStatus.OK)
-    public InstructorDTO getInstructor(@PathVariable("cursoId") Long cursoId) throws Exception {
+    public InstructorDTO getInstructor(@PathVariable("cursoId") Long cursoId) throws EntityNotFoundException  {
         InstructorEntity entity=instructorCursoService.getInstructor(cursoId);
         return modelMapper.map(entity, InstructorDTO.class);
     }
 
     @PutMapping(value="/{cursoId}/instructor/{instructorId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public InstructorDTO replaceInstructor(@PathVariable("cursoId") Long cursoId, @PathVariable("instructorId") Long instructorId) throws Exception {
+    public InstructorDTO replaceInstructor(@PathVariable("cursoId") Long cursoId, @PathVariable("instructorId") Long instructorId) throws EntityNotFoundException  {
         InstructorEntity entity=instructorCursoService.replaceInstructor(instructorId, cursoId);
         return modelMapper.map(entity, InstructorDTO.class);
     }
 
     @DeleteMapping(value="/{cursoId}/instructor/{instructorId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteInstructor(@PathVariable("cursoId") Long cursoId,@PathVariable("instructorId") Long instructorId) throws Exception {
+    public void deleteInstructor(@PathVariable("cursoId") Long cursoId,@PathVariable("instructorId") Long instructorId) throws EntityNotFoundException {
         instructorCursoService.removeInstructor(instructorId,cursoId);
     }
 

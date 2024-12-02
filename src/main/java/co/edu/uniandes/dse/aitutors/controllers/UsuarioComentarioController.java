@@ -39,7 +39,7 @@ public class UsuarioComentarioController {
     // Agregar comentario a usuario
     @PostMapping("/{comentarioId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<ComentarioDTO> addComentario(@PathVariable("comentarioId") Long comentarioId, @PathVariable("usuarioId") Long usuarioId) throws EntityNotFoundException, IllegalOperationException {
+    public ResponseEntity<ComentarioDTO> addComentario(@PathVariable("comentarioId") Long comentarioId, @PathVariable("usuarioId") Long usuarioId) throws EntityNotFoundException {
         ComentarioEntity entity = usuarioComentarioService.addComentario(comentarioId, usuarioId);
         return ResponseEntity.ok(modelMapper.map(entity, ComentarioDTO.class));
     }
