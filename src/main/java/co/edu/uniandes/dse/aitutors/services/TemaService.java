@@ -67,8 +67,14 @@ public class TemaService {
     @Transactional
     public List<DocumentoEntity> getDocumentos(Long temaId) throws IllegalOperationException {
         try {
-            TemaEntity tema = temaRepository.findById(temaId).get();
-            return tema.getDocumentos();
+            Optional<TemaEntity> optionalTema = temaRepository.findById(temaId);
+            if (optionalTema.isPresent()) {
+                return optionalTema.get().getDocumentos();
+            } else {
+                throw new IllegalOperationException("El tema con ID " + temaId + " no existe.");
+            }
+        } catch (IllegalOperationException e) {
+            throw e; // Re-throw para mantener el mensaje personalizado
         } catch (Exception e) {
             throw new IllegalOperationException("No se pudo obtener los documentos del tema");
         }
