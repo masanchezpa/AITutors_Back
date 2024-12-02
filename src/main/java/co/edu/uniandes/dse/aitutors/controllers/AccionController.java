@@ -49,7 +49,7 @@ public class AccionController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public AccionDTO create(@RequestBody AccionDTO accionDTO) throws IllegalOperationException, EntityNotFoundException {
+    public AccionDTO create(@RequestBody AccionDTO accionDTO) {
         AccionEntity accionEntity = accionService.createAccion(modelMapper.map(accionDTO, AccionEntity.class));
         return modelMapper.map(accionEntity, AccionDTO.class);
     }
@@ -57,14 +57,14 @@ public class AccionController {
     @PutMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public AccionDTO update(@PathVariable("id") Long id, @RequestBody AccionDTO accionDTO)
-            throws EntityNotFoundException, IllegalOperationException {
+            throws EntityNotFoundException {
         AccionEntity accionEntity = accionService.updateAccion(id, modelMapper.map(accionDTO, AccionEntity.class));
         return modelMapper.map(accionEntity, AccionDTO.class);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
+    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException {
         accionService.deleteAccion(id);
     }
 }
