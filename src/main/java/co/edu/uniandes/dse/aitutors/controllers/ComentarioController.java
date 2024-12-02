@@ -22,7 +22,6 @@ import co.edu.uniandes.dse.aitutors.entities.ComentarioEntity;
 import co.edu.uniandes.dse.aitutors.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.aitutors.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.aitutors.services.ComentarioService;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 @RequestMapping("/comentarios")
@@ -37,7 +36,6 @@ public class ComentarioController {
 
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    @ResponseBody
     public List<ComentarioDTO> findAll(@RequestParam Boolean ord, @RequestParam  Boolean tipo) {
         List<ComentarioEntity> comentarios = comentarioService.getComentarios(ord, tipo);
         return modelMapper.map(comentarios, new TypeToken<List<ComentarioDTO>>() {}.getType());
