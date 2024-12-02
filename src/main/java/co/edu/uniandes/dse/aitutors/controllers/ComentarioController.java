@@ -60,16 +60,16 @@ public class ComentarioController {
     @PutMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public ComentarioDTO update(@PathVariable("id") Long id, @RequestBody ComentarioDTO comentarioDTO)
-            throws EntityNotFoundException, IllegalOperationException {
+            throws EntityNotFoundException {
         ComentarioEntity comentarioEntity = comentarioService.updateComentario(id, modelMapper.map(comentarioDTO, ComentarioEntity.class));
         return modelMapper.map(comentarioEntity, ComentarioDTO.class);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
+    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException {
         comentarioService.deleteComentario(id);
     }
-
+    
     
 }

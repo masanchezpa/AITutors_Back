@@ -39,7 +39,7 @@ public class DocumentoController {
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public DocumentoDTO createDocumento(@RequestBody DocumentoDTO documento) throws EntityNotFoundException,IllegalOperationException {
+    public DocumentoDTO createDocumento(@RequestBody DocumentoDTO documento) throws IllegalOperationException {
         DocumentoEntity entity = modelMapper.map(documento, DocumentoEntity.class);
         DocumentoEntity newEntity = documentoService.createDocumento(entity);
         return modelMapper.map(newEntity, DocumentoDTO.class);
@@ -62,7 +62,7 @@ public class DocumentoController {
 
     @PutMapping (value="/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public DocumentoDTO update(@PathVariable("id") Long id,@RequestBody DocumentoDTO documento) throws EntityNotFoundException,IllegalOperationException {
+    public DocumentoDTO update(@PathVariable("id") Long id,@RequestBody DocumentoDTO documento) throws IllegalOperationException {
         DocumentoEntity entity = modelMapper.map(documento, DocumentoEntity.class);
         entity = documentoService.updateDocumento(id, entity);
         return modelMapper.map(entity, DocumentoDTO.class);
@@ -70,10 +70,10 @@ public class DocumentoController {
 
     @DeleteMapping(value="/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException,IllegalOperationException {
+    public void delete(@PathVariable("id") Long id) throws IllegalOperationException {
         documentoService.deleteDocumento(id);
     }
-
+    
 
 
     
